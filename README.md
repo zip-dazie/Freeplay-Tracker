@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Freeplay Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Website made for Badminton Club at UCI to keep track of the Thursday free-play schedule.
 
 ## Available Scripts
 

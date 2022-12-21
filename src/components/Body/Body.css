@@ -1,0 +1,23 @@
+.Body {
+    display: flex;
+    height: 100%;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.courts {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}

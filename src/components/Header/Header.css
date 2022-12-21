@@ -1,16 +1,18 @@
 .Header {
     position: relative;
-    height: 80px;
+    display: flex;
+    height: 70px;
     padding: 15px;
-    text-align: center;
-    background-color: lightgrey;
-    justify-content: space-between;
+    background-color: black;
     align-items: center;
+    justify-content: center;
 }
 
 .title {
     font-size: 30px;
     font-weight: bold;
+    color: white;
+    margin: 0px;
 }
 
 .login {

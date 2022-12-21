@@ -1,16 +1,15 @@
 .Body {
     display: flex;
     height: 100%;
-    padding: 15px;
-    justify-content: space-around;
+    padding: 0px 15px 15px 15px;
+    gap: 5px;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    flex-grow: 1;
+    flex-grow: 5;
 }
 
 .courts {
@@ -19,5 +18,34 @@
     width: 100%;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
+}
+
+.label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.slots {
+    height: 100%;
+    width: 100%;
+    background-color: #52b5f7;
+    cursor: pointer;
+    border-width: 0px;
+}
+
+.slots:hover {
+    background-color: #1278c8;
+}
+
+.time-slots {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.times {
+    flex-grow: 1;
 }

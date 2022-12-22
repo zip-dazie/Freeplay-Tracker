@@ -1,39 +1,32 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 
-function SignUp({ courtID, trigger, setTrigger }) {
-    const [player, setPlayer] = useState('');
+function SignUp({ id, trigger, setTrigger }) {
     const [type, setType] = useState('doubles');
-    const [other, setOther] = useState('');
-    const [other1, setOther1] = useState('');
-    const [other2, setOther2] = useState('');
-    const [other3, setOther3] = useState('');
+    const [player1, setPlayer1] = useState('');
+    const [player2, setPlayer2] = useState('');
+    const [player3, setPlayer3] = useState('');
+    const [player4, setPlayer4] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        let court = {type, player};
+        let court = { id, type, player1, player2, player3, player4 };
 
-        // fetch('http://localhost:8000/courts', {
-        //     method: 'PUT',
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(court)
-        // })
+        const response = await fetch('http://localhost:8000/courts/' + id, {
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(court)
+        });
+        
+        window.location.reload();
     }
 
     return (trigger) ? (
         <div className="Sign-Up">
             <div onClick={() => setTrigger()} className="overlay"></div>
             <div className="pop-up">
-                <h2>{ courtID }</h2>
+                <h2>{ id }</h2>
                 <form onSubmit={handleSubmit}>
-                    <label>Player:</label>
-                    <input 
-                        type="text" 
-                        required
-                        value={player}
-                        onChange={(e) => setPlayer(e.target.value)}
-                    />
-                    
                     <label>Type:</label>
                     <select
                         value={type}
@@ -45,34 +38,46 @@ function SignUp({ courtID, trigger, setTrigger }) {
 
                     {type === 'doubles' && (
                     <div>
-                        <label>Other 1:</label>
+                        <label>Player 1:</label>
                         <input 
                             type="text" 
-                            value={other1}
-                            onChange={(e) => setOther1(e.target.value)}
+                            value={player1}
+                            onChange={(e) => setPlayer1(e.target.value)}
                         />
-                        <label>Other 2:</label>
+                        <label>Player 2:</label>
                         <input 
                             type="text" 
-                            value={other2}
-                            onChange={(e) => setOther2(e.target.value)}
+                            value={player2}
+                            onChange={(e) => setPlayer2(e.target.value)}
                         />
-                        <label>Other 3:</label>
+                        <label>Player 3:</label>
                         <input 
                             type="text" 
-                            value={other3}
-                            onChange={(e) => setOther3(e.target.value)}
+                            value={player3}
+                            onChange={(e) => setPlayer3(e.target.value)}
+                        />
+                        <label>Player 4:</label>
+                        <input 
+                            type="text" 
+                            value={player4}
+                            onChange={(e) => setPlayer4(e.target.value)}
                         />
                     </div>
                     )}
 
                     {type === 'singles' && (
                         <div>
-                            <label>Other:</label>
+                            <label>Player 1:</label>
                             <input 
                                 type="text" 
-                                value={other}
-                                onChange={(e) => setOther(e.target.value)}
+                                value={player1}
+                                onChange={(e) => setPlayer1(e.target.value)}
+                            />
+                            <label>Player 2:</label>
+                            <input 
+                                type="text" 
+                                value={player2}
+                                onChange={(e) => setPlayer2(e.target.value)}
                             />
                         </div>
                     )}

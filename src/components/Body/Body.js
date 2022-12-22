@@ -19,10 +19,9 @@ let time = [
 ]
 
 function Body() {
-    const [signUpState, setSignUpState] = useState({ signUp: false, court: ' ' });
+    const [signUpState, setSignUpState] = useState({ signUp: false, court: '' });
     const signUp = signUpState.signUp;
     const court = signUpState.court;
-    const [courts, setCourts] = useState([]);
 
     function togglePopUp() {
         setSignUpState(prevState => {
@@ -36,8 +35,9 @@ function Body() {
         });
     };
 
+    const [courts, setCourts] = useState(null);
+
     useEffect(() => {
-        console.log('ran use effect');
         fetch('http://localhost:8000/courts')
             .then(res => {
                 return res.json();
@@ -65,7 +65,7 @@ function Body() {
             {courts && <CourtList courts={courts.slice(24, 36)} title="Court 1" signUp={toggleCourtSignUp} /> }
 
 
-            <SignUp courtID={court} trigger={signUp} setTrigger={togglePopUp} />
+            <SignUp id={court} trigger={signUp} setTrigger={togglePopUp} />
         </div>
     );
 }

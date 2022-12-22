@@ -1,21 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SignUp from '../SignUp/SignUp.js'
+import CourtList from "../CourtList/CourtList.js";
 import './Body.css';
-
-let slots = [
-    'Slot1', 
-    'Slot2', 
-    'Slot3', 
-    'Slot4', 
-    'Slot5', 
-    'Slot6', 
-    'Slot7', 
-    'Slot8', 
-    'Slot9', 
-    'Slot10', 
-    'Slot11', 
-    'Slot12',
-]
 
 let time = [
     '6:00 pm - 6:15 pm',
@@ -36,6 +22,7 @@ function Body() {
     const [signUpState, setSignUpState] = useState({ signUp: false, court: ' ' });
     const signUp = signUpState.signUp;
     const court = signUpState.court;
+    const [courts, setCourts] = useState([]);
 
     function togglePopUp() {
         setSignUpState(prevState => {
@@ -49,6 +36,17 @@ function Body() {
         });
     };
 
+    useEffect(() => {
+        console.log('ran use effect');
+        fetch('http://localhost:8000/courts')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setCourts(data);
+            })
+    }, []);
+
     return (
         <div className="Body">
             <div className="column times">
@@ -56,45 +54,18 @@ function Body() {
                 <div className="time-slots">
                     {time.map(i => {
                         return (
-                            <p>{i}</p>
+                            <p key={i}>{i}</p>
                         );
                     })}
                 </div>
             </div>
-            <div className="column">
-                <p className="label">Court 1</p>
-                <div className="courts">
-                    {slots.map(i => {
-                        return (
-                            <button id={i} className="slots" onClick={(event) => toggleCourtSignUp('Court1' + event.target.id)}  />
-                        );
-                    })}
-                </div>
-            </div>
-            <div className="column">
-                <p className="label">Court 2</p>
-                <div className="courts">
-                    {slots.map(i => {
-                        return (
-                            <button id={i} className="slots" onClick={(event) => toggleCourtSignUp('Court2' + event.target.id)}  />
-                        );
-                    })}
-                </div>
-            </div>
-            <div className="column">
-                <p className="label">Court 3</p>
-                <div className="courts">
-                    {slots.map(i => {
-                        return (
-                            <button id={i} className="slots" onClick={(event) => toggleCourtSignUp('Court3' + event.target.id)}  />
-                        );
-                    })}
-                </div>
-            </div>
+            
+            {courts && <CourtList courts={courts.slice(0, 12)} title="Court 1" signUp={toggleCourtSignUp} /> }
+            {courts && <CourtList courts={courts.slice(12, 24)} title="Court 1" signUp={toggleCourtSignUp} /> }
+            {courts && <CourtList courts={courts.slice(24, 36)} title="Court 1" signUp={toggleCourtSignUp} /> }
 
-            <SignUp trigger={signUp} setTrigger={togglePopUp}>
-                <p>{court}</p>
-            </SignUp>
+
+            <SignUp courtID={court} trigger={signUp} setTrigger={togglePopUp} />
         </div>
     );
 }

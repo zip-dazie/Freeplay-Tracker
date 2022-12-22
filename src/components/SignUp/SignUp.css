@@ -12,7 +12,13 @@
     background: rgba(49,49,49,0.8);
 }
 
-.modal-content {
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.pop-up {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -21,13 +27,34 @@
     background: #f1f1f1;
     padding: 14px 28px;
     border-radius: 3px;
-    max-width: 600px;
-    min-width: 300px;
+    max-width: 50vw;
+    min-width: 50vh;
+    text-align: center;
 }
 
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 7px;
+.pop-up label {
+text-align: left;
+display: block;
+}
+
+.pop-up h2 {
+margin-bottom: 30px;
+}
+
+.pop-up input, .pop-up select {
+width: 100%;
+padding: 6px 10px;
+margin: 10px 0;
+border: 1px solid #ddd;
+box-sizing: border-box;
+display: block;
+}
+
+.pop-up button {
+background: #52b5f7;
+color: #fff;
+border: 0;
+padding: 8px;
+border-radius: 8px;
+cursor: pointer;
 }

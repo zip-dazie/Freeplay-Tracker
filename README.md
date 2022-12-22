@@ -2,6 +2,14 @@
 
 Website made for Badminton Club at UCI to keep track of the Thursday free-play schedule.
 
+## To Run Program
+
+Get open two terminals:
+* One that runs `yarn start`
+* Other tha runs `npx json-server --watch data/db.json --port 8000`
+
+Make sure to terminate both when done.
+
 ## Available Scripts
 
 In the project directory, you can run:

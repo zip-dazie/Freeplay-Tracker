@@ -1,95 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './SignUp.css';
 
-function SignUp({ id, trigger, setTrigger }) {
-    const [type, setType] = useState('doubles');
-    const [player1, setPlayer1] = useState('');
-    const [player2, setPlayer2] = useState('');
-    const [player3, setPlayer3] = useState('');
-    const [player4, setPlayer4] = useState('');
+function SignUp({ courtID, closeSignUp }) {
+  const [type, setType] = useState('');
+  const [players, setPlayers] = useState(Array(4).fill(''));
+  const numPlayers = type === 'singles' ? 2 : 4;
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        let court = { id, type, player1, player2, player3, player4 };
+  const handleSubmit = async (e) => {
+    console.log(players);
+    e.preventDefault();
+    let id = courtID;
+    let court = { id, type, players };
 
-        const response = await fetch('http://localhost:8000/courts/' + id, {
-            method: 'PUT',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(court)
-        });
-        
-        window.location.reload();
+    await fetch('http://localhost:8000/courts/' + courtID, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(court)
+    });
+
+    closeSignUp();
+  };
+
+  useEffect(() => {
+    if (!courtID) return;
+    async function fetchData() {
+      const response = await fetch('http://localhost:8000/courts/' + courtID);
+      const data = await response.json();
+      if (data.type != '') setType(data.type);
+      setPlayers(data.players);
     }
+    fetchData();
+  }, [courtID]);
 
-    return (trigger) ? (
-        <div className="Sign-Up">
-            <div onClick={() => setTrigger()} className="overlay"></div>
-            <div className="pop-up">
-                <h2>{ id }</h2>
-                <form onSubmit={handleSubmit}>
-                    <label>Type:</label>
-                    <select
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                    >
-                        <option value="doubles">Doubles</option>
-                        <option value="singles">Singles</option>
-                    </select> 
+  useEffect(() => {
+    setPlayers(Array(numPlayers).fill(''));
+  }, [type]);
 
-                    {type === 'doubles' && (
-                    <div>
-                        <label>Player 1:</label>
-                        <input 
-                            type="text" 
-                            value={player1}
-                            onChange={(e) => setPlayer1(e.target.value)}
-                        />
-                        <label>Player 2:</label>
-                        <input 
-                            type="text" 
-                            value={player2}
-                            onChange={(e) => setPlayer2(e.target.value)}
-                        />
-                        <label>Player 3:</label>
-                        <input 
-                            type="text" 
-                            value={player3}
-                            onChange={(e) => setPlayer3(e.target.value)}
-                        />
-                        <label>Player 4:</label>
-                        <input 
-                            type="text" 
-                            value={player4}
-                            onChange={(e) => setPlayer4(e.target.value)}
-                        />
-                    </div>
-                    )}
+  const updatePlayers = (index) => (e) => {
+    let newArr = [...players];
+    newArr[index] = e.target.value;
+    setPlayers(newArr);
+    console.log(players);
+  };
 
-                    {type === 'singles' && (
-                        <div>
-                            <label>Player 1:</label>
-                            <input 
-                                type="text" 
-                                value={player1}
-                                onChange={(e) => setPlayer1(e.target.value)}
-                            />
-                            <label>Player 2:</label>
-                            <input 
-                                type="text" 
-                                value={player2}
-                                onChange={(e) => setPlayer2(e.target.value)}
-                            />
-                        </div>
-                    )}
-
-                    <button>Sign Up</button>
-                </form>
-                <button className="close" onClick={() => setTrigger()}>
-                    x
-                </button>
-            </div>
-        </div>
-    ) : "";
+  return courtID ? (
+    <div className="Sign-Up">
+      <div onClick={() => closeSignUp()} className="overlay"></div>
+      <div className="pop-up">
+        <h2>{courtID}</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Type:</label>
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="doubles">Doubles</option>
+            <option value="singles">Singles</option>
+          </select>
+          <div>
+            {players.map((value, index) => (
+              <React.Fragment key={index}>
+                <label>Player {index + 1}:</label>
+                <input
+                  type="text"
+                  value={value}
+                  placeholder="Player Name"
+                  onChange={updatePlayers(index)}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+          <button>Sign Up</button>
+        </form>
+        <button className="close" onClick={() => closeSignUp()}>
+          x
+        </button>
+      </div>
+    </div>
+  ) : (
+    ''
+  );
 }
+
+SignUp.propTypes = {
+  courtID: PropTypes.string.isRequired,
+  closeSignUp: PropTypes.func.isRequired
+};
 
 export default SignUp;

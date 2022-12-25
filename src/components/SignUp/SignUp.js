@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import './SignUp.css';
 
 function SignUp({ courtID, closeSignUp }) {
-  const [type, setType] = useState('');
+  const [type, setType] = useState('doubles');
   const [players, setPlayers] = useState(Array(4).fill(''));
   const numPlayers = type === 'singles' ? 2 : 4;
 
   const handleSubmit = async (e) => {
-    console.log(players);
     e.preventDefault();
     let id = courtID;
     let court = { id, type, players };
@@ -27,8 +26,10 @@ function SignUp({ courtID, closeSignUp }) {
     async function fetchData() {
       const response = await fetch('http://localhost:8000/courts/' + courtID);
       const data = await response.json();
-      if (data.type != '') setType(data.type);
-      setPlayers(data.players);
+      if (data.type != '') {
+        setType(data.type);
+        setPlayers(data.players);
+      }
     }
     fetchData();
   }, [courtID]);
@@ -41,7 +42,6 @@ function SignUp({ courtID, closeSignUp }) {
     let newArr = [...players];
     newArr[index] = e.target.value;
     setPlayers(newArr);
-    console.log(players);
   };
 
   return courtID ? (

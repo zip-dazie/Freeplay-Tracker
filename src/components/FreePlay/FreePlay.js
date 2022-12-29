@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import SignUp from '../SignUp/SignUp.js';
+import Reserve from '../Reserve/Reserve.js';
 import CourtList from '../CourtList/CourtList.js';
-import './Body.css';
+import './FreePlay.css';
 
 let time = [
   '6:00 pm - 6:15 pm',
@@ -18,7 +18,7 @@ let time = [
   '8:45 pm - 9:00 pm'
 ];
 
-function Body() {
+function FreePlay() {
   const [courtID, setCourtID] = useState(null);
   const [courts, setCourts] = useState(null);
 
@@ -33,7 +33,7 @@ function Body() {
   }, [courtID]);
 
   return (
-    <div className="Body">
+    <div className="FreePlay">
       <div className="column times">
         <p className="label">Time</p>
         <div className="time-slots">
@@ -50,9 +50,9 @@ function Body() {
         <CourtList courts={courts.slice(24, 36)} title="Court 3" setCourtID={setCourtID} />
       )}
 
-      {courtID && <SignUp courtID={courtID} closeSignUp={() => setCourtID(null)} />}
+      {courtID && <Reserve courtID={courtID} closeReserve={() => setCourtID(null)} />}
     </div>
   );
 }
 
-export default Body;
+export default FreePlay;

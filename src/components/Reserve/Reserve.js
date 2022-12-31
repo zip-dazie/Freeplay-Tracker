@@ -1,88 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import whiteSingles from '../../assets/whiteSingles.png';
+import whiteDoubles from '../../assets/whiteDoubles.png';
+import greySingles from '../../assets/greySingles.png';
+import greyDoubles from '../../assets/greyDoubles.png';
 import './Reserve.css';
+import { useParams } from 'react-router-dom';
 
-function Reserve({ courtID, closeReserve }) {
-  const [type, setType] = useState('doubles');
-  const [players, setPlayers] = useState(Array(4).fill(''));
-  const numPlayers = type === 'singles' ? 2 : 4;
+function Reserve() {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [doublesText, setDoublesText] = useState('selected-text');
+  const [singlesText, setSinglesText] = useState('unselected-text');
+  const [doublesBox, setDoublesBox] = useState('selected-box');
+  const [singlesBox, setSinglesBox] = useState('unselected-box');
+  const [event, setEvent] = useState('doubles');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let id = courtID;
-    let court = { id, type, players };
+  const { courtId } = useParams();
 
-    await fetch('http://localhost:8000/courts/' + courtID, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(court)
-    });
-
-    closeReserve();
+  const changeToDoubles = () => {
+    setDoublesBox('selected-box');
+    setSinglesBox('unselected-box');
+    setDoublesText('selected-text');
+    setSinglesText('unselected-text');
+    setEvent('doubles');
   };
 
-  useEffect(() => {
-    if (!courtID) return;
-    async function fetchData() {
-      const response = await fetch('http://localhost:8000/courts/' + courtID);
-      const data = await response.json();
-      if (data.type != '') {
-        setType(data.type);
-        setPlayers(data.players);
-      }
-    }
-    fetchData();
-  }, [courtID]);
-
-  useEffect(() => {
-    setPlayers(Array(numPlayers).fill(''));
-  }, [type]);
-
-  const updatePlayers = (index) => (e) => {
-    let newArr = [...players];
-    newArr[index] = e.target.value;
-    setPlayers(newArr);
+  const changeToSingles = () => {
+    setDoublesBox('unselected-box');
+    setSinglesBox('selected-box');
+    setDoublesText('unselected-text');
+    setSinglesText('selected-text');
+    setEvent('singles');
   };
 
-  return courtID ? (
+  return (
     <div className="Reserve">
-      <div onClick={() => closeReserve()} className="overlay"></div>
-      <div className="pop-up">
-        <h2>{courtID}</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Type:</label>
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="doubles">Doubles</option>
-            <option value="singles">Singles</option>
-          </select>
-          <div>
-            {players.map((value, index) => (
-              <React.Fragment key={index}>
-                <label>Player {index + 1}:</label>
-                <input
-                  type="text"
-                  value={value}
-                  placeholder="Player Name"
-                  onChange={updatePlayers(index)}
-                />
-              </React.Fragment>
-            ))}
-          </div>
+      <form className="form">
+        <div className="name-layer">
+          <h2>{courtId}</h2>
           <button>Reserve</button>
-        </form>
-        <button className="close" onClick={() => closeReserve()}>
-          x
-        </button>
-      </div>
+        </div>
+        <div className="phone-layer">
+          <div className="phone-input">
+            <label className="label">What&apos;s your phone number?</label>
+            <input
+              type="text"
+              value={phoneNumber}
+              placeholder="1234567890"
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="event-layer">
+          <label className="label">What event?</label>
+          <div className="options">
+            <div className={'option ' + doublesBox} onClick={changeToDoubles}>
+              <p className={doublesText}>Doubles </p>
+              <div className="images">
+                <img src={event === 'doubles' ? whiteDoubles : greyDoubles} />
+                <p className={doublesText}>vs.</p>
+                <img src={event === 'doubles' ? whiteDoubles : greyDoubles} />
+              </div>
+              <p className={doublesText}>For four players on court</p>
+            </div>
+            <div className={'option ' + singlesBox} onClick={changeToSingles}>
+              <p className={singlesText}>Singles</p>
+              <div className="images">
+                <img src={event === 'singles' ? whiteSingles : greySingles} />
+                <p className={singlesText}>vs.</p>
+                <img src={event === 'singles' ? whiteSingles : greySingles} />
+              </div>
+              <p className={singlesText}>For two players on court</p>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  ) : (
-    ''
   );
 }
-
-Reserve.propTypes = {
-  courtID: PropTypes.string.isRequired,
-  closeReserve: PropTypes.func.isRequired
-};
 
 export default Reserve;

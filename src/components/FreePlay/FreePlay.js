@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Reserve from '../Reserve/Reserve.js';
 import CourtList from '../CourtList/CourtList.js';
 import './FreePlay.css';
 
@@ -49,8 +48,6 @@ function FreePlay() {
       {courts && (
         <CourtList courts={courts.slice(24, 36)} title="Court 3" setCourtID={setCourtID} />
       )}
-
-      {courtID && <Reserve courtID={courtID} closeReserve={() => setCourtID(null)} />}
     </div>
   );
 }

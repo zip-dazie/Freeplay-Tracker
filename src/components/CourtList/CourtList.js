@@ -1,5 +1,6 @@
 import './CourtList.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function CourtList({ courts, title, setCourtID }) {
   return (
@@ -8,7 +9,9 @@ function CourtList({ courts, title, setCourtID }) {
       <div className="courts">
         {courts.map((court) => {
           return (
-            <button
+            <Link
+              to={'/reserve/' + court.id}
+              state={{ from: 'uh oh stinky' }}
               key={court.id}
               id={court.id}
               className="slots"
@@ -30,7 +33,7 @@ function CourtList({ courts, title, setCourtID }) {
                     {court.players[0]}/{court.players[1]} vs. {court.players[2]}/{court.players[3]}
                   </p>
                 )}
-            </button>
+            </Link>
           );
         })}
       </div>

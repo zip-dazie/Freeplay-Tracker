@@ -1,60 +1,130 @@
-.Reserve, .overlay {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
+.Reserve {
+    display: flex;
+    height: 100%;
+    padding: 50px 200px;
+    gap: 5px;
 }
 
-.overlay {
-    background: rgba(49,49,49,0.8);
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.label {
+    font-size: 25px;
 }
 
-.pop-up {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1.4;
-    background: #f1f1f1;
-    padding: 14px 28px;
-    border-radius: 3px;
-    max-width: 50vw;
-    min-width: 50vh;
-    text-align: center;
-}
-
-.pop-up label {
-    text-align: left;
-    display: block;
-}
-
-.pop-up h2 {
-    margin-bottom: 30px;
-}
-
-.pop-up input, .pop-up select {
+.Reserve form {
+    height: 100%;
     width: 100%;
-    padding: 6px 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-    display: block;
 }
 
-.pop-up button {
-    background: #52b5f7;
-    color: #fff;
-    border: 0;
+.Reserve input {
+    padding: 6px 10px;
+    margin: 20px 0px;
+    outline: 0px;
+    border-width: 0px 0px 1px;
+    border-color: #acacac;
+    transition: 0.3s ease;
+    font-size: 20px;
+}
+
+.Reserve input:focus {
+    border-color: black;
+}
+
+.Reserve button {
+    background-color: white;
+    border: 1px solid;
+    border-color: #acacac;
+    color: #acacac;
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
+    height: fit-content;
+    transition: 0.3s ease;
+    font-size: 15px;
+}
+
+.Reserve button:hover {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+.name-layer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.phone-layer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.event-layer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.phone-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 30px 0px 0px;
+}
+
+.options {
+    display: flex;
+    gap: 30px;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-radius: 8px;
+    width: 220px;
+    height: 220px;
+    transition: all .3s ease;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.selected-box {
+    background-color: black;
+    border-color: black;
+}
+
+.unselected-box {
+    background-color: white;
+    border-color: #acacac;
+}
+
+.selected-text {
+    color: white;
+}
+
+.unselected-text {
+    color: #acacac;
+}
+
+.option:hover {
+    box-shadow: 0 0 50px rgba(33, 33, 33, .4);
+}
+
+.images {
+    display: flex;
+}
+
+.images img {
+    padding: 0px 10px 0px 10px;
+    height: 50px;
+    width: auto;
 }

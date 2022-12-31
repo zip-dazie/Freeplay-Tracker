@@ -7,7 +7,7 @@ function Header() {
     <div className="Header">
       <Link to="/" className="header-left">
         <img src={logo} className="logo" />
-        <p>Badminton Club at UCI</p>
+        <h1>Badminton Club at UCI</h1>
       </Link>
       <div className="header-right">
         <Link to="/" className="link free-play">

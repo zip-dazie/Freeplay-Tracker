@@ -45,7 +45,7 @@ function Reserve() {
             <input
               type="text"
               value={phoneNumber}
-              placeholder="1234567890"
+              placeholder="e.g. 7463785928"
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </div>

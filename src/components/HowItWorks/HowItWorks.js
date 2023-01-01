@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import './SignUp.css';
+import './HowItWorks.css';
 
-function SignUp() {
+function HowItWorks() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [name, setName] = useState('');
 
   return (
-    <div className="SignUp">
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="HowItWorks">
+      <form className="form">
         <div className="name-layer">
-          <h2>Sign up</h2>
-          <button>Sign up &nbsp;&rarr;</button>
+          <h2>How it works</h2>
+          <button>Try it out! &nbsp;&rarr;</button>
         </div>
         <label className="label">Phone Number</label>
         <input
@@ -31,4 +31,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default HowItWorks;

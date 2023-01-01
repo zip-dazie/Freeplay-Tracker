@@ -37,7 +37,7 @@ function Reserve() {
       <form className="form">
         <div className="name-layer">
           <h2>{courtId}</h2>
-          <button>Reserve</button>
+          <button>Reserve &nbsp;&rarr;</button>
         </div>
         <div className="phone-layer">
           <div className="phone-input">

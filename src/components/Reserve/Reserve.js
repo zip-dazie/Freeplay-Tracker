@@ -32,9 +32,13 @@ function Reserve() {
     setEvent('singles');
   };
 
+  const handleSubmit = () => {
+    alert('reserve form was submitted');
+  };
+
   return (
     <div className="Reserve">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="name-layer">
           <h2>{courtId}</h2>
           <button>Reserve &nbsp;&rarr;</button>

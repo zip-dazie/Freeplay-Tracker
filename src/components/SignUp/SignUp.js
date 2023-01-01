@@ -5,6 +5,10 @@ function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [name, setName] = useState('');
 
+  const handleSubmit = () => {
+    alert('sign up form was submitted');
+  };
+
   return (
     <div className="SignUp">
       <form className="form" onSubmit={handleSubmit}>

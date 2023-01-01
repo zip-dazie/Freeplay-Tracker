@@ -5,9 +5,13 @@ function HowItWorks() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [name, setName] = useState('');
 
+  const handleSubmit = () => {
+    alert('how it work form was submitted');
+  };
+
   return (
     <div className="HowItWorks">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="name-layer">
           <h2>How it works</h2>
           <button>Try it out! &nbsp;&rarr;</button>

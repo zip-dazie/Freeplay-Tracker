@@ -5,6 +5,7 @@ import greySingles from '../../assets/greySingles.png';
 import greyDoubles from '../../assets/greyDoubles.png';
 import './Reserve.css';
 import { useParams } from 'react-router-dom';
+import getName from '../Users/Users.js';
 
 function Reserve() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -36,6 +37,13 @@ function Reserve() {
     alert('reserve form was submitted');
   };
 
+  const updatePhoneNumber = (e) => {
+    if (e.target.value.match('^[0-9]*$') && e.target.value.length == 10) {
+      e.target.value = getName(e.target.value);
+    }
+    setPhoneNumber(e.target.value);
+  };
+
   return (
     <div className="Reserve">
       <form className="form" onSubmit={handleSubmit}>
@@ -50,7 +58,7 @@ function Reserve() {
               type="text"
               value={phoneNumber}
               placeholder="e.g. 7463785928"
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              onChange={(e) => updatePhoneNumber(e)}
             />
           </div>
         </div>

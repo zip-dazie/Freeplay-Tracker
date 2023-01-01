@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './SignUp.css';
+import { addStudent } from '../Users/Users';
 
 function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -7,6 +8,14 @@ function SignUp() {
 
   const handleSubmit = () => {
     alert('sign up form was submitted');
+    addStudent(phoneNumber, name);
+  };
+
+  const checkPhoneNumber = (e) => {
+    if (!e.target.value.match('^[0-9]*$') || e.target.value.length > 10) {
+      e.target.value = e.target.value.slice(0, -1);
+    }
+    setPhoneNumber(e.target.value);
   };
 
   return (
@@ -21,7 +30,7 @@ function SignUp() {
           type="text"
           value={phoneNumber}
           placeholder="What is your phone number? e.g. 7463785928"
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          onChange={(e) => checkPhoneNumber(e)}
         />
         <label className="label">Name</label>
         <input

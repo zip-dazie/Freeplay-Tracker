@@ -33,7 +33,7 @@ function FreePlay() {
 
   return (
     <div className="FreePlay">
-      <div className="column times">
+      <div className="times">
         <p className="label">Time</p>
         <div className="time-slots">
           {time.map((i) => {

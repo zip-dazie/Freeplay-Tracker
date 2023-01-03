@@ -11,7 +11,6 @@ function CourtList({ courts, title, setCourtID }) {
           return (
             <Link
               to={'/reserve/' + court.id}
-              state={{ from: 'uh oh stinky' }}
               key={court.id}
               id={court.id}
               className="slots"

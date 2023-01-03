@@ -20,18 +20,28 @@
     width: 100%;
 }
 
-.Reserve input {
+.Reserve .input {
     padding: 6px 10px;
     margin: 20px 0px;
     outline: 0px;
+    width: calc(100% - 20px);
     border-width: 0px 0px 1px;
     border-color: #acacac;
     transition: 0.3s ease;
     font-size: 20px;
 }
 
-.Reserve input:focus {
+.Reserve .input:focus {
     border-color: #1278c8;
+}
+
+.error {
+    border-color: red !important;
+}
+
+.error-message {
+    color: red;
+    margin: 0px;
 }
 
 .Reserve button {

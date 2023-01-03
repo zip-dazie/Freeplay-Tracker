@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import whiteSingles from '../../assets/whiteSingles.png';
 import whiteDoubles from '../../assets/whiteDoubles.png';
 import greySingles from '../../assets/greySingles.png';
 import greyDoubles from '../../assets/greyDoubles.png';
 import './Reserve.css';
 import { useParams } from 'react-router-dom';
-import getName from '../Users/Users.js';
+import { checkNumber } from '../Users/Users.js';
 
 function Reserve() {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneError, setPhoneError] = useState(false);
+  const [phoneEmptyError, setPhoneEmptyError] = useState(false);
   const [doublesText, setDoublesText] = useState('selected-text');
   const [singlesText, setSinglesText] = useState('unselected-text');
   const [doublesBox, setDoublesBox] = useState('selected-box');
@@ -33,15 +35,33 @@ function Reserve() {
     setEvent('singles');
   };
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (phoneNumber != '') setPhoneEmptyError(false);
+  }, [phoneNumber]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (phoneError) return;
+
+    if (phoneNumber === '' || phoneNumber.length != 10) {
+      setPhoneEmptyError(true);
+      return;
+    }
+
     alert('reserve form was submitted');
+    // add student to court
+    window.location.href = '/';
   };
 
   const updatePhoneNumber = (e) => {
-    if (e.target.value.match('^[0-9]*$') && e.target.value.length == 10) {
-      e.target.value = getName(e.target.value);
+    if (!e.target.value.match('^[0-9]*$') || e.target.value.length > 10) {
+      e.target.value = e.target.value.slice(0, -1);
     }
+
     setPhoneNumber(e.target.value);
+
+    if (e.target.value.length == 10 && !checkNumber(e.target.value)) setPhoneError(true);
+    else setPhoneError(false);
   };
 
   return (
@@ -54,12 +74,22 @@ function Reserve() {
         <div className="phone-layer">
           <div className="phone-input">
             <label className="label">What&apos;s your phone number?</label>
-            <input
-              type="text"
-              value={phoneNumber}
-              placeholder="e.g. 7463785928"
-              onChange={(e) => updatePhoneNumber(e)}
-            />
+            <div>
+              <input
+                type="text"
+                value={phoneNumber}
+                className={phoneError || phoneEmptyError ? 'input error' : 'input'}
+                placeholder="e.g. 7463785928"
+                onChange={(e) => updatePhoneNumber(e)}
+              />
+              {phoneError && <p className="error-message">Phone number not in database!</p>}
+              {phoneEmptyError && phoneNumber === '' && (
+                <p className="error-message">This field is required!</p>
+              )}
+              {phoneEmptyError && phoneNumber != '' && (
+                <p className="error-message">Phone number must be 10 digits long!</p>
+              )}
+            </div>
           </div>
         </div>
         <div className="event-layer">

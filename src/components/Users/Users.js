@@ -1,10 +1,16 @@
-export function addStudent(phoneNumber, name) {
+function checkNumber(phoneNumber) {
   if (localStorage.getItem(phoneNumber)) {
-    return 'invalid';
+    return true;
   }
-  localStorage.setItem(phoneNumber, name);
-  return 'valid';
+  return false;
 }
+
+function addStudent(phoneNumber, name) {
+  if (checkNumber(phoneNumber)) return false;
+  localStorage.setItem(phoneNumber, name);
+  return true;
+}
+
 function getName(phoneNumber) {
   var name = localStorage.getItem(phoneNumber);
   if (name) {
@@ -13,4 +19,4 @@ function getName(phoneNumber) {
   return 'not found';
 }
 
-export default getName;
+export { getName, addStudent, checkNumber };

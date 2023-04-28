@@ -1,7 +1,7 @@
 {
   "name": "freeplay-tracker",
   "version": "0.1.0",
-  "homepage":"https://zip-dazie.github.io/Freeplay-Tracker",
+  "homepage": "https://zip-dazie.github.io/Freeplay-Tracker",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.15.0",
@@ -20,6 +20,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "gh-pages": "^5.0.0",
+    "gh-pages-deploy": "^0.5.1",
     "jest": "^27.0.6",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.7.0",
@@ -33,7 +34,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "predeploy": "yarn run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",

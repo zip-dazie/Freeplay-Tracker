@@ -14,7 +14,8 @@ function CourtList({ courts, title, setCourtID }) {
               key={court.id}
               id={court.id}
               className="slots"
-              onClick={() => setCourtID(court.id)}>
+              onClick={() => setCourtID(court.id)}
+            >
               {court.type === 'singles' &&
                 !(court.players[0] === '' && court.players[1] === '') && (
                   <p>

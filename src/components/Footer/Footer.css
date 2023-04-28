@@ -1,11 +1,12 @@
 .Footer {
   position: relative;
   display: flex;
+  padding: 10px;
   height: 40px;
-  padding: 20px 50px;
   align-items: center;
   justify-content: space-between;
-  z-index: -1;
+  margin-top: auto;
+
 }
 
 .footer-left {
@@ -21,9 +22,10 @@
 .footer-text {
   margin: 0px;
   color: #a0a193;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 img {
   color: #a0a193;
 }
+

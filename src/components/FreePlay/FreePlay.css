@@ -1,26 +1,72 @@
 .FreePlay {
-    display: flex;
-    height: 100%;
-    padding: 0px 50px 15px 50px;
-    gap: 5px;
+  display: flex;
+  height: 100%;
+  padding: 0px 50px 15px 50px;
+  gap: 5px;
 }
 
 .label {
-    font-size: 20px;
-    font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .time-slots {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
 }
 
 .times {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
 }
+
+.box {
+  border-radius: 10px;
+  width: 190vh;
+  height: 70vh;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.current{
+  border: solid 1px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: 30vh;
+
+}
+.queue{
+  border: solid 1px;
+  width: 100%;
+  height: 10vh;
+}
+.court{
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  min-height: 70vh;
+  transition: all 0.3s;
+  background-color: #343a40 !important;
+  border-radius: 20px !important;
+  
+
+}
+.court .court-title{
+  color: white;
+  width:50%;
+  margin: 0px;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+.court:hover{
+  transform: scale(1.05)
+}
+

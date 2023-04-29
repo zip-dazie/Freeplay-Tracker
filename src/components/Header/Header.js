@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Header() {
   return (
     <div className="Header">
-      <Link to="/" className="header-left">
+      <Link to="/Freeplay-Tracker" className="header-left">
         <img src={logo} className="logo" />
         <h3 style={{ color: '#424242' }}>Badminton Club at UCI</h3>
       </Link>

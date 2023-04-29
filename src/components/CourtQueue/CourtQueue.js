@@ -12,8 +12,11 @@ import { GiPlayerNext } from 'react-icons/gi';
 import Draggable from 'react-draggable';
 let nextId = 0; // indexing for queuing
 
-function CourtQueue() {
-  const [players, setPlayers] = useState([]);
+function CourtQueue(props) {
+  const { id } = props;
+  const [players, setPlayers] = useState(
+    JSON.parse(localStorage.getItem(`players-queue-${id}`)) || []
+  );
   // eslint-disable-next-line no-unused-vars
   let isEmpty = true;
   const [showModal, setShowModal] = useState(false);
@@ -137,6 +140,7 @@ function CourtQueue() {
     } else if (players.length <= 0) {
       childRef.current.stop();
     }
+    localStorage.setItem(`players-queue-${id}`, JSON.stringify(players));
   }, [players]);
   const childRef = useRef(null);
   const handleNext = () => {
@@ -264,6 +268,7 @@ export default CourtQueue;
 
 CourtQueue.propTypes = {
   //courts: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
   //setCourtID: PropTypes.func.isRequired
 };

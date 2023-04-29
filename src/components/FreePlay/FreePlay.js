@@ -30,6 +30,7 @@ function FreePlay() {
   const [courtID, setCourtID] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [courts, setCourts] = useState(null);
+  // eslint-disable-next-line no-unused-vars
 
   useEffect(() => {
     if (courtID) return;
@@ -46,19 +47,19 @@ function FreePlay() {
         <Card className="court">
           <Card.Body>
             <Card.Title className="court-title">Court 1</Card.Title>
-            <CourtQueue title="Court 1"></CourtQueue>
+            <CourtQueue id={'Court 1'} title="Court 1"></CourtQueue>
           </Card.Body>
         </Card>
         <Card className="court">
           <Card.Body>
             <Card.Title className="court-title">Court 2</Card.Title>
-            <CourtQueue title="Court 2"></CourtQueue>
+            <CourtQueue id={'Court 2'} title="Court 2"></CourtQueue>
           </Card.Body>
         </Card>
         <Card className="court">
           <Card.Body>
             <Card.Title className="court-title">Court 3</Card.Title>
-            <CourtQueue title="Court 3"></CourtQueue>
+            <CourtQueue id={'Court 3'} title="Court 3"></CourtQueue>
           </Card.Body>
         </Card>
       </CardGroup>

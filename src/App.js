@@ -14,7 +14,7 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<FreePlay />} />
+          <Route path="/" element={<Freeplay-Tracker />} />
           <Route path="/reserve/:courtId" element={<Reserve />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/signup" element={<SignUp />} />

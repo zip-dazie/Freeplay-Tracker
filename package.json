@@ -1,7 +1,7 @@
 {
   "name": "freeplay-tracker",
   "version": "0.1.0",
-  "homepage": "https://zip-dazie.github.io/",
+  "homepage": "https://zip-dazie.github.io/Freeplay-Tracker",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.15.0",

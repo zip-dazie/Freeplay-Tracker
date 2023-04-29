@@ -10,7 +10,7 @@ function Header() {
         <h3 style={{ color: '#424242' }}>Badminton Club at UCI</h3>
       </Link>
       <div className="header-right">
-        <Link to="/" className="link free-play">
+        <Link to="/Freeplay-Tracker" className="link free-play">
           FREE PLAY
         </Link>
         <Link to="/how-it-works" className="link how-it-works">

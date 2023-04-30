@@ -44,7 +44,6 @@ function CourtQueue(props) {
     return { count, formatted };
   };
   const inputPlayers = (inputs, merge) => {
-    //["ja", "?"]{id:nextId, name: "["ja", "asdf"], status: [2, 0]}
     let { count, formatted } = replaceEmpty(inputs);
     if (merge && nextId != 0) {
       const index = findEmpty(formatted, count);
@@ -70,7 +69,6 @@ function CourtQueue(props) {
         ]);
       }
     } else {
-      console.log('we default added');
       players.forEach((e) => console.log(e));
       setPlayers([
         ...players,
@@ -149,7 +147,7 @@ function CourtQueue(props) {
   return (
     <div>
       <div className="top-items">
-        <Timer ref={childRef} />
+        <Timer ref={childRef} title={id} />
         {/*pop queue*/}
         <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Next</Tooltip>}>
           <button
@@ -267,8 +265,6 @@ function CourtQueue(props) {
 export default CourtQueue;
 
 CourtQueue.propTypes = {
-  //courts: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired
-  //setCourtID: PropTypes.func.isRequired
 };

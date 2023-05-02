@@ -1,4 +1,4 @@
-.SignUp {
+.Register {
   display: flex;
   height: 100%;
   padding: 50px 200px;
@@ -18,7 +18,7 @@
   gap: 30px;
 }
 
-.SignUp .input {
+.Register .input {
   padding: 6px 10px;
   margin: 20px 0px;
   outline: 0px;
@@ -29,7 +29,7 @@
   font-size: 20px;
 }
 
-.SignUp .input:focus {
+.Register .input:focus {
   border-color: #1278c8;
 }
 
@@ -42,7 +42,7 @@
   margin: 0px;
 }
 
-.SignUp button {
+.Register button {
   background-color: white;
   border: 1px solid;
   border-color: #acacac;
@@ -55,7 +55,7 @@
   font-size: 15px;
 }
 
-.SignUp button:hover {
+.Register button:hover {
   background-color: #1278c8;
   border-color: #1278c8;
   color: white;

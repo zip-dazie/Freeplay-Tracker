@@ -33,14 +33,8 @@ function FreePlay() {
   // eslint-disable-next-line no-unused-vars
 
   useEffect(() => {
-    if (courtID) return;
-    async function fetchData() {
-      const response = await fetch('http://localhost:8000/courts');
-      const data = await response.json();
-      setCourts(data);
-    }
-    fetchData();
-  }, [courtID]);
+    // fetch data when the page is loaded
+  });
   return (
     <div>
       <CardGroup style={{ marginBottom: '0.5vh' }}>

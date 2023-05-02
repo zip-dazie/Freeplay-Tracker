@@ -16,8 +16,8 @@ function Header() {
         <Link to="/how-it-works" className="link how-it-works">
           HOW IT WORKS
         </Link>
-        <Link to="/signup" className="link sign-up">
-          SIGN UP
+        <Link to="/register" className="link register">
+          REGISTER
         </Link>
       </div>
     </div>

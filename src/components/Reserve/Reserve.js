@@ -5,10 +5,10 @@ import greySingles from '../../assets/greySingles.png';
 import greyDoubles from '../../assets/greyDoubles.png';
 import './Reserve.css';
 import { useParams } from 'react-router-dom';
-import { checkNumber } from '../Users/Users.js';
 
 function Reserve() {
   const [phoneNumber, setPhoneNumber] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [phoneError, setPhoneError] = useState(false);
   const [phoneEmptyError, setPhoneEmptyError] = useState(false);
   const [doublesText, setDoublesText] = useState('selected-text');
@@ -59,9 +59,6 @@ function Reserve() {
     }
 
     setPhoneNumber(e.target.value);
-
-    if (e.target.value.length == 10 && !checkNumber(e.target.value)) setPhoneError(true);
-    else setPhoneError(false);
   };
 
   return (

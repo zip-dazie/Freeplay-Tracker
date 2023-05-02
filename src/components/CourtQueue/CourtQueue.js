@@ -36,7 +36,7 @@ function CourtQueue(props) {
     let formatted = arr.map((i) => {
       if (i === '') {
         count++;
-        return '?';
+        return '🫥';
       } else {
         return i;
       }
@@ -49,9 +49,9 @@ function CourtQueue(props) {
       const index = findEmpty(formatted, count);
       if (index != -1) {
         let counter = 0;
-        let toMerge = formatted.filter((e) => e != '?');
+        let toMerge = formatted.filter((e) => e != '🫥');
         let mergeWith = players[index].name.filter((e) => {
-          if (e === '?' && counter < toMerge.length) {
+          if (e === '🫥' && counter < toMerge.length) {
             counter++;
             return false;
           }
@@ -60,7 +60,7 @@ function CourtQueue(props) {
         let merged = toMerge.concat(mergeWith);
         const updatedPlayers = [...players];
         updatedPlayers[index].name = merged;
-        updatedPlayers[index].status[1] = merged.filter((e) => e === '?').length;
+        updatedPlayers[index].status[1] = merged.filter((e) => e === '🫥').length;
         setPlayers(updatedPlayers);
       } else {
         setPlayers([
@@ -237,15 +237,17 @@ function CourtQueue(props) {
           Waiting: {players.length - 1 > 0 ? players.length - 1 : 0}
         </strong>
         {/* clear queue */}
-        <button
-          className="circle-control"
-          onClick={handleClearing}
-          style={{
-            pointerEvents: 'auto'
-          }}
-        >
-          ×
-        </button>
+        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Clear line</Tooltip>}>
+          <button
+            className="circle-control"
+            onClick={handleClearing}
+            style={{
+              pointerEvents: 'auto'
+            }}
+          >
+            ×
+          </button>
+        </OverlayTrigger>
       </div>
       <div className="Queue-Box">
         {/* display rest of queue */}

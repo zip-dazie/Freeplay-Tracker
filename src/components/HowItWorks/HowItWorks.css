@@ -25,14 +25,14 @@
 
 }
 .tryIt-button{
-  font-size: 30px;
+  font-size: 30px!important;;
   height: 25vh;
   width: 50vh;
-  background-color: #343a40;
-  border-color: #343a40;
-  font-weight: 500;
+  background-color: #343a40!important;
+  border-color: #343a40!important;
+  font-weight: 500!important;;
 }
 .tryIt-button:hover{
-  background-color: skyblue;
-  border-color: skyblue;
+  background-color: skyblue!important;
+  border-color: skyblue!important;
 }

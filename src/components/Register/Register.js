@@ -11,6 +11,7 @@ function Register() {
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]);
   const UCINETID = /^[a-zA-Z0-9._%+-]+@uci\.edu$/;
+
   useEffect(() => {
     if (name !== '') setNameEmptyError(false);
   }, [name]);
@@ -36,6 +37,9 @@ function Register() {
       console.log('loaded');
     }
     addUser(ID, name);
+    setID('');
+    setName('');
+    setIdEmptyError(false);
   };
 
   const updateID = (e) => {
@@ -43,47 +47,41 @@ function Register() {
     setID(id);
     if (id === '') {
       setIdEmptyError(true);
-    }
-    // check if UCINET is valid
-    else if (!UCINETID.test(id)) {
+    } else if (!UCINETID.test(id)) {
       setIdError(true);
     } else {
       setIdError(false);
       setIdEmptyError(false);
     }
   };
+
   return (
-    <div className="Register">
+    <div className="Register" style={{ textAlign: 'left' }}>
+      <h5>
+        <strong>Register</strong>
+      </h5>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="name-layer">
-          <h2>Register</h2>
-          <button style={{ width: '30vh' }}>Submit &nbsp;&rarr;</button>
-        </div>
-        <label className="label">UCINETID</label>
-        <div>
+        <div className="id-input" style={{ marginTop: '10vh', alignContent: 'center' }}>
           <input
             type="text"
             value={ID}
             className={IdError || IdEmptyError ? 'input error' : 'input'}
-            placeholder="UCINETID? e.g. weihc2@uci.edu"
+            placeholder="UCINETID@uci.edu"
             onChange={(e) => updateID(e)}
           />
-          {IdEmptyError && ID === '' && <p className="error-message">This field is required!</p>}
-          {IdEmptyError && ID !== '' && !UCINETID.test(ID) && (
-            <p className="error-message">Must be valid UCINETID</p>
-          )}
+          {IdEmptyError && <p className="error-message">This field is required!</p>}
         </div>
-        <label className="label">Name</label>
-        <div>
+        <div className="name-input">
           <input
             type="text"
             value={name}
             className={nameEmptyError ? 'input error' : 'input'}
-            placeholder="What is your first and last name?"
+            placeholder="First LastName"
             onChange={(e) => setName(e.target.value)}
           />
           {nameEmptyError && <p className="error-message">This field is required!</p>}
         </div>
+        <button>Submit &nbsp;&rarr;</button>
       </form>
     </div>
   );

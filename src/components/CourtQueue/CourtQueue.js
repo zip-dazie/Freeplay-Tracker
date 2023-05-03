@@ -1,24 +1,27 @@
 import './CourtQueue.css';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line no-unused-vars
 import { Tooltip, Alert, Fade } from 'react-bootstrap';
+// eslint-disable-next-line no-unused-vars
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useRef } from 'react';
 import QueueReserve from '../QueueReserve/QueueReserve.js';
 import Timer from '../Timer/Timer.js';
 import { GrCheckmark, GrClose } from 'react-icons/gr';
+// eslint-disable-next-line no-unused-vars
 import { GiPlayerNext } from 'react-icons/gi';
 // eslint-disable-next-line no-unused-vars
 import Draggable from 'react-draggable';
 let nextId = 0; // indexing for queuing
+const MISSING_SIGN = '🫥';
+const VERSUS_SIGN = '🏸';
 
 function CourtQueue(props) {
   const { id } = props;
   const [players, setPlayers] = useState(
     JSON.parse(localStorage.getItem(`players-queue-${id}`)) || []
   );
-  // eslint-disable-next-line no-unused-vars
-  let isEmpty = true;
   const [showModal, setShowModal] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [warning, setWarning] = useState(false);
@@ -36,22 +39,23 @@ function CourtQueue(props) {
     let formatted = arr.map((i) => {
       if (i === '') {
         count++;
-        return '🫥';
+        return { MISSING_SYM: MISSING_SIGN };
       } else {
         return i;
       }
     });
     return { count, formatted };
   };
-  const inputPlayers = (inputs, merge) => {
+  const inputPlayers = (inputs, merge, empty) => {
+    console.log(empty);
     let { count, formatted } = replaceEmpty(inputs);
     if (merge && nextId != 0) {
       const index = findEmpty(formatted, count);
       if (index != -1) {
         let counter = 0;
-        let toMerge = formatted.filter((e) => e != '🫥');
+        let toMerge = formatted.filter((e) => e != { MISSING_SYM: MISSING_SIGN });
         let mergeWith = players[index].name.filter((e) => {
-          if (e === '🫥' && counter < toMerge.length) {
+          if (e === { MISSING_SYM: MISSING_SIGN } && counter < toMerge.length) {
             counter++;
             return false;
           }
@@ -60,7 +64,9 @@ function CourtQueue(props) {
         let merged = toMerge.concat(mergeWith);
         const updatedPlayers = [...players];
         updatedPlayers[index].name = merged;
-        updatedPlayers[index].status[1] = merged.filter((e) => e === '🫥').length;
+        updatedPlayers[index].status[1] = merged.filter(
+          (e) => e === { MISSING_SYM: MISSING_SIGN }
+        ).length;
         setPlayers(updatedPlayers);
       } else {
         setPlayers([
@@ -102,7 +108,7 @@ function CourtQueue(props) {
     }
     return -1;
   };
-  const playersText = (p) => {
+  const queueText = (p) => {
     const half = Math.ceil(p.length / 2);
     const firstHalf = p
       .slice(0, half)
@@ -112,7 +118,26 @@ function CourtQueue(props) {
       .slice(half)
       .map((value) => (value ? value : '?'))
       .join(' • ');
-    return secondHalf ? `${firstHalf}🏸${secondHalf}` : firstHalf;
+    return secondHalf ? `${firstHalf}\n🏸\n${secondHalf}` : firstHalf;
+  };
+  const OnCourtText = (p) => {
+    const half = Math.ceil(p.length / 2);
+    const firstHalf = p
+      .slice(0, half)
+      .map((value) => (value ? value : '?'))
+      .join(' + ');
+    const secondHalf = p
+      .slice(half)
+      .map((value) => (value ? value : '?'))
+      .join(' + ');
+    const separator = secondHalf ? <div>{VERSUS_SIGN}</div> : null;
+    return (
+      <div style={{ whiteSpace: 'pre', lineHeight: 1.2 }}>
+        {firstHalf}
+        {separator}
+        {secondHalf}
+      </div>
+    );
   };
   //toast event handling
   // eslint-disable-next-line no-unused-vars
@@ -149,27 +174,36 @@ function CourtQueue(props) {
       <div className="top-items">
         <Timer ref={childRef} title={id} />
         {/*pop queue*/}
-        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Next</Tooltip>}>
-          <button
-            className="circle-control"
-            style={{ marginLeft: 'auto', borderRadius: '0.5rem 0.5rem 0 0' }}
-            onClick={() => {
-              setPlayers(players.slice(1, players.length));
-              handleNext();
-            }}
-          >
-            <GiPlayerNext />
-          </button>
-        </OverlayTrigger>
+        <button
+          className="circle-control"
+          style={{ marginLeft: 'auto', borderRadius: '0.5rem 0.5rem 0 0' }}
+          onClick={() => {
+            setPlayers(players.slice(1, players.length));
+            handleNext();
+          }}
+        >
+          →
+        </button>
       </div>
       {/* display only top of queue */}
-      <div className="Current-Box">
+      <div
+        className="Current-Box"
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
         {players.slice(0, 1).map((player) => (
           <div className="Cur-Players" key={player.id}>
-            {playersText(player.name)}
+            <div
+              style={{
+                margin: '5vh',
+                textAlign: 'center'
+              }}
+            >
+              {OnCourtText(player.name)}
+            </div>
           </div>
         ))}
       </div>
+
       {warning ? <div className="dark-overlay"></div> : null}
       <div
         className="controls"
@@ -237,24 +271,22 @@ function CourtQueue(props) {
           Waiting: {players.length - 1 > 0 ? players.length - 1 : 0}
         </strong>
         {/* clear queue */}
-        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Clear line</Tooltip>}>
-          <button
-            className="circle-control"
-            onClick={handleClearing}
-            style={{
-              pointerEvents: 'auto'
-            }}
-          >
-            ×
-          </button>
-        </OverlayTrigger>
+        <button
+          className="circle-control"
+          onClick={handleClearing}
+          style={{
+            pointerEvents: 'auto'
+          }}
+        >
+          ×
+        </button>
       </div>
       <div className="Queue-Box">
         {/* display rest of queue */}
         {players.slice(1, players.length).map((player) => (
           <div className="Queue-Item" key={player.id}>
             <button className="config-btn">⋮</button>
-            <p className="Queue-Text">{playersText(player.name)}</p>
+            <p className="Queue-Text">{queueText(player.name)}</p>
             <button className="remove-btn" onClick={() => removePlayers(player.id)}>
               ×
             </button>

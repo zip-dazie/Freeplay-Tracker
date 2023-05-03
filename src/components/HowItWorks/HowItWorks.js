@@ -1,64 +1,54 @@
 import './HowItWorks.css';
-import signUp from '../../assets/signUp.png';
-import availableCourt from '../../assets/availableCourt.png';
-import reserve from '../../assets/reserve.png';
-import result from '../../assets/result.png';
-
+import { Parallax } from 'react-parallax';
+import register from '../../assets/registerFull.png';
+import signUp from '../../assets/signUpFull.png';
+import queue from '../../assets/queueFull.png';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 function HowItWorks() {
-  const handleSubmit = () => {
-    alert('how it work form was submitted');
-  };
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate('/Freeplay-Tracker');
+  }
 
   return (
     <div className="HowItWorks">
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="name-layer">
-          <h2>How it works</h2>
-          <button>Try it out! &nbsp;&rarr;</button>
+      <Parallax strength={100} bgImage={register}>
+        <div className="content">
+          <div className="text-content">Register with UCINETID and name (Scroll down)</div>
         </div>
-        <div className="section">
-          <div className="description">
-            <p className="label">1&#x29; Sign up with phone number and name.</p>
-            <p className="text">
-              Click Sign Up on the top right corner to add yourself into the
-              <br />
-              UCI Badminton database. All we need is your phone number
-              <br />
-              and name!
-            </p>
+      </Parallax>
+      <Parallax strength={10} bgImage={queue}>
+        <div className="content">
+          <div className="text-content">
+            <span>
+              ⋅ Press the (+) button to sign-up for a court <br />
+              ⋅ (→) to finish game <br />⋅ ( x ) to clear line or spot in line
+            </span>
           </div>
-          <img src={signUp} className="images" />
         </div>
-        <div className="section">
-          <div className="description">
-            <p className="label">2&#x29; Click on an available court.</p>
-            <p className="text">Click any court that have no name or a missing player.</p>
+      </Parallax>
+      <Parallax strength={10} bgImage={signUp}>
+        <div className="content">
+          <div className="text-content">
+            ⋅ Choose between singles or doubles
+            <br />
+            ⋅ Enter UCINETID (not including domain)
+            <br /> ⋅ Toggle between merging or not (for incomplete sign-ups)
           </div>
-          <img src={availableCourt} className="images" />
         </div>
-        <div className="section">
-          <div className="description">
-            <p className="label">3&#x29; Reserve your spot on the court.</p>
-            <p className="text">
-              Enter in your phone number. If you are the first person to
-              <br />
-              sign up, choose what event you want to play.
-            </p>
-          </div>
-          <img src={reserve} className="images" />
+      </Parallax>
+      <Parallax strength={200} blur={{ min: -5, max: 5 }} bgImage={queue}>
+        <div className="content">
+          <div className="text-content">Wait in line and play (scroll down)</div>
         </div>
-        <div className="section">
-          <div className="description">
-            <p className="label">4&#x29; See your name on the court!</p>
-            <p className="text">
-              Once you click reserve, you could see your name on
-              <br />
-              the court!
-            </p>
-          </div>
-          <img src={result} className="images" />
-        </div>
-      </form>
+      </Parallax>
+      <div className="content">
+        <Button onClick={handleClick} className="tryIt-button">
+          Try Freeplay!
+        </Button>
+      </div>
     </div>
   );
 }

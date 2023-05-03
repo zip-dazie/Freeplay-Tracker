@@ -1,36 +1,52 @@
 .Register {
+  margin-top: 10vh;
+  padding: 5vh;
   display: flex;
-  height: 100%;
-  padding: 50px 200px;
-  gap: 5px;
-}
-
-.name-layer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form {
-  display: flex;
-  width: 100%;
   flex-direction: column;
-  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  text-Shadow: 1px 1px 6px black;
+  flex-direction: column;
+  position: relative;
+  width: 40%;
+  margin: auto;
+  background-color: #2a3744;
+  border-radius: 20px;
+  box-shadow: 0px 1px 5px black;
+}
+.Register .form {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0px 1px 5px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 1.3s ease;
+}
+.Register .form:hover {
+  background-color: #2a3744;
+  transform: scale(1.15);
+  transition: transform 0.3s ease;
 }
 
 .Register .input {
+  width: 80%;
+  height: 30px;
   padding: 6px 10px;
-  margin: 20px 0px;
+  margin: 10px 0px;
   outline: 0px;
-  width: calc(100% - 20px);
   border-width: 0px 0px 1px;
   border-color: #acacac;
   transition: 0.3s ease;
-  font-size: 20px;
+  font-size: 10px;
 }
-
 .Register .input:focus {
-  border-color: #1278c8;
+  outline: none;
+  box-shadow: 0px 0px 10px skyblue;
+  border-color: skyblue;
 }
 
 .error {
@@ -39,7 +55,7 @@
 
 .error-message {
   color: red;
-  margin: 0px;
+  font-size: 10px;
 }
 
 .Register button {
@@ -53,10 +69,42 @@
   height: fit-content;
   transition: 0.3s ease;
   font-size: 15px;
+  width: 20vw; 
+  margin-bottom: 10vh;
+
 }
 
 .Register button:hover {
-  background-color: #1278c8;
-  border-color: #1278c8;
+  background-color: skyblue;
+  border-color: skyblue;
   color: white;
+}
+
+.label{
+  color:#616161;
+  font-size: 20px;
+}
+.submit-button{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 0;
+}
+.name-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.id-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100%;
+  overflow: hidden;
+
 }

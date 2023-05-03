@@ -1,53 +1,38 @@
-.HowItWorks {
+.content {
+  height: 85vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content img {
   height: 100%;
-  padding: 50px 200px;
-  gap: 5px;
-}
-
-.form {
-  display: flex;
   width: 100%;
-  flex-direction: column;
-  gap: 30px;
+  object-fit: cover;
+  object-position: center;
 }
-
-.name-layer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.text {
-  color: #757575;
-  padding: 0px 0px 0px 30px;
-}
-
-.images {
-  width: 300px;
-}
-
-.HowItWorks button {
-  background-color: white;
-  border: 1px solid;
-  border-color: #acacac;
-  color: #acacac;
-  padding: 8px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  height: fit-content;
-  transition: 0.3s ease;
+.text-content{
+  position:absolute;
+  top: 80%;
+  left: 80%;
+  padding: 5px 5px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 6, 0.20);
+  color:white;
   font-size: 15px;
-}
+  border-radius: 20px;
+  font-weight: 500;
 
-.HowItWorks button:hover {
-  background-color: #1278c8;
-  border-color: #1278c8;
-  color: white;
+}
+.tryIt-button{
+  font-size: 30px;
+  height: 25vh;
+  width: 50vh;
+  background-color: #343a40;
+  border-color: #343a40;
+  font-weight: 500;
+}
+.tryIt-button:hover{
+  background-color: skyblue;
+  border-color: skyblue;
 }

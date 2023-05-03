@@ -38,20 +38,19 @@ async function addUser(id, name) {
   console.log({ id, name });
   const docId = inputId.replace('@uci.edu', '');
 
-  if (await checkUser(docId)) {
-    console.log(checkUser(docId));
+  if ((await checkUser(docId)).allow) {
     try {
       const docRef = doc(collection(firestore, 'users'), docId);
       await setDoc(docRef, {
         id: inputId,
         name: inputName
       });
-      console.log('Document written with ID: ', docRef.id);
+      alert('Registered User!');
     } catch (e) {
-      console.error('Error adding document: ', e);
+      alert('Error registering user ', e);
     }
   } else {
-    console.log('User already exists in database');
+    alert('User is already registered');
   }
 }
 const getUser = async (documentName) => {

@@ -24,6 +24,7 @@ function QueueReserve(props) {
   const [showToast, setShowToast] = useState(false);
   const [merge, setMerge] = useState(false);
   const [players, setPlayers] = useState(Array(numPlayers).fill(''));
+  // eslint-disable-next-line no-unused-vars
   const SINGLES = 2;
   // eslint-disable-next-line no-unused-vars
   const DOUBLES = 4;
@@ -49,10 +50,15 @@ function QueueReserve(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const promises = players.filter((name) => name !== '').map((name) => checkUser(name));
+    const promises = players
+      .filter((name) => name !== '')
+      .map((name) => checkUser(name.toLowerCase()));
     const results = await Promise.all(promises);
     const empty = players.every((name) => name === '');
-    if (!empty && results.every((result) => !result.allow)) {
+    const filteredPlayers = players.filter((name) => name.trim() !== '');
+    const uniquePlayers = new Set(filteredPlayers.map((name) => name.toLowerCase()));
+    const isUnique = uniquePlayers.size >= filteredPlayers.length;
+    if (!empty && results.every((result) => !result.allow) && isUnique) {
       // create an array of appropriate size depending on amount of palyers, and add the names of the players
       let toFill = Array(numPlayers)
         .fill('')
@@ -65,12 +71,14 @@ function QueueReserve(props) {
                 .join(' ')
             : '';
         });
-      handleSave(toFill, merge);
+      handleSave(toFill, merge, empty);
     } else {
       if (empty) {
         setToastText('No input');
+      } else if (!isUnique) {
+        setToastText('No double sign-up!');
       } else {
-        setToastText('All players must be registered');
+        setToastText('All players must be registered!');
       }
       setShowToast(true);
     }
@@ -112,7 +120,8 @@ function QueueReserve(props) {
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        width: '102.5%'
       }}
     >
       <Modal
@@ -186,10 +195,10 @@ function QueueReserve(props) {
       <Toast
         show={showToast}
         onClose={() => setShowToast(false)}
-        delay={3000}
+        delay={2000}
         autohide
         style={{
-          width: '70vh',
+          width: '300%',
           height: '8vh',
           color: 'black',
           backgroundColor: 'white'

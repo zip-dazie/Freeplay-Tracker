@@ -2,7 +2,7 @@ import './HowItWorks.css';
 import { Parallax } from 'react-parallax';
 import register from '../../assets/registerFull.png';
 import signUp from '../../assets/signUpFull.png';
-import queue from '../../assets/queueFull.png';
+import court from '../../assets/courtsFull.png';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 function HowItWorks() {
@@ -19,7 +19,7 @@ function HowItWorks() {
           <div className="text-content">Register with UCINETID and name (Scroll down)</div>
         </div>
       </Parallax>
-      <Parallax strength={10} bgImage={queue}>
+      <Parallax strength={10} bgImage={court}>
         <div className="content">
           <div className="text-content">
             <span>
@@ -39,7 +39,7 @@ function HowItWorks() {
           </div>
         </div>
       </Parallax>
-      <Parallax strength={200} blur={{ min: -5, max: 5 }} bgImage={queue}>
+      <Parallax strength={200} blur={{ min: -5, max: 5 }} bgImage={court}>
         <div className="content">
           <div className="text-content">Wait in line and play (scroll down)</div>
         </div>

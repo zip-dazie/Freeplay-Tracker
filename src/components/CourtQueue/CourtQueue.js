@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line no-unused-vars
 import { Tooltip, Alert, Fade } from 'react-bootstrap';
-// eslint-disable-next-line no-unused-vars
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useRef } from 'react';
 import QueueReserve from '../QueueReserve/QueueReserve.js';
 import Timer from '../Timer/Timer.js';
@@ -14,24 +12,22 @@ import { GiPlayerNext } from 'react-icons/gi';
 // eslint-disable-next-line no-unused-vars
 import Draggable from 'react-draggable';
 let nextId = 0; // indexing for queuing
-const MISSING_SIGN = '🫥';
-const VERSUS_SIGN = '🏸';
-
 function CourtQueue(props) {
   const { id } = props;
+  const [showModal, setShowModal] = useState(false);
+  const [warning, setWarning] = useState(false);
+  // retrive array from local storage (persisting)
   const [players, setPlayers] = useState(
     JSON.parse(localStorage.getItem(`players-queue-${id}`)) || []
   );
-  const [showModal, setShowModal] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [warning, setWarning] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [showButton, setShowButtons] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [dupWarn, setdupWarn] = useState(false);
-  const [warnMsg, setWarnMsg] = useState(null);
+  const MISSING_SIGN = '🫥';
+  const VERSUS_SIGN = '🏸';
+  const checkCourts = {
+    1: [2, 3],
+    2: [1, 3],
+    3: [1, 2]
+  };
   const toggleWarning = () => {
-    setWarnMsg('Clear Line?');
     setWarning(!warning);
   };
   const handleClose = () => {
@@ -44,7 +40,6 @@ function CourtQueue(props) {
     let formatted = arr.map((i) => {
       if (i === '') {
         count++;
-        console.log('here');
         return '?';
       } else {
         return i;
@@ -52,25 +47,47 @@ function CourtQueue(props) {
     });
     return { count, formatted };
   };
-  // eslint-disable-next-line no-unused-vars
-
   const inputPlayers = (inputs, merge) => {
-    // check for duplicates
-    let alreadyExists = false;
+    // check for sign-up on another court
+    let courtNums = checkCourts[id.match(/\d+/)[0]];
+    let A = courtNums[0];
+    let B = courtNums[1];
+
+    let tempA = JSON.parse(localStorage.getItem(`players-queue-${`Court ${A}`}`));
+    let tempB = JSON.parse(localStorage.getItem(`players-queue-${`Court ${B}`}`));
+
+    let otherCourts = [...tempA.map((item) => item.name), ...tempB.map((item) => item.name)].flat();
+    console.log(otherCourts);
+    let onOtherCourt = inputs
+      .filter((input) => input !== '')
+      .some((input) => otherCourts.includes(input));
+    console.log(onOtherCourt);
+    tempA.map((item, index) => {
+      console.log(`Item ${index}:`, item.name);
+    });
+
+    tempB.map((item, index) => {
+      console.log(`Item ${index}:`, item.name);
+    });
+    // check for sign-up on same court
+    let onCourt = false;
     for (let i = 0; i < inputs.length; i++) {
       const input = inputs[i];
       console.log(input);
       for (let j = 0; j < players.length; j++) {
         const player = players[j];
         if (player.name.includes(input)) {
-          alreadyExists = true;
-          console.log(player.name);
+          onCourt = true;
           break;
         }
       }
     }
-    if (alreadyExists) {
-      alert('Player is already signed up');
+    // alert based on duplicate type
+    if (onCourt) {
+      alert('Player is already signed up!');
+      return;
+    } else if (onOtherCourt) {
+      alert('Player is already signed up another court');
       return;
     }
     let { count, formatted } = replaceEmpty(inputs);
@@ -98,7 +115,6 @@ function CourtQueue(props) {
         ]);
       }
     } else {
-      //players.forEach((e) => console.log(e));
       setPlayers([
         ...players,
         { id: nextId++, name: formatted, status: [formatted.length, count] }
@@ -131,6 +147,7 @@ function CourtQueue(props) {
     }
     return -1;
   };
+
   const queueText = (p) => {
     const half = Math.ceil(p.length / 2);
     const firstHalf = p
@@ -163,7 +180,6 @@ function CourtQueue(props) {
     );
   };
   //toast event handling
-  // eslint-disable-next-line no-unused-vars
   const handleClearing = () => {
     if (players.length > 1) {
       handleWarning();
@@ -171,7 +187,6 @@ function CourtQueue(props) {
   };
 
   // bind keys to queueing
-  // eslint-disable-next-line no-unused-vars
   const clearQueue = () => {
     setPlayers((players) => [players[0]]);
   };
@@ -205,7 +220,7 @@ function CourtQueue(props) {
             handleNext();
           }}
         >
-          →
+          →<span className="tip-text">Next</span>
         </button>
       </div>
       {/* display only top of queue */}
@@ -249,7 +264,8 @@ function CourtQueue(props) {
             position: 'absolute',
             pointerEvents: 'auto',
             paddingBottom: '0px',
-            paddingTop: '7px'
+            paddingTop: '7px',
+            overflow: 'hidden'
           }}
         >
           <Alert.Heading
@@ -259,7 +275,7 @@ function CourtQueue(props) {
               alignItems: 'center'
             }}
           >
-            {warnMsg}
+            Clear Line?
             <button
               className="check-control"
               onClick={() => {

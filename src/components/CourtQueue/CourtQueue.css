@@ -149,3 +149,20 @@
   justify-content: center;
   align-items: center;
 }
+.circle-control .tip-text {
+  font-size: 10px;
+  visibility: hidden;
+  width: fit-content;
+  background-color: rgba(73,78,83,255);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 0px 5px 0px 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.circle-control:hover .tip-text {
+  visibility: visible;
+  transform: translateY(-150%)
+}

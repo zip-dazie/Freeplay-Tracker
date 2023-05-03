@@ -71,7 +71,7 @@ function QueueReserve(props) {
                 .join(' ')
             : '';
         });
-      handleSave(toFill, merge, empty);
+      handleSave(toFill, merge);
     } else {
       if (empty) {
         setToastText('No input');

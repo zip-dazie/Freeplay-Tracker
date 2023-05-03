@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div className="Footer">
       <div className="footer-left">
-        <p className="footer-text">Made with ❤️ by zip-Dazie</p>
+        <p className="footer-text">Made with ❤️ by zip-dazie</p>
         <p className="footer-text">2022 © Badminton Club at UCI</p>
       </div>
       <div className="footer-right">

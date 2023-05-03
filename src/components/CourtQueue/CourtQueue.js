@@ -26,7 +26,12 @@ function CourtQueue(props) {
   // eslint-disable-next-line no-unused-vars
   const [warning, setWarning] = useState(false);
   // eslint-disable-next-line no-unused-vars
+  const [showButton, setShowButtons] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [dupWarn, setdupWarn] = useState(false);
+  const [warnMsg, setWarnMsg] = useState(null);
   const toggleWarning = () => {
+    setWarnMsg('Clear Line?');
     setWarning(!warning);
   };
   const handleClose = () => {
@@ -39,23 +44,43 @@ function CourtQueue(props) {
     let formatted = arr.map((i) => {
       if (i === '') {
         count++;
-        return { MISSING_SYM: MISSING_SIGN };
+        console.log('here');
+        return '?';
       } else {
         return i;
       }
     });
     return { count, formatted };
   };
-  const inputPlayers = (inputs, merge, empty) => {
-    console.log(empty);
+  // eslint-disable-next-line no-unused-vars
+
+  const inputPlayers = (inputs, merge) => {
+    // check for duplicates
+    let alreadyExists = false;
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
+      console.log(input);
+      for (let j = 0; j < players.length; j++) {
+        const player = players[j];
+        if (player.name.includes(input)) {
+          alreadyExists = true;
+          console.log(player.name);
+          break;
+        }
+      }
+    }
+    if (alreadyExists) {
+      alert('Player is already signed up');
+      return;
+    }
     let { count, formatted } = replaceEmpty(inputs);
     if (merge && nextId != 0) {
       const index = findEmpty(formatted, count);
       if (index != -1) {
         let counter = 0;
-        let toMerge = formatted.filter((e) => e != { MISSING_SYM: MISSING_SIGN });
+        let toMerge = formatted.filter((e) => e != '?');
         let mergeWith = players[index].name.filter((e) => {
-          if (e === { MISSING_SYM: MISSING_SIGN } && counter < toMerge.length) {
+          if (e === '?' && counter < toMerge.length) {
             counter++;
             return false;
           }
@@ -64,9 +89,7 @@ function CourtQueue(props) {
         let merged = toMerge.concat(mergeWith);
         const updatedPlayers = [...players];
         updatedPlayers[index].name = merged;
-        updatedPlayers[index].status[1] = merged.filter(
-          (e) => e === { MISSING_SYM: MISSING_SIGN }
-        ).length;
+        updatedPlayers[index].status[1] = merged.filter((e) => e === { MISSING_SIGN }).length;
         setPlayers(updatedPlayers);
       } else {
         setPlayers([
@@ -75,7 +98,7 @@ function CourtQueue(props) {
         ]);
       }
     } else {
-      players.forEach((e) => console.log(e));
+      //players.forEach((e) => console.log(e));
       setPlayers([
         ...players,
         { id: nextId++, name: formatted, status: [formatted.length, count] }
@@ -112,23 +135,23 @@ function CourtQueue(props) {
     const half = Math.ceil(p.length / 2);
     const firstHalf = p
       .slice(0, half)
-      .map((value) => (value ? value : '?'))
-      .join(' • ');
+      .map((value) => (value === '?' ? MISSING_SIGN : value))
+      .join(' + ');
     const secondHalf = p
       .slice(half)
-      .map((value) => (value ? value : '?'))
-      .join(' • ');
+      .map((value) => (value === '?' ? MISSING_SIGN : value))
+      .join(' + ');
     return secondHalf ? `${firstHalf}\n🏸\n${secondHalf}` : firstHalf;
   };
   const OnCourtText = (p) => {
     const half = Math.ceil(p.length / 2);
     const firstHalf = p
       .slice(0, half)
-      .map((value) => (value ? value : '?'))
+      .map((value) => (value === '?' ? MISSING_SIGN : value))
       .join(' + ');
     const secondHalf = p
       .slice(half)
-      .map((value) => (value ? value : '?'))
+      .map((value) => (value === '?' ? MISSING_SIGN : value))
       .join(' + ');
     const separator = secondHalf ? <div>{VERSUS_SIGN}</div> : null;
     return (
@@ -236,7 +259,7 @@ function CourtQueue(props) {
               alignItems: 'center'
             }}
           >
-            Clear Line?
+            {warnMsg}
             <button
               className="check-control"
               onClick={() => {

@@ -45,7 +45,25 @@ function HowItWorks() {
         </div>
       </Parallax>
       <div className="content">
-        <Button onClick={handleClick} className="tryIt-button">
+        <Button
+          onClick={handleClick}
+          style={{
+            fontSize: '30px',
+            height: '25vh',
+            width: '50vh',
+            backgroundColor: '#343a40',
+            borderColor: '#343a40',
+            fontWeight: '500'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = 'skyblue';
+            e.target.style.borderColor = 'skyblue';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = '#343a40';
+            e.target.style.borderColor = '#343a40';
+          }}
+        >
           Try Freeplay!
         </Button>
       </div>

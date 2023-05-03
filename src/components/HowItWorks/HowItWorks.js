@@ -35,7 +35,7 @@ function HowItWorks() {
             ⋅ Choose between singles or doubles
             <br />
             ⋅ Enter UCINETID (not including domain)
-            <br /> ⋅ Toggle between merging or not (for incomplete sign-ups)
+            <br /> ⋅ Toggle between merging or not (find incomplete sign-ups)
           </div>
         </div>
       </Parallax>

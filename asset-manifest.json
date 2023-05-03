@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/Freeplay-Tracker/static/css/main.34d4d469.css",
-    "main.js": "/Freeplay-Tracker/static/js/main.1fb2e7af.js",
+    "main.css": "/Freeplay-Tracker/static/css/main.bcb3727e.css",
+    "main.js": "/Freeplay-Tracker/static/js/main.15c67c6f.js",
     "static/js/651.ae995f48.chunk.js": "/Freeplay-Tracker/static/js/651.ae995f48.chunk.js",
     "static/media/logo.png": "/Freeplay-Tracker/static/media/logo.46534ec0d4649d84657a.png",
-    "static/media/reserve.png": "/Freeplay-Tracker/static/media/reserve.95ae03ceb90db18cdea8.png",
-    "static/media/result.png": "/Freeplay-Tracker/static/media/result.507da71cef096443d997.png",
-    "static/media/availableCourt.png": "/Freeplay-Tracker/static/media/availableCourt.38316c13acd45000c593.png",
-    "static/media/signUp.png": "/Freeplay-Tracker/static/media/signUp.8ae86a8327886a10e529.png",
+    "static/media/queueFull.png": "/Freeplay-Tracker/static/media/queueFull.13f8991d5cf2b9b5c689.png",
+    "static/media/signUpFull.png": "/Freeplay-Tracker/static/media/signUpFull.88f4af9cb0d0cc2e17d3.png",
+    "static/media/registerFull.png": "/Freeplay-Tracker/static/media/registerFull.85d842a697fef11ca0fd.png",
     "index.html": "/Freeplay-Tracker/index.html",
-    "main.34d4d469.css.map": "/Freeplay-Tracker/static/css/main.34d4d469.css.map",
-    "main.1fb2e7af.js.map": "/Freeplay-Tracker/static/js/main.1fb2e7af.js.map",
+    "main.bcb3727e.css.map": "/Freeplay-Tracker/static/css/main.bcb3727e.css.map",
+    "main.15c67c6f.js.map": "/Freeplay-Tracker/static/js/main.15c67c6f.js.map",
     "651.ae995f48.chunk.js.map": "/Freeplay-Tracker/static/js/651.ae995f48.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.34d4d469.css",
-    "static/js/main.1fb2e7af.js"
+    "static/css/main.bcb3727e.css",
+    "static/js/main.15c67c6f.js"
   ]
 }

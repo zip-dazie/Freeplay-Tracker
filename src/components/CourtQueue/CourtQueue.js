@@ -258,7 +258,7 @@ function CourtQueue(props) {
             zIndex: 9998,
             display: 'flex',
             justifyContent: 'center',
-            height: '25px',
+            height: '100%',
             width: '100%',
             top: '.001vh',
             position: 'absolute',

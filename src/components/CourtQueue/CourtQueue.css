@@ -15,29 +15,33 @@
   text-shadow : 0px 1px 5px lightskyblue;
 
 }
-.Queue-Box{
-    max-height:22.5vh;
-    overflow-y:scroll;
-    overflow-x:hidden;
-    align-items: center;
-    text-align:center;
-    margin-top: 1vh;
-    box-shadow: 0px 1px 5px lightskyblue;
-    transition-duration: 0.3s;
-}
-.Queue-Box::-webkit-scrollbar {
-    width: 8px;
-    animation-duration: 0.3s;
+.Queue-Box {
+  max-height: 70%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1vh;
+  box-shadow: 0px 1px 5px lightskyblue;
+  transition-duration: 0.3s;
   }
+  
+  .Queue-Box::-webkit-scrollbar {
+  width: 8px;
+  animation-duration: 0.3s;
+  }
+  
   .Queue-Box::-webkit-scrollbar-thumb {
-    background-color: skyblue;
-    border-radius: 8px;
+  background-color: skyblue;
+  border-radius: 8px;
   }
   
   .Queue-Box::-webkit-scrollbar-thumb:hover {
-    background-color: gray;
+  background-color: gray;
   }
-.Queue-Item{
+  
+  .Queue-Item {
   border-color: skyblue;
   font-size: 10px;
   min-height: 4vh;
@@ -45,11 +49,12 @@
   text-align: center;
   color: rgb(190, 188, 188);
   padding-left: 3.5vh;
-  overflow:visible;
-}
-.Queue-Text{
+  overflow: visible;
+  }
+  
+  .Queue-Text {
   margin: 0;
-}
+  }
 .Queue-Item:hover{
   background-color: rgba(255, 255, 255, 0.1);
   color: white;

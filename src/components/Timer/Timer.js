@@ -4,23 +4,25 @@ import './Timer.css';
 
 const Timer = forwardRef((props, ref) => {
   const { title } = props;
-  const [start, setStart] = useState(
+  const [startTime, setStartTime] = useState(
     parseInt(localStorage.getItem(`timer-${title}-start`), 10) || Date.now()
   );
-  const [time, setTime] = useState(parseInt(localStorage.getItem(`timer-${title}-time`), 10) || 0);
+  const [elapsedTime, setElapsedTime] = useState(
+    parseInt(localStorage.getItem(`timer-${title}-elapsed`), 10) || 0
+  );
   const [running, setRunning] = useState(
-    localStorage.getItem(`timer-${title}`) === 'true' || false
+    localStorage.getItem(`timer-${title}-running`) === 'true' || false
   );
 
   useImperativeHandle(ref, () => ({
     reset() {
-      setTime(0);
-      setStart(Date.now());
+      setElapsedTime(0);
+      setStartTime(Date.now());
       setRunning(false);
     },
     start() {
       setRunning(true);
-      setStart(Date.now());
+      setStartTime(Date.now());
     },
     stop() {
       setRunning(false);
@@ -32,21 +34,21 @@ const Timer = forwardRef((props, ref) => {
     if (running) {
       interval = setInterval(() => {
         const cur = Date.now();
-        setTime(time + cur - start);
-        setStart(cur);
+        setElapsedTime((prevElapsedTime) => prevElapsedTime + cur - startTime);
+        setStartTime(cur);
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [running, start, time]);
+  }, [running, startTime]);
 
   useEffect(() => {
-    localStorage.setItem(`timer-${title}-start`, start);
-    localStorage.setItem(`timer-${title}-time`, time);
-    localStorage.setItem(`timer-${title}`, running);
-  }, [title, start, time, running]);
+    localStorage.setItem(`timer-${title}-start`, startTime);
+    localStorage.setItem(`timer-${title}-elapsed`, elapsedTime);
+    localStorage.setItem(`timer-${title}-running`, running);
+  }, [title, startTime, elapsedTime, running]);
 
-  const minutes = Math.floor(time / 60000);
-  const seconds = Math.floor((time / 1000) % 60);
+  const minutes = Math.floor(elapsedTime / 60000);
+  const seconds = Math.floor((elapsedTime / 1000) % 60);
   const minutesStr = minutes < 10 ? `0${minutes}` : minutes.toString();
   const secondsStr = seconds < 10 ? `0${seconds}` : seconds.toString();
 
@@ -62,6 +64,7 @@ const Timer = forwardRef((props, ref) => {
 Timer.propTypes = {
   title: PropTypes.string.isRequired
 };
+
 Timer.displayName = 'Timer';
 
 export default Timer;

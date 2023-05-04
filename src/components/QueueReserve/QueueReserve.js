@@ -199,7 +199,7 @@ function QueueReserve(props) {
         autohide
         style={{
           width: '300%',
-          height: '8vh',
+          height: '80%',
           color: 'black',
           backgroundColor: 'white'
         }}

@@ -75,10 +75,10 @@ function CourtQueue(props) {
     }
     // alert based on duplicate type
     if (onCourt) {
-      alert('A player signed up on this court!');
+      alert('A player is already signed up on this court!');
       return false;
     } else if (onOtherCourt) {
-      alert('A player signed up on another court!');
+      alert('A player is signed up on another court!');
       return false;
     }
     let { count, formatted } = replaceEmpty(inputs);

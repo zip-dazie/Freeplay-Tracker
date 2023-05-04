@@ -2,7 +2,7 @@ import './CourtQueue.css';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line no-unused-vars
-import { Tooltip, Alert, Fade } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Alert, Fade } from 'react-bootstrap';
 import { useRef } from 'react';
 import QueueReserve from '../QueueReserve/QueueReserve.js';
 import Timer from '../Timer/Timer.js';
@@ -143,18 +143,17 @@ function CourtQueue(props) {
     if (/\p{Emoji}/gu.test(secondHalf)) {
       secondHalf = secondHalf.replace(/\p{Emoji}/gu, '?');
     }
+    const tooltip = <Tooltip>{`${firstHalf} vs. ${secondHalf}`}</Tooltip>;
     return (
-      <>
-        <span
+      <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={tooltip}>
+        <div
+          data-bs-toggle="tooltip"
+          data-bs-target="#my-tooltip"
           title={`${firstHalf} vs. ${secondHalf}`}
-          onTouchStart={(e) => {
-            e.preventDefault();
-            e.currentTarget.title = `${firstHalf} vs. ${secondHalf}`;
-          }}
         >
           {text}
-        </span>
-      </>
+        </div>
+      </OverlayTrigger>
     );
   };
   const shortenName = (name) => {
@@ -196,25 +195,9 @@ function CourtQueue(props) {
     }
     return (
       <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
-        <span
-          title={firstHalf}
-          onTouchStart={(e) => {
-            e.preventDefault();
-            e.currentTarget.title = `${firstHalf}`;
-          }}
-        >
-          {fHalf}
-        </span>
+        <span title={firstHalf}>{fHalf}</span>
         {separator}
-        <span
-          title={secondHalf}
-          onTouchStart={(e) => {
-            e.preventDefault();
-            e.currentTarget.title = `${secondHalf}`;
-          }}
-        >
-          {sHalf}
-        </span>
+        <span title={secondHalf}>{sHalf}</span>
       </div>
     );
   };

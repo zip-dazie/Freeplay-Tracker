@@ -58,7 +58,6 @@ function CourtQueue(props) {
     let tempB = JSON.parse(localStorage.getItem(`players-queue-${`Court ${B}`}`));
 
     let otherCourts = [...tempA.map((item) => item.name), ...tempB.map((item) => item.name)].flat();
-    console.log(otherCourts);
     let onOtherCourt = inputs
       .filter((input) => input !== '')
       .some((input) => otherCourts.includes(input));
@@ -66,7 +65,6 @@ function CourtQueue(props) {
     let onCourt = false;
     for (let i = 0; i < inputs.length; i++) {
       const input = inputs[i];
-      console.log(input);
       for (let j = 0; j < players.length; j++) {
         const player = players[j];
         if (player.name.includes(input)) {
@@ -78,40 +76,33 @@ function CourtQueue(props) {
     // alert based on duplicate type
     if (onCourt) {
       alert('Player is already signed up!');
-      return;
+      return false;
     } else if (onOtherCourt) {
       alert('Player is already signed up another court');
-      return;
+      return false;
     }
     let { count, formatted } = replaceEmpty(inputs);
-    if (merge && nextId != 0) {
-      const index = findEmpty(formatted, count);
-      if (index != -1) {
-        let counter = 0;
-        let toMerge = formatted.filter((e) => e != '?');
-        let mergeWith = players[index].name.filter((e) => {
-          if (e === '?' && counter < toMerge.length) {
-            counter++;
-            return false;
-          }
-          return true;
-        });
-        let merged = toMerge.concat(mergeWith);
-        const updatedPlayers = [...players];
-        updatedPlayers[index].name = merged;
-        updatedPlayers[index].status[1] = merged.filter((e) => e === { MISSING_SIGN }).length;
-        setPlayers(updatedPlayers);
-      } else {
-        setNextId((prevNextId) => prevNextId + 1);
-        setPlayers([
-          ...players,
-          { id: nextId, name: formatted, status: [formatted.length, count] }
-        ]);
-      }
-    } else {
-      setNextId((prevNextId) => prevNextId + 1);
-      setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
+    const index = findEmpty(formatted, count);
+    // merging
+    if (merge && nextId != 0 && index != -1) {
+      let counter = 0;
+      let toMerge = formatted.filter((e) => e != '?');
+      let mergeWith = players[index].name.filter((e) => {
+        if (e === '?' && counter < toMerge.length) {
+          counter++;
+          return false;
+        }
+        return true;
+      });
+      let merged = toMerge.concat(mergeWith);
+      const updatedPlayers = [...players];
+      updatedPlayers[index].name = merged;
+      updatedPlayers[index].status[1] = merged.filter((e) => e === { MISSING_SIGN }).length;
+      setPlayers(updatedPlayers);
+      return true;
     }
+    setNextId((prevNextId) => prevNextId + 1);
+    setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
   };
   const findEmpty = (input, toBeFilled) => {
     for (let i = 0; i < players.length; i++) {
@@ -146,12 +137,21 @@ function CourtQueue(props) {
     const { a: fHalf, b: sHalf } = splitNames(short);
     const text = secondHalf ? `${fHalf} ${VERSUS_SIGN} ${sHalf}` : firstHalf;
     // reconvert back into string for tooltip
-    if (/\p{Emoji}/u.test(sHalf)) {
-      secondHalf = '?';
+    if (/\p{Emoji}/gu.test(firstHalf)) {
+      firstHalf = firstHalf.replace(/\p{Emoji}/gu, '?');
+    }
+    if (/\p{Emoji}/gu.test(secondHalf)) {
+      secondHalf = secondHalf.replace(/\p{Emoji}/gu, '?');
     }
     return (
       <>
-        <span title={`${firstHalf} vs. ${secondHalf}`} onTouchStart={(e) => e.preventDefault()}>
+        <span
+          title={`${firstHalf} vs. ${secondHalf}`}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            e.currentTarget.title = `${firstHalf} vs. ${secondHalf}`;
+          }}
+        >
           {text}
         </span>
       </>
@@ -188,16 +188,31 @@ function CourtQueue(props) {
     const { a: fHalf, b: sHalf } = splitNames(short);
     const separator = sHalf ? <div>{VERSUS_SIGN}</div> : null;
     //convert emoji to string
-    if (/\p{Emoji}/u.test(sHalf)) {
-      secondHalf = '?';
+    if (/\p{Emoji}/gu.test(fHalf)) {
+      firstHalf = fHalf.replace(/\p{Emoji}/gu, '?');
+    }
+    if (/\p{Emoji}/gu.test(sHalf)) {
+      secondHalf = sHalf.replace(/\p{Emoji}/gu, '?');
     }
     return (
       <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
-        <span title={firstHalf} onTouchStart={(e) => e.preventDefault()}>
+        <span
+          title={firstHalf}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            e.currentTarget.title = `${firstHalf}`;
+          }}
+        >
           {fHalf}
         </span>
         {separator}
-        <span title={secondHalf} onTouchStart={(e) => e.preventDefault()}>
+        <span
+          title={secondHalf}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            e.currentTarget.title = `${secondHalf}`;
+          }}
+        >
           {sHalf}
         </span>
       </div>

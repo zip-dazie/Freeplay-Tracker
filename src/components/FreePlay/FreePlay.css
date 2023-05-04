@@ -51,8 +51,8 @@
 .court{
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   margin: 10px;
+  min-height: 50vh;
   max-height: calc(80vh - 10px);
-  height: fit-content;
   transition: all 0.3s;
   background-color: #343a40 !important;
   border-radius: 20px !important;

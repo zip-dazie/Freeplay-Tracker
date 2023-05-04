@@ -51,7 +51,8 @@
   padding-left: 3.5vh;
   overflow: visible;
   margin: auto;
-  padding: auto;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   }
   
   .Queue-Text {

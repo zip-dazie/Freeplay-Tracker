@@ -172,7 +172,7 @@ function CourtQueue(props) {
       .join(' + ');
     const separator = secondHalf ? <div>{VERSUS_SIGN}</div> : null;
     return (
-      <div style={{ whiteSpace: 'pre', lineHeight: 1.2 }}>
+      <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
         {firstHalf}
         {separator}
         {secondHalf}
@@ -324,7 +324,6 @@ function CourtQueue(props) {
         {/* display rest of queue */}
         {players.slice(1, players.length).map((player) => (
           <div className="Queue-Item" key={player.id}>
-            <button className="config-btn">⋮</button>
             <p className="Queue-Text">{queueText(player.name)}</p>
             <button className="remove-btn" onClick={() => removePlayers(player.id)}>
               ×

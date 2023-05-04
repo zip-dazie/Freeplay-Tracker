@@ -44,7 +44,7 @@
   .Queue-Item {
   border-color: skyblue;
   font-size: 10px;
-  min-height: 4vh;
+  height: fit-content;
   display: flex;
   text-align: center;
   color: rgb(190, 188, 188);

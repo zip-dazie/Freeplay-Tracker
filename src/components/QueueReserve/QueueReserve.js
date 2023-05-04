@@ -2,8 +2,7 @@ import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import './QueueReserve.css';
 import { BsFillPersonFill, BsFillPeopleFill } from 'react-icons/bs';
-// eslint-disable-next-line no-unused-vars
-import { checkUser, getUser } from '../Users/Users';
+import { checkUser } from '../Users/Users';
 
 import {
   Modal,
@@ -16,7 +15,7 @@ import {
   Toast
 } from 'react-bootstrap';
 function QueueReserve(props) {
-  const { showModal, handleClose, handleSave } = props;
+  const { show_modal, handle_close, handle_save, ...rest } = props;
   const [numPlayers, setNumPlayers] = useState(2);
   const [radioValue, setRadioValue] = useState('2');
   // eslint-disable-next-line no-unused-vars
@@ -24,10 +23,7 @@ function QueueReserve(props) {
   const [showToast, setShowToast] = useState(false);
   const [merge, setMerge] = useState(false);
   const [players, setPlayers] = useState(Array(numPlayers).fill(''));
-  // eslint-disable-next-line no-unused-vars
   const SINGLES = 2;
-  // eslint-disable-next-line no-unused-vars
-  const DOUBLES = 4;
   const radios = [
     { name: 'Singles', value: '2' },
     { name: 'Doubles', value: '4' }
@@ -59,7 +55,7 @@ function QueueReserve(props) {
           return name ? name : '';
         });
 
-      handleSave(toFill, merge);
+      handle_save(toFill, merge);
     } else {
       if (empty) {
         setToastText('No input');
@@ -71,7 +67,7 @@ function QueueReserve(props) {
       setShowToast(true);
     }
     resetModal();
-    handleClose();
+    handle_close();
   };
   const resetModal = () => {
     setRadioValue(radios.find((option) => option.name === 'Singles').value);
@@ -90,6 +86,7 @@ function QueueReserve(props) {
     for (let i = 0; i < numPlayers; i++) {
       inputs.push(
         <Form.Control
+          key={i}
           type="text"
           maxLength={14}
           placeholder={'UCINetID ' + (i + 1)}
@@ -104,6 +101,7 @@ function QueueReserve(props) {
   };
   return (
     <div
+      {...rest}
       style={{
         position: 'absolute',
         top: '50%',
@@ -117,12 +115,12 @@ function QueueReserve(props) {
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        show={showModal}
-        onHide={handleClose}
+        show={show_modal}
+        onHide={handle_close}
       >
         <Modal.Header>
           <Modal.Title>Court Sign-up</Modal.Title>
-          <CloseButton variant="white" onClick={handleClose}></CloseButton>
+          <CloseButton variant="white" onClick={handle_close}></CloseButton>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -203,7 +201,7 @@ function QueueReserve(props) {
 export default QueueReserve;
 
 QueueReserve.propTypes = {
-  handleClose: PropTypes.string,
-  showModal: PropTypes.string,
-  handleSave: PropTypes.string
+  handle_close: PropTypes.func,
+  show_modal: PropTypes.bool,
+  handle_save: PropTypes.func
 };

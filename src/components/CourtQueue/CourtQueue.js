@@ -183,11 +183,11 @@ function CourtQueue(props) {
     const { a: fHalf, b: sHalf } = splitNames(short);
     const separator = sHalf ? <div>{VERSUS_SIGN}</div> : null;
     //convert emoji to string
-    if (/\p{Emoji}/gu.test(fHalf)) {
-      firstHalf = fHalf.replace(/\p{Emoji}/gu, '?');
+    if (/\p{Emoji}/gu.test(firstHalf)) {
+      firstHalf = firstHalf.replace(/\p{Emoji}/gu, '?');
     }
-    if (/\p{Emoji}/gu.test(sHalf)) {
-      secondHalf = sHalf.replace(/\p{Emoji}/gu, '?');
+    if (/\p{Emoji}/gu.test(secondHalf)) {
+      secondHalf = secondHalf.replace(/\p{Emoji}/gu, '?');
     }
     return (
       <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
@@ -249,7 +249,6 @@ function CourtQueue(props) {
       </div>
       {/* display only top of queue */}
       <div
-        onTouchMove
         className="Current-Box"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
@@ -331,7 +330,11 @@ function CourtQueue(props) {
         >
           +
         </button>
-        <QueueReserve showModal={showModal} handleClose={handleClose} handleSave={inputPlayers} />
+        <QueueReserve
+          show_modal={showModal}
+          handle_close={handleClose}
+          handle_save={inputPlayers}
+        />
         <strong style={{ color: 'white', fontSize: '10px' }}>
           Waiting: {players.length - 1 > 0 ? players.length - 1 : 0}
         </strong>
@@ -346,7 +349,7 @@ function CourtQueue(props) {
           ×
         </button>
       </div>
-      <div className="Queue-Box" onTouchMove>
+      <div className="Queue-Box">
         {/* display rest of queue */}
         {players.slice(1, players.length).map((player) => (
           <div className="Queue-Item" key={player.id}>

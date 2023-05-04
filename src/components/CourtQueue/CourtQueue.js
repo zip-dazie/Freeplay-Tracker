@@ -20,7 +20,7 @@ function CourtQueue(props) {
   const [players, setPlayers] = useState(
     JSON.parse(localStorage.getItem(`players-queue-${id}`)) || []
   );
-  const MISSING_SIGN = '🫥';
+  const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
   const checkCourts = {
     1: [2, 3],

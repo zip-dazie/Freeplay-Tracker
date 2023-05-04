@@ -266,6 +266,7 @@ function CourtQueue(props) {
       </div>
       {/* display only top of queue */}
       <div
+        onTouchMove
         className="Current-Box"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
@@ -311,7 +312,7 @@ function CourtQueue(props) {
         >
           <Alert.Heading
             style={{
-              fontSize: '15px',
+              fontSize: '12.5px',
               display: 'flex',
               alignItems: 'center'
             }}
@@ -361,7 +362,7 @@ function CourtQueue(props) {
           ×
         </button>
       </div>
-      <div className="Queue-Box">
+      <div className="Queue-Box" onTouchMove>
         {/* display rest of queue */}
         {players.slice(1, players.length).map((player) => (
           <div className="Queue-Item" key={player.id}>

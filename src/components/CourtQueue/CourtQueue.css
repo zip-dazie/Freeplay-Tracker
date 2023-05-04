@@ -11,10 +11,7 @@
     overflow: hidden;
     display: flex;
 }
-.Current-Box:hover{
-  text-shadow : 0px 1px 5px lightskyblue;
 
-}
 .Queue-Box {
   max-height: calc(30vh - 10px);
   height: fit-content;

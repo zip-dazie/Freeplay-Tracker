@@ -314,7 +314,8 @@ function CourtQueue(props) {
             style={{
               fontSize: '12.5px',
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
+              whiteSpace: 'nowrap'
             }}
           >
             Clear Line?

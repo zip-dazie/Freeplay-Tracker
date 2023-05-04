@@ -151,7 +151,9 @@ function CourtQueue(props) {
     }
     return (
       <>
-        <span title={`${firstHalf} vs. ${secondHalf}`}>{text}</span>
+        <span title={`${firstHalf} vs. ${secondHalf}`} onTouchStart={(e) => e.preventDefault()}>
+          {text}
+        </span>
       </>
     );
   };
@@ -191,9 +193,13 @@ function CourtQueue(props) {
     }
     return (
       <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
-        <span title={firstHalf}>{fHalf}</span>
+        <span title={firstHalf} onTouchStart={(e) => e.preventDefault()}>
+          {fHalf}
+        </span>
         {separator}
-        <span title={secondHalf}>{sHalf}</span>
+        <span title={secondHalf} onTouchStart={(e) => e.preventDefault()}>
+          {sHalf}
+        </span>
       </div>
     );
   };

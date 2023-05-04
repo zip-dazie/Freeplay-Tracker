@@ -11,8 +11,8 @@ import { GrCheckmark, GrClose } from 'react-icons/gr';
 import { GiPlayerNext } from 'react-icons/gi';
 // eslint-disable-next-line no-unused-vars
 import Draggable from 'react-draggable';
-let nextId = 0; // indexing for queuing
 function CourtQueue(props) {
+  const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
   const { id } = props;
   const [showModal, setShowModal] = useState(false);
   const [warning, setWarning] = useState(false);
@@ -48,6 +48,7 @@ function CourtQueue(props) {
     return { count, formatted };
   };
   const inputPlayers = (inputs, merge) => {
+    console.log(inputs);
     // check for sign-up on another court
     let courtNums = checkCourts[id.match(/\d+/)[0]];
     let A = courtNums[0];
@@ -61,14 +62,6 @@ function CourtQueue(props) {
     let onOtherCourt = inputs
       .filter((input) => input !== '')
       .some((input) => otherCourts.includes(input));
-    console.log(onOtherCourt);
-    tempA.map((item, index) => {
-      console.log(`Item ${index}:`, item.name);
-    });
-
-    tempB.map((item, index) => {
-      console.log(`Item ${index}:`, item.name);
-    });
     // check for sign-up on same court
     let onCourt = false;
     for (let i = 0; i < inputs.length; i++) {
@@ -109,16 +102,15 @@ function CourtQueue(props) {
         updatedPlayers[index].status[1] = merged.filter((e) => e === { MISSING_SIGN }).length;
         setPlayers(updatedPlayers);
       } else {
+        setNextId((prevNextId) => prevNextId + 1);
         setPlayers([
           ...players,
-          { id: nextId++, name: formatted, status: [formatted.length, count] }
+          { id: nextId, name: formatted, status: [formatted.length, count] }
         ]);
       }
     } else {
-      setPlayers([
-        ...players,
-        { id: nextId++, name: formatted, status: [formatted.length, count] }
-      ]);
+      setNextId((prevNextId) => prevNextId + 1);
+      setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
     }
   };
   const findEmpty = (input, toBeFilled) => {
@@ -147,35 +139,61 @@ function CourtQueue(props) {
     }
     return -1;
   };
-
+  // eslint-disable-next-line no-unused-vars
   const queueText = (p) => {
-    const half = Math.ceil(p.length / 2);
-    const firstHalf = p
+    let short = shortenNames(p);
+    let { a: firstHalf, b: secondHalf } = splitNames(p);
+    const { a: fHalf, b: sHalf } = splitNames(short);
+    const text = secondHalf ? `${fHalf} ${VERSUS_SIGN} ${sHalf}` : firstHalf;
+    // reconvert back into string for tooltip
+    if (/\p{Emoji}/u.test(sHalf)) {
+      secondHalf = '?';
+    }
+    return (
+      <>
+        <span title={`${firstHalf} vs. ${secondHalf}`}>{text}</span>
+      </>
+    );
+  };
+  const shortenName = (name) => {
+    const words = name.split(' ');
+    if (words.length === 1) {
+      return name;
+    } else {
+      const lastWord = words[words.length - 1];
+      const shortened = lastWord.slice(0, 1) + '.';
+      return words.slice(0, -1).join(' ') + ' ' + shortened;
+    }
+  };
+  const shortenNames = (names) => {
+    return names.map(shortenName);
+  };
+  const splitNames = (names) => {
+    const half = Math.ceil(names.length / 2);
+    const firstHalf = names
       .slice(0, half)
       .map((value) => (value === '?' ? MISSING_SIGN : value))
       .join(' + ');
-    const secondHalf = p
+    const secondHalf = names
       .slice(half)
       .map((value) => (value === '?' ? MISSING_SIGN : value))
       .join(' + ');
-    return secondHalf ? `${firstHalf}\n🏸\n${secondHalf}` : firstHalf;
+    return { a: firstHalf, b: secondHalf };
   };
   const OnCourtText = (p) => {
-    const half = Math.ceil(p.length / 2);
-    const firstHalf = p
-      .slice(0, half)
-      .map((value) => (value === '?' ? MISSING_SIGN : value))
-      .join(' + ');
-    const secondHalf = p
-      .slice(half)
-      .map((value) => (value === '?' ? MISSING_SIGN : value))
-      .join(' + ');
-    const separator = secondHalf ? <div>{VERSUS_SIGN}</div> : null;
+    let short = shortenNames(p);
+    let { a: firstHalf, b: secondHalf } = splitNames(p);
+    const { a: fHalf, b: sHalf } = splitNames(short);
+    const separator = sHalf ? <div>{VERSUS_SIGN}</div> : null;
+    //convert emoji to string
+    if (/\p{Emoji}/u.test(sHalf)) {
+      secondHalf = '?';
+    }
     return (
       <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
-        {firstHalf}
+        <span title={firstHalf}>{fHalf}</span>
         {separator}
-        {secondHalf}
+        <span title={secondHalf}>{sHalf}</span>
       </div>
     );
   };
@@ -191,7 +209,6 @@ function CourtQueue(props) {
     setPlayers((players) => [players[0]]);
   };
   const removePlayers = (pid) => {
-    console.log(players.length);
     setPlayers((players) => players.filter((player) => player.id !== pid));
   };
 
@@ -207,6 +224,9 @@ function CourtQueue(props) {
   const handleNext = () => {
     childRef.current.reset();
   };
+  useEffect(() => {
+    localStorage.setItem('nextId', nextId);
+  }, [nextId]);
   return (
     <div>
       <div className="top-items">

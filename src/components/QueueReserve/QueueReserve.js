@@ -40,14 +40,6 @@ function QueueReserve(props) {
     newInputs[pos] = event.target.value;
     setPlayers(newInputs);
   };
-  // eslint-disable-next-line no-unused-vars
-  const playersOutput = () => {
-    const full = Array(numPlayers).fill('');
-    const fullPlayers = full.map((value, index) => {
-      return players[index] || '';
-    });
-    return fullPlayers;
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const promises = players
@@ -64,13 +56,9 @@ function QueueReserve(props) {
         .fill('')
         .map((_, i) => {
           const name = results[i]?.name;
-          return name
-            ? name
-                .split(' ')
-                .map((word, index) => (index === 0 ? word : `${word[0]}.`))
-                .join(' ')
-            : '';
+          return name ? name : '';
         });
+
       handleSave(toFill, merge);
     } else {
       if (empty) {

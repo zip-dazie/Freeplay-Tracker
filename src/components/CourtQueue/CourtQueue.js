@@ -146,11 +146,7 @@ function CourtQueue(props) {
     const tooltip = <Tooltip>{`${firstHalf} vs. ${secondHalf}`}</Tooltip>;
     return (
       <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={tooltip}>
-        <div
-          data-bs-toggle="tooltip"
-          data-bs-target="#my-tooltip"
-          title={`${firstHalf} vs. ${secondHalf}`}
-        >
+        <div data-bs-toggle="tooltip" data-bs-target="#my-tooltip">
           {text}
         </div>
       </OverlayTrigger>
@@ -195,9 +191,13 @@ function CourtQueue(props) {
     }
     return (
       <div style={{ whiteSpace: 'pre', lineHeight: 1.4 }}>
-        <span title={firstHalf}>{fHalf}</span>
+        <OverlayTrigger placement="top" overlay={<Tooltip>{firstHalf}</Tooltip>}>
+          <span>{fHalf}</span>
+        </OverlayTrigger>
         {separator}
-        <span title={secondHalf}>{sHalf}</span>
+        <OverlayTrigger placement="top" overlay={<Tooltip>{secondHalf}</Tooltip>}>
+          <span>{sHalf}</span>
+        </OverlayTrigger>
       </div>
     );
   };

@@ -146,39 +146,7 @@
   border-style: outset;
   border: 1vh solid rgba(35, 234, 124, 0.8);
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
-  .close-control{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-Color: transparent;
-    border-color: transparent;
-    box-sizing: content-box;
-    border-radius: 10px;
-    border: 2px solid transparent;
-  
-  }
-  .close-control:hover{
-    border-style: outset;
-    border: 4px solid rgba(204,80, 80, 0.8);
-  }
-  
-  .check-control{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-Color: transparent;
-    border-color: transparent;
-    box-sizing: content-box;
-    border-radius: 10px;
-    border: 2px solid transparent;
-    margin-left: 5vh;
-  }
-  .check-control:hover{
-    border-style: outset;
-    border: 4px solid rgba(35, 234, 124, 0.8);
-  }
-}
+
 .dark-overlay {
   position: absolute;
   border-radius: 20px;

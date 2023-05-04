@@ -63,6 +63,17 @@ function HowItWorks() {
             e.target.style.backgroundColor = '#343a40';
             e.target.style.borderColor = '#343a40';
           }}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            e.target.style.backgroundColor = 'skyblue';
+            e.target.style.borderColor = 'skyblue';
+          }}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            e.target.style.backgroundColor = '#343a40';
+            e.target.style.borderColor = '#343a40';
+            handleClick();
+          }}
         >
           Try Freeplay!
         </Button>

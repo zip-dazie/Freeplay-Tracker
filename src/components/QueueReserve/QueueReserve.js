@@ -16,14 +16,14 @@ import {
 } from 'react-bootstrap';
 function QueueReserve(props) {
   const { show_modal, handle_close, handle_save, ...rest } = props;
-  const [numPlayers, setNumPlayers] = useState(2);
-  const [radioValue, setRadioValue] = useState('2');
+  const [numPlayers, setNumPlayers] = useState(4);
+  const [radioValue, setRadioValue] = useState('4');
   // eslint-disable-next-line no-unused-vars
   const [toastText, setToastText] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [merge, setMerge] = useState(false);
   const [players, setPlayers] = useState(Array(numPlayers).fill(''));
-  const SINGLES = 2;
+  const DOUBLES = 4;
   const radios = [
     { name: 'Singles', value: '2' },
     { name: 'Doubles', value: '4' }
@@ -38,9 +38,14 @@ function QueueReserve(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const promises = players
-      .filter((name) => name !== '')
-      .map((name) => checkUser(name.toLowerCase()));
+    console.log(players);
+    const promises = players.map((name) => {
+      if (name === '') {
+        return Promise.resolve('');
+      } else {
+        return checkUser(name.toLowerCase());
+      }
+    });
     const results = await Promise.all(promises);
     const empty = players.every((name) => name === '');
     const filteredPlayers = players.filter((name) => name.trim() !== '');
@@ -54,7 +59,6 @@ function QueueReserve(props) {
           const name = results[i]?.name;
           return name ? name : '';
         });
-
       handle_save(toFill, merge);
     } else {
       if (empty) {
@@ -70,9 +74,9 @@ function QueueReserve(props) {
     handle_close();
   };
   const resetModal = () => {
-    setRadioValue(radios.find((option) => option.name === 'Singles').value);
-    setNumPlayers(SINGLES);
-    const defaultPlayers = Array(SINGLES).fill('');
+    setRadioValue(radios.find((option) => option.name === 'Doubles').value);
+    setNumPlayers(DOUBLES);
+    const defaultPlayers = Array(DOUBLES).fill('');
     setPlayers(defaultPlayers);
     setMerge(false);
   };
@@ -93,7 +97,7 @@ function QueueReserve(props) {
           onChange={(e) => handleInput(e, i)}
           value={inputs[i]}
           onKeyUp={handleKeyPressed}
-          style={{ width: '35%', margin: '10px', fontSize: '12px' }}
+          style={{ width: '35%', margin: '10px', fontSize: '12px', outlineColor: 'black' }}
         />
       );
     }
@@ -144,10 +148,10 @@ function QueueReserve(props) {
                     color: radioValue === radio.value ? 'white' : 'skyblue'
                   }}
                 >
-                  {radio.name === 'Singles' ? (
-                    <BsFillPersonFill></BsFillPersonFill>
-                  ) : (
+                  {radio.name === 'Doubles' ? (
                     <BsFillPeopleFill></BsFillPeopleFill>
+                  ) : (
+                    <BsFillPersonFill></BsFillPersonFill>
                   )}
                 </ToggleButton>
               ))}

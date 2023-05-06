@@ -1,12 +1,13 @@
 import './CourtQueue.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line no-unused-vars
 import { OverlayTrigger, Tooltip, Alert, Fade } from 'react-bootstrap';
-import { useRef } from 'react';
 import QueueReserve from '../QueueReserve/QueueReserve.js';
+import Unsign from '../Unsign/Unsign.js';
 import Timer from '../Timer/Timer.js';
 import { GrCheckmark, GrClose } from 'react-icons/gr';
+// eslint-disable-next-line no-unused-vars
+import { checkUser } from '../Users/Users.js';
 // eslint-disable-next-line no-unused-vars
 import { GiPlayerNext } from 'react-icons/gi';
 // eslint-disable-next-line no-unused-vars
@@ -14,7 +15,9 @@ import Draggable from 'react-draggable';
 function CourtQueue(props) {
   const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
   const { id } = props;
-  const [showModal, setShowModal] = useState(false);
+  const [showSignUp, SetShowSignup] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [showUnsign, setShowUnsign] = useState(false);
   const [warning, setWarning] = useState(false);
   // retrive array from local storage (persisting)
   const [players, setPlayers] = useState(
@@ -22,7 +25,8 @@ function CourtQueue(props) {
   );
   const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
-  const checkCourts = {
+  const MISSING_STRING = '?';
+  const CHECKCOURTS = {
     1: [2, 3],
     2: [1, 3],
     3: [1, 2]
@@ -31,26 +35,90 @@ function CourtQueue(props) {
     setWarning(!warning);
   };
   const handleClose = () => {
-    setShowModal(false);
+    SetShowSignup(false);
   };
-  const handleShow = () => setShowModal(true);
+  const handleShow = () => {
+    SetShowSignup(true);
+  };
+  // unsign/withdraw players
+  const showRemove = () => {
+    if (players.length > 0) setShowUnsign(true);
+  };
+  const closeRemove = () => setShowUnsign(false);
+  const withdrawPlayers = async (p) => {
+    let pName = p.toString();
+    console.log(pName);
+    let result = '';
+    if (p !== '') {
+      result = await checkUser(pName);
+    }
+    console.log(result);
+    if (result.name) {
+      const updatedPlayers = players
+        .map((player) => {
+          if (player.name.includes(result.name)) {
+            const updatedName = player.name.map((name) =>
+              name === result.name ? MISSING_STRING : name
+            );
+            const updatedStatus = [player.status[0], player.status[1] - 1];
+            if (updatedStatus[1] <= 0) {
+              removePlayers(player.id);
+              return null;
+            } else {
+              return {
+                ...player,
+                name: updatedName,
+                status: updatedStatus
+              };
+            }
+          } else {
+            return player;
+          }
+        })
+        .filter(Boolean);
+      updatedPlayers.forEach((a) => {
+        console.log(a);
+      });
+      setPlayers(updatedPlayers);
+    } else {
+      alert('Player is not signed up');
+    }
+  };
   const handleWarning = () => setWarning(true);
   const replaceEmpty = (arr) => {
     let count = 0;
     let formatted = arr.map((i) => {
       if (i === '') {
-        count++;
         return '?';
       } else {
+        count++;
         return i;
       }
     });
     return { count, formatted };
   };
+  const mergeArrays = (arr1, arr2) => {
+    // keep integrity of player position
+    const merged = [];
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] === '?') {
+        const notEmpty = arr2.findIndex((el) => el !== '?');
+        if (notEmpty !== -1) {
+          merged.push(arr2[notEmpty]);
+          arr2[notEmpty] = '?';
+        } else {
+          merged.push('?');
+        }
+      } else {
+        merged.push(arr1[i]);
+      }
+    }
+    return merged;
+  };
   const inputPlayers = (inputs, merge) => {
     console.log(inputs);
     // check for sign-up on another court
-    let courtNums = checkCourts[id.match(/\d+/)[0]];
+    let courtNums = CHECKCOURTS[id.match(/\d+/)[0]];
     let A = courtNums[0];
     let B = courtNums[1];
 
@@ -83,28 +151,27 @@ function CourtQueue(props) {
     }
     let { count, formatted } = replaceEmpty(inputs);
     const index = findEmpty(formatted, count);
+    console.log(index, count, formatted);
     // merging
+    console.log(index);
     if (merge && nextId != 0 && index != -1) {
-      let counter = 0;
-      let toMerge = formatted.filter((e) => e != '?');
-      let mergeWith = players[index].name.filter((e) => {
-        if (e === '?' && counter < toMerge.length) {
-          counter++;
-          return false;
-        }
-        return true;
-      });
-      let merged = toMerge.concat(mergeWith);
+      let mergeWith = players[index].name;
+      console.log(mergeWith);
+      console.log(formatted);
+      let merged = mergeArrays(mergeWith, formatted);
+      console.log(merged);
       const updatedPlayers = [...players];
       updatedPlayers[index].name = merged;
-      updatedPlayers[index].status[1] = merged.filter((e) => e === { MISSING_SIGN }).length;
+      updatedPlayers[index].status[1] = merged.filter((e) => e === MISSING_STRING).length;
       setPlayers(updatedPlayers);
       return true;
     }
     setNextId((prevNextId) => prevNextId + 1);
     setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
+    return true;
   };
   const findEmpty = (input, toBeFilled) => {
+    console.log(input, toBeFilled);
     for (let i = 0; i < players.length; i++) {
       let playerInfo = players[i];
       let slotSize = playerInfo.status[0];
@@ -113,16 +180,14 @@ function CourtQueue(props) {
         slotSize === input.length &&
         emptySlots != 0 &&
         emptySlots === toBeFilled &&
-        slotSize - emptySlots + (slotSize - toBeFilled) <= input.length
+        slotSize - emptySlots + toBeFilled <= input.length
       ) {
-        console.log(emptySlots, toBeFilled);
-        console.log('all add');
         return i;
       } else if (
         slotSize === input.length &&
         emptySlots != 0 &&
-        emptySlots < toBeFilled &&
-        slotSize - emptySlots + (slotSize - toBeFilled) <= input.length
+        emptySlots >= toBeFilled &&
+        slotSize - emptySlots + toBeFilled <= input.length
       ) {
         console.log('partial add');
         return i;
@@ -202,6 +267,7 @@ function CourtQueue(props) {
     );
   };
   //toast event handling
+  // eslint-disable-next-line no-unused-vars
   const handleClearing = () => {
     if (players.length > 1) {
       handleWarning();
@@ -209,18 +275,18 @@ function CourtQueue(props) {
   };
 
   // bind keys to queueing
+  // eslint-disable-next-line no-unused-vars
   const clearQueue = () => {
     setPlayers((players) => [players[0]]);
   };
   const removePlayers = (pid) => {
     setPlayers((players) => players.filter((player) => player.id !== pid));
   };
-
   useEffect(() => {
     if (players.length > 0) {
       childRef.current.start();
     } else if (players.length <= 0) {
-      childRef.current.stop();
+      childRef.current.reset();
     }
     localStorage.setItem(`players-queue-${id}`, JSON.stringify(players));
   }, [players]);
@@ -240,8 +306,7 @@ function CourtQueue(props) {
           className="circle-control"
           style={{ marginLeft: 'auto', borderRadius: '0.5rem 0.5rem 0 0' }}
           onClick={() => {
-            setPlayers(players.slice(1, players.length));
-            handleNext();
+            if (players.length > 0) handleWarning();
           }}
         >
           →<span className="tip-text">Next</span>
@@ -300,11 +365,12 @@ function CourtQueue(props) {
               whiteSpace: 'nowrap'
             }}
           >
-            Clear Line?
+            Finish game?
             <button
               className="check-control"
               onClick={() => {
-                clearQueue();
+                setPlayers(players.slice(1, players.length));
+                handleNext();
                 toggleWarning();
               }}
             >
@@ -331,7 +397,7 @@ function CourtQueue(props) {
           +
         </button>
         <QueueReserve
-          show_modal={showModal}
+          show_modal={showSignUp}
           handle_close={handleClose}
           handle_save={inputPlayers}
         />
@@ -341,13 +407,18 @@ function CourtQueue(props) {
         {/* clear queue */}
         <button
           className="circle-control"
-          onClick={handleClearing}
+          onClick={showRemove}
           style={{
             pointerEvents: 'auto'
           }}
         >
-          ×
+          −
         </button>
+        <Unsign
+          show_remove={showUnsign}
+          close_remove={closeRemove}
+          save_removal={withdrawPlayers}
+        ></Unsign>
       </div>
       <div className="Queue-Box">
         {/* display rest of queue */}

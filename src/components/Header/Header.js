@@ -1,24 +1,26 @@
 import './Header.css';
 import logo from '../../assets/logo.png';
-import { Link } from 'react-router-dom';
-
+//import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 function Header() {
   return (
     <div className="Header">
-      <Link to="/Freeplay-Tracker" className="header-left">
-        <img src={logo} className="logo" />
+      <div className="header-left">
+        <a href="https://campusrec.mhsoftware.com/" target="_blank" rel="noopener noreferrer">
+          <img src={logo} className="logo" />
+        </a>
         <h3 style={{ color: '#424242' }}>Badminton Club at UCI</h3>
-      </Link>
+      </div>
       <div className="header-right">
-        <Link to="/Freeplay-Tracker" className="link free-play">
+        <NavLink to="/Freeplay-Tracker" className="link free-play" activeClassName="active">
           FREE PLAY
-        </Link>
-        <Link to="/how-it-works" className="link how-it-works">
+        </NavLink>
+        <NavLink to="/how-it-works" className="link how-it-works">
           HOW IT WORKS
-        </Link>
-        <Link to="/register" className="link register">
+        </NavLink>
+        <NavLink to="/register" className="link register">
           REGISTER
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

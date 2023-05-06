@@ -24,7 +24,7 @@ function HowItWorks() {
           <div className="text-content">
             <span>
               ⋅ Press the (+) button to sign-up for a court <br />
-              ⋅ (→) to finish game <br />⋅ ( x ) to clear line or spot in line
+              ⋅ (→) to finish game <br />⋅ (−) to withdraw a player
             </span>
           </div>
         </div>

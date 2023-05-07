@@ -450,7 +450,9 @@ function CourtQueue(props) {
       </div>
       <div
         style={{
-          position: 'relative',
+          height: 'fit-content',
+          width: 'fit-content',
+          position: 'absolute',
           bottom: 0,
           left: 0,
           marginBottom: '1.5vh'

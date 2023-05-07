@@ -66,7 +66,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
       style={{
         height: 'fit-content',
         wight: 'fit-content',
-        fontSize: '5vh',
+        fontSize: '4vh',
         color: 'white',
         cursor: 'pointer',
         fontWeight: 'bold',

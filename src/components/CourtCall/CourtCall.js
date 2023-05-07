@@ -90,7 +90,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
       </div>
       <div
         style={{
-          transform: 'rotate(90deg) translateX(.6vh)',
+          transform: 'rotate(90deg) translateX(.55vh)',
           height: 'fit-content',
           width: 'fit-content',
           marginLeft: '-1vh',

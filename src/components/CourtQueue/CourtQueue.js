@@ -46,8 +46,7 @@ function CourtQueue(props) {
   };
   const closeRemove = () => setShowUnsign(false);
   const withdrawPlayers = async (p) => {
-    let pName = p.toString();
-    console.log(pName);
+    let pName = p.toString().toLowerCase();
     let result = '';
     if (p !== '') {
       result = await checkUser(pName);

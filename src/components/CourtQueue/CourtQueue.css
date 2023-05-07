@@ -140,7 +140,7 @@
   box-sizing: content-box;
   border-radius: 10px;
   border: 1vh solid transparent;
-  margin-left: 2vh;
+  margin-left: 1vw;
 }
 .check-control:hover{
   border-style: outset;

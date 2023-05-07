@@ -355,7 +355,7 @@ function CourtQueue(props) {
         >
           <Alert.Heading
             style={{
-              fontSize: '12.5px',
+              fontSize: 'clamp(10px, 1.5vw, 20px)',
               display: 'flex',
               alignItems: 'center',
               whiteSpace: 'nowrap'

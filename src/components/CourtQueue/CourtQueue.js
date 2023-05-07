@@ -11,6 +11,8 @@ import { checkUser } from '../Users/Users.js';
 // eslint-disable-next-line no-unused-vars
 import { GiPlayerNext } from 'react-icons/gi';
 // eslint-disable-next-line no-unused-vars
+import { CSSTransition } from 'react-transition-group';
+// eslint-disable-next-line no-unused-vars
 import Draggable from 'react-draggable';
 function CourtQueue(props) {
   const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
@@ -51,7 +53,7 @@ function CourtQueue(props) {
     if (p !== '') {
       result = await checkUser(pName);
     }
-    console.log(result);
+
     if (result.name) {
       const updatedPlayers = players
         .map((player) => {
@@ -71,13 +73,11 @@ function CourtQueue(props) {
               };
             }
           } else {
+            alert('Player is not signed up');
             return player;
           }
         })
         .filter(Boolean);
-      updatedPlayers.forEach((a) => {
-        console.log(a);
-      });
       setPlayers(updatedPlayers);
     } else {
       alert('Player is not signed up');
@@ -316,18 +316,15 @@ function CourtQueue(props) {
         className="Current-Box"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
-        {players.slice(0, 1).map((player) => (
-          <div className="Cur-Players" key={player.id}>
-            <div
-              style={{
-                margin: '5vh',
-                textAlign: 'center'
-              }}
-            >
-              {OnCourtText(player.name)}
-            </div>
+        <CSSTransition in={players.length > 0} timeout={1000} classNames="fade" unmountOnExit>
+          <div className="Cur-Players">
+            {players.slice(0, 1).map((player) => (
+              <div className="div_in" key={player.id}>
+                <div style={{ margin: '5vh', textAlign: 'center' }}>{OnCourtText(player.name)}</div>
+              </div>
+            ))}
           </div>
-        ))}
+        </CSSTransition>
       </div>
 
       {warning ? <div className="dark-overlay"></div> : null}

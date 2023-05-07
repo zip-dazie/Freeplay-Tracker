@@ -448,7 +448,17 @@ function CourtQueue(props) {
           </div>
         ))}
       </div>
-      <CourtCall toCall={id} ref={courtCallRef} />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          marginBottom: '1.5vh',
+          marginLeft: '1.5vh'
+        }}
+      >
+        <CourtCall toCall={id} ref={courtCallRef} />
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { OverlayTrigger, Tooltip, Alert, Fade } from 'react-bootstrap';
 import QueueReserve from '../QueueReserve/QueueReserve.js';
 import Unsign from '../Unsign/Unsign.js';
 import Timer from '../Timer/Timer.js';
+import CourtCall from '../CourtCall/CourtCall.js';
 import { GrCheckmark, GrClose } from 'react-icons/gr';
 // eslint-disable-next-line no-unused-vars
 import { checkUser } from '../Users/Users.js';
@@ -25,6 +26,8 @@ function CourtQueue(props) {
   const [players, setPlayers] = useState(
     JSON.parse(localStorage.getItem(`players-queue-${id}`)) || []
   );
+  const [pLength, setPLength] = useState(0);
+  const [removed, setRemoved] = useState(false);
   const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
   const MISSING_STRING = '?';
@@ -33,6 +36,7 @@ function CourtQueue(props) {
     2: [1, 3],
     3: [1, 2]
   };
+  const courtCallRef = useRef(null);
   const toggleWarning = () => {
     setWarning(!warning);
   };
@@ -114,7 +118,7 @@ function CourtQueue(props) {
     return merged;
   };
   const inputPlayers = (inputs, merge) => {
-    console.log(inputs);
+    //console.log(inputs);
     // check for sign-up on another court
     let courtNums = CHECKCOURTS[id.match(/\d+/)[0]];
     let A = courtNums[0];
@@ -149,27 +153,28 @@ function CourtQueue(props) {
     }
     let { count, formatted } = replaceEmpty(inputs);
     const index = findEmpty(formatted, count);
-    console.log(index, count, formatted);
+    //console.log(index, count, formatted);
     // merging
-    console.log(index);
+    //console.log(index);
     if (merge && nextId != 0 && index != -1) {
       let mergeWith = players[index].name;
-      console.log(mergeWith);
-      console.log(formatted);
+      //console.log(mergeWith);
+      //console.log(formatted);
       let merged = mergeArrays(mergeWith, formatted);
-      console.log(merged);
+      //console.log(merged);
       const updatedPlayers = [...players];
       updatedPlayers[index].name = merged;
       updatedPlayers[index].status[1] = merged.filter((e) => e === MISSING_STRING).length;
       setPlayers(updatedPlayers);
       return true;
     }
+
     setNextId((prevNextId) => prevNextId + 1);
     setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
     return true;
   };
   const findEmpty = (input, toBeFilled) => {
-    console.log(input, toBeFilled);
+    //console.log(input, toBeFilled);
     for (let i = 0; i < players.length; i++) {
       let playerInfo = players[i];
       let slotSize = playerInfo.status[0];
@@ -187,7 +192,7 @@ function CourtQueue(props) {
         emptySlots >= toBeFilled &&
         slotSize - emptySlots + toBeFilled <= input.length
       ) {
-        console.log('partial add');
+        //console.log('partial add');
         return i;
       }
     }
@@ -278,23 +283,41 @@ function CourtQueue(props) {
     setPlayers((players) => [players[0]]);
   };
   const removePlayers = (pid) => {
+    setRemoved(true);
     setPlayers((players) => players.filter((player) => player.id !== pid));
   };
+  // get queue (persisted)
   useEffect(() => {
     if (players.length > 0) {
       childRef.current.start();
     } else if (players.length <= 0) {
       childRef.current.reset();
     }
+    setPLength(players.length);
+
+    if (players.length > 0) {
+      childRef.current.start();
+    } else if (players.length <= 0) {
+      childRef.current.reset();
+    }
+    setRemoved(false);
     localStorage.setItem(`players-queue-${id}`, JSON.stringify(players));
-  }, [players]);
+  }, [players, pLength, removed]);
   const childRef = useRef(null);
   const handleNext = () => {
+    setPlayers(players.length > 1 ? players.slice(1, players.length) : []);
+    console.log(players.length);
+    if (players.length > 1) {
+      courtCallRef.current.finishPlay();
+    } else if (players.length <= 1) {
+      courtCallRef.current.finish();
+    }
     childRef.current.reset();
   };
   useEffect(() => {
     localStorage.setItem('nextId', nextId);
   }, [nextId]);
+
   return (
     <div>
       <div className="top-items">
@@ -364,7 +387,6 @@ function CourtQueue(props) {
             <button
               className="check-control"
               onClick={() => {
-                setPlayers(players.slice(1, players.length));
                 handleNext();
                 toggleWarning();
               }}
@@ -426,6 +448,7 @@ function CourtQueue(props) {
           </div>
         ))}
       </div>
+      <CourtCall toCall={id} ref={courtCallRef} />
     </div>
   );
 }

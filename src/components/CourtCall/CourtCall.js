@@ -65,7 +65,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
     <div
       style={{
         height: 'fit-content',
-        wight: 'fit-content',
+        weight: 'fit-content',
         fontSize: '4vh',
         color: 'white',
         cursor: 'pointer',
@@ -80,15 +80,14 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         e.target.style.filter = '';
       }}
     >
-      <span style={{ zIndex: '2' }} onClick={handlePlay}>
+      <span onClick={handlePlay}>
         <BsFillVolumeOffFill style={{ width: 'fit-content' }} />
       </span>
       <div
         style={{
           transform: 'rotate(90deg) translateX(.65vh)',
           height: 'fit-content',
-          width: 'fit-content',
-          zIndex: '1'
+          width: 'fit-content'
         }}
         onClick={toggleMute}
       >

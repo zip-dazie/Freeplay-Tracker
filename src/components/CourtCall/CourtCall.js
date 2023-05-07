@@ -82,15 +82,14 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         e.target.style.filter = '';
       }}
     >
-      <span style={{ margin: '0 0.5em' }} onClick={handlePlay}>
+      <span onClick={handlePlay}>
         <BsFillVolumeOffFill />
       </span>
       <div
         style={{
           transform: 'rotate(90deg) translateX(.65vh)',
           height: 'fit-content',
-          width: 'fit-content',
-          margin: '0 0.5em'
+          width: 'fit-content'
         }}
         onClick={toggleMute}
       >

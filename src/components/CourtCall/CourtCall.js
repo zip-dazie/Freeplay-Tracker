@@ -80,12 +80,12 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         e.target.style.filter = '';
       }}
     >
-      <span style={{ zIndex: '2', marginRight: '1.5px' }} onClick={handlePlay}>
+      <span style={{ zIndex: '2' }} onClick={handlePlay}>
         <BsFillVolumeOffFill style={{ width: 'fit-content' }} />
       </span>
       <div
         style={{
-          transform: 'rotate(90deg) translateX(.65vh) translateY(.5vh)',
+          transform: 'rotate(90deg) translateX(.65vh)',
           height: 'fit-content',
           width: 'fit-content',
           zIndex: '1'

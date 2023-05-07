@@ -73,7 +73,6 @@ function CourtQueue(props) {
               };
             }
           } else {
-            alert('Player is not signed up');
             return player;
           }
         })

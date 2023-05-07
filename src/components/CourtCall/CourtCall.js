@@ -65,13 +65,14 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
     <div
       style={{
         height: 'fit-content',
-        weight: '6vh',
+        width: 'fit-content',
         fontSize: '4vh',
         color: 'white',
         cursor: 'pointer',
         fontWeight: 'bold',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '0px'
       }}
       onMouseOver={(e) => {
         e.target.style.filter = 'brightness(80%)';
@@ -94,12 +95,6 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         {muted ? <BsX style={{ fontSize: '3vh' }} /> : <BsWifi1 style={{ fontSize: '4.5vh' }} />}
       </div>
       <style>
-        {`@media (max-width: 768px) {
-      div {
-        font-size: 3vh;
-        margin-left: .5vh;
-      }
-    }`}
       </style>
     </div>
   );

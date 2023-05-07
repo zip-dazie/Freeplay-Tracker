@@ -94,8 +94,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
       >
         {muted ? <BsX style={{ fontSize: '3vh' }} /> : <BsWifi1 style={{ fontSize: '4.5vh' }} />}
       </div>
-      <style>
-      </style>
+      <style></style>
     </div>
   );
 });

@@ -4,7 +4,9 @@
   height: 17vh;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .header-left {
@@ -13,20 +15,22 @@
   font-weight: bold;
   color: black;
   text-decoration: none;
-  margin-right: 5vh;
+  margin-right: 1vh;
   
 }
 .header-left h3{
   text-Shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: clamp(20px, 2.5vw, 25px);
 }
 .header-left h3:hover {
   text-Shadow: 1px 1px 2px rgb(235,205,84);
 }
-.header-left
+
 .header-right {
   display: flex;
   align-items: center;
   gap: 1vh;
+  margin-right: 2vh;
 }
 
 .logo {
@@ -34,6 +38,8 @@
 }
 
 .link {
+  font-size: 1.5vw;
+  margin-left: 1vh;
   color: #616161;
   font-weight: bold;
   padding: 2vh;
@@ -50,7 +56,7 @@
   color: #424242;
   letter-spacing: 2px;
 }
-.active{
-  box-shadow: 0 2px 0 0 rgb(235,205,84);
+.active {
+  border-bottom: 2px solid rgb(235, 205, 84);
 
 }

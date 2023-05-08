@@ -95,7 +95,7 @@ function CourtQueue(props) {
         return i;
       }
     });
-    return { count, formatted };
+    return { formatted, count };
   };
   const mergeArrays = (arr1, arr2) => {
     // keep integrity of player position
@@ -116,7 +116,9 @@ function CourtQueue(props) {
     return merged;
   };
   const inputPlayers = (inputs, merge) => {
-    //console.log(inputs);
+    inputs.forEach((i) => {
+      console.log(i);
+    });
     // check for sign-up on another court
     let courtNums = CHECKCOURTS[id.match(/\d+/)[0]];
     let A = courtNums[0];
@@ -149,11 +151,11 @@ function CourtQueue(props) {
       alert('A player is signed up on another court!');
       return false;
     }
-    let { count, formatted } = replaceEmpty(inputs);
+    let { formatted, count } = replaceEmpty(inputs);
     const index = findEmpty(formatted, count);
     //console.log(index, count, formatted);
     // merging
-    //console.log(index);
+    console.log(index);
     if (merge && nextId != 0 && index != -1) {
       let mergeWith = players[index].name;
       //console.log(mergeWith);
@@ -175,21 +177,22 @@ function CourtQueue(props) {
     for (let i = 0; i < players.length; i++) {
       let playerInfo = players[i];
       let slotSize = playerInfo.status[0];
-      let emptySlots = playerInfo.status[1];
+      let emptySlots = slotSize - playerInfo.status[1];
+      console.log(emptySlots);
+      console.log(toBeFilled);
       if (
         slotSize === input.length &&
         emptySlots != 0 &&
         emptySlots === toBeFilled &&
-        slotSize - emptySlots + toBeFilled <= input.length
+        slotSize - emptySlots + toBeFilled <= slotSize
       ) {
         return i;
       } else if (
         slotSize === input.length &&
         emptySlots != 0 &&
         emptySlots >= toBeFilled &&
-        slotSize - emptySlots + toBeFilled <= input.length
+        slotSize - emptySlots + toBeFilled <= slotSize
       ) {
-        //console.log('partial add');
         return i;
       }
     }

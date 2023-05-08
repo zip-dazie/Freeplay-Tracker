@@ -69,14 +69,14 @@
     padding: 2vh;
   }
 .header-left h3 {
-    font-size: clamp(3vh, 2.5vw, 4vh);
+    font-size: 3vh;
     margin-right: 0;
     margin-bottom: 2vh;
   }
 
   .logo {
-    width: 10vh;
-    height: 10vh;
+    width: 12vh;
+    height: 12vh;
   }
 
   .header-right {
@@ -88,7 +88,7 @@
   }
 
   .link {
-    font-size: clamp(2.5vh, 2vw, 3vh);
+    font-size: clamp(2.5vh, 2vw, 2.8vh);
     margin: 0;
     padding: 1vh;
   }

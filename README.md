@@ -4,7 +4,7 @@ Website made for Badminton Club at UCI to keep track of the Thursday free-play s
 
 ## To Run Program
 
-Get open two terminals:
+Open terminal:
 
 - One that runs `yarn start`
 

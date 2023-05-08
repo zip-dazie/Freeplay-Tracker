@@ -46,7 +46,12 @@ function HowItWorks() {
       </Parallax>
       <div className="content">
         <Button
-          onClick={handleClick}
+          onClick={(e) => {
+            e.preventDefault();
+            setTimeout(() => {
+              handleClick();
+            }, 500); // Delay of 500 milliseconds (0.5 seconds)
+          }}
           style={{
             fontSize: '30px',
             height: '25vh',

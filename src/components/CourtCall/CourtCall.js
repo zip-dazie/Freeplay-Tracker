@@ -72,8 +72,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         fontWeight: 'bold',
         display: 'flex',
         alignItems: 'center',
-        padding: '0',
-        marginLeft: '2vh'
+        padding: '0'
       }}
       onMouseOver={(e) => {
         e.target.style.filter = 'brightness(80%)';
@@ -83,7 +82,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
       }}
     >
       <div
-        style={{ zIndex: '2', height: 'fit-content', width: 'fit-content' }}
+        style={{ zIndex: '2', height: 'fit-content', width: 'fit-content', marginLeft: '1vw' }}
         onClick={handlePlay}
       >
         <BsFillVolumeOffFill />

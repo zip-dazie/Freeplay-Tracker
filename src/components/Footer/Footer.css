@@ -28,4 +28,7 @@
 img {
   color: #a0a193;
 }
+img:hover{
+  scale: 110%;
+}
 

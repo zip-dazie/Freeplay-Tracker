@@ -16,7 +16,10 @@ function Footer() {
           <img src="https://getzelos.com/wp-content/themes/zelos/assets/icon-facebook.svg" />
         </a>
         <a href="https://www.instagram.com/ucibadminton/" target="_blank" rel="noopener noreferrer">
-          <img src="https://getzelos.com/wp-content/themes/zelos/assets/icon-instagram.svg" />
+          <img
+            src="https://getzelos.com/wp-content/themes/zelos/assets/icon-instagram.svg"
+            className="filter-sky-blue"
+          />
         </a>
       </div>
     </div>

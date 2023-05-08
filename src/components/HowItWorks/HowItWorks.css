@@ -19,7 +19,7 @@
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 6, 0.50);
   color:white;
-  font-size: 15px;
+  font-size: 3vh;
   border-radius: 20px;
   font-weight: 500;
   transition: background-color 0.7s ease, transform 0.7s ease;

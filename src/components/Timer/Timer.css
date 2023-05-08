@@ -1,5 +1,6 @@
 .time-text{
     color:rgb(157, 165, 183);
+    font-size: 3.5vh;
 }
 .time-text:hover{
     color: white;

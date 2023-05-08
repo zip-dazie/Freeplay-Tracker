@@ -322,7 +322,7 @@ function CourtQueue(props) {
         {/*pop queue*/}
         <button
           className="circle-control"
-          style={{ marginLeft: 'auto', borderRadius: '0.5rem 0.5rem 0 0' }}
+          style={{ marginLeft: 'auto', borderRadius: '1.5vh 1.5vh 0 0' }}
           onClick={() => {
             if (players.length > 0) handleWarning();
           }}
@@ -415,7 +415,7 @@ function CourtQueue(props) {
           handle_close={handleClose}
           handle_save={inputPlayers}
         />
-        <strong style={{ color: 'white', fontSize: '10px' }}>
+        <strong style={{ color: 'white', fontSize: '2.25vh' }}>
           Waiting: {players.length - 1 > 0 ? players.length - 1 : 0}
         </strong>
         {/* clear queue */}

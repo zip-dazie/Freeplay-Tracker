@@ -12,7 +12,6 @@ function Register() {
   useEffect(() => {
     if (name !== '') setNameEmptyError(false);
   }, [name]);
-
   useEffect(() => {
     if (ID !== '') setIdEmptyError(false);
   }, [ID]);

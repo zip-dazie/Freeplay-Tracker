@@ -1,7 +1,7 @@
 .FreePlay {
   display: flex;
   height: 100%;
-  padding: 0px 50px 15px 50px;
+  padding: 0 50px 15px 50px;
   gap: 5px;
 }
 
@@ -49,18 +49,18 @@
   height: 10vh;
 }
 .court{
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  margin: 10px;
+  box-shadow: 0 2vh 1.5vh rgba(0, 0, 0, 0.2);
+  margin: 2.25vh;
   min-height: calc(80vh - 31px);
   transition: all 0.3s;
   background-color: #343a40 !important;
-  border-radius: 20px !important;
+  border-radius: 5vh !important;
 }
 .court .court-title{
   color: white;
   width:50%;
   margin: 0px;
-  font-size: 20px;
+  font-size: 4.5vh;
   font-weight: bold;
 
 }

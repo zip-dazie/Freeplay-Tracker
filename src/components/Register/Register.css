@@ -1,51 +1,55 @@
 .Register {
-  margin-top: 10vh;
-  padding: 5vh;
+  margin-top: 5vh;
+  padding: 6.5vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
   color: white;
-  text-Shadow: 1px 1px 6px black;
+  text-shadow: 0.3vh 0.3vh 1.8vh black;
   flex-direction: column;
   position: relative;
-  width: 40%;
+  width: 100vh;
+  height: 80vh;
+  overflow:hidden;
   margin: auto;
   background-color: #2a3744;
-  border-radius: 20px;
-  box-shadow: 0px 1px 5px black;
+  border-radius: 4vh;
+  box-shadow: 0 0.5vh 2.5vh black;
 }
+
 .Register .form {
   width: 100%;
-  border-radius: 20px;
-  box-shadow: 0px 1px 5px black;
+  border-radius: 4vh;
+  box-shadow: 0 0.5vh 2.5vh black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: background-color 1.3s ease, transform 1.3s ease;
 }
+
 .Register .form:hover {
   background-color: #2a3744;
-  transform: scale(1.15);
-  transition: transform 0.3s ease;
+  transform: scaleY(1.25) scaleX(1.2);
+  transition: transform 1.3s ease;
 }
 
 .Register .input {
   width: 80%;
-  height: 30px;
-  padding: 6px 10px;
-  margin: 10px 0px;
-  outline: 0px;
-  border-width: 0px 0px 1px;
+  height: 8vh;
+  padding: 0.8vh 1vh;
+  margin: 2vh 0;
+  outline: none;
+  border-width: 0 0 0.1vh;
   border-color: #acacac;
   transition: 0.3s ease;
-  font-size: 10px;
+  font-size: 2.5vh;
 }
+
 .Register .input:focus {
   outline: none;
-  box-shadow: 0px 0px 10px skyblue;
+  box-shadow: 0 0 2.5vh skyblue;
   border-color: skyblue;
 }
 
@@ -55,23 +59,24 @@
 
 .error-message {
   color: red;
-  font-size: 10px;
+  font-size: 2vh;
 }
 
 .Register button {
   background-color: white;
-  border: 1px solid;
+  border: 0.5vh solid;
   border-color: #acacac;
   color: #acacac;
-  padding: 8px 24px;
-  border-radius: 8px;
+  padding: 0.8vh 2.4vh;
+  border-radius: 0.8vh;
   cursor: pointer;
   height: fit-content;
   transition: 0.3s ease;
-  font-size: 15px;
-  width: 20vw; 
+  font-size: 3vh;
+  width: 10vw;
+  margin-top: 2vh;
   margin-bottom: 10vh;
-
+  font-weight: 400;
 }
 
 .Register button:hover {
@@ -80,11 +85,12 @@
   color: white;
 }
 
-.label{
-  color:#616161;
-  font-size: 20px;
+.label {
+  color: #616161;
+  font-size: 2vh;
 }
-.submit-button{
+
+.submit-button {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,19 +98,20 @@
   position: fixed;
   right: 0;
 }
-.name-input{
+
+.name-input {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-.id-input{
+
+.id-input {
   display: flex;
   flex-direction: column;
   justify-content: center !important;
   align-items: center !important;
   width: 100%;
   overflow: hidden;
-
 }

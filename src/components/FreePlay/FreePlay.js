@@ -11,7 +11,7 @@ function FreePlay() {
   });
   return (
     <div>
-      <CardGroup style={{ marginBottom: '0.5vh' }}>
+      <CardGroup>
         <Card className="court">
           <Card.Body>
             <Card.Title className="court-title">Court 1</Card.Title>

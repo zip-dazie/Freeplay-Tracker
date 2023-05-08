@@ -1,7 +1,7 @@
 .Current-Box{
-    box-shadow: 0 1px 6px lightskyblue;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    box-shadow: 0vh 0.2vh 1vh lightskyblue;
+    border-bottom-left-radius: 2.5vh;
+    border-bottom-right-radius: 2.5vh;
     height: 15vh;
     width: 100%;
     text-align: center;
@@ -12,7 +12,7 @@
     display: flex;
 }
 .Current-Box:hover{
-  text-shadow : 0px 1px 5px lightskyblue;
+  text-shadow : 0vh 0.5vh 2vh lightskyblue;
 
 }
 .Queue-Box {
@@ -24,7 +24,7 @@
   justify-content: center;
   text-align: center;
   margin-top: 1vh;
-  box-shadow: 0px 1px 5px lightskyblue;
+  box-shadow: 0vh .25vh 1vh lightskyblue;
   transition-duration: 0.3s;
   }
   
@@ -44,7 +44,7 @@
   
   .Queue-Item {
   border-color: skyblue;
-  font-size: 10px;
+  font-size: 2.25vh;
   height: fit-content;
   display: flex;
   text-align: center;
@@ -67,16 +67,17 @@
   background-color: skyblue;
   border: transparent;
   color: white;
-  height: 25px;
-  width: 25px;
-  border-radius: 30%;
+  height: 5.5vh;
+  width: 5.5vh;
+  border-radius: 1.75vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 3px;
+  font-size: 3.5vh;
 }
 .circle-control:hover{
-  box-shadow: 0px 1px 5px lightskyblue;
+  box-shadow: 0vh .5vh 1vh lightskyblue;
 
 }
 .controls{
@@ -122,7 +123,7 @@
   background-Color: transparent;
   border-color: transparent;
   box-sizing: content-box;
-  border-radius: 10px;
+  border-radius: 2vh;
   border: 1vh solid transparent;
 
 }
@@ -138,7 +139,7 @@
   background-Color: transparent;
   border-color: transparent;
   box-sizing: content-box;
-  border-radius: 10px;
+  border-radius: 2vh;
   border: 1vh solid transparent;
   margin-left: 1vw;
 }
@@ -149,7 +150,7 @@
 
 .dark-overlay {
   position: absolute;
-  border-radius: 20px;
+  border-radius: 5vh;
   top: 0;
   left: 0;
   width: 100%;
@@ -160,14 +161,14 @@
   align-items: center;
 }
 .circle-control .tip-text {
-  font-size: 10px;
+  font-size: 2.5vh;
   visibility: hidden;
   width: fit-content;
   background-color: rgba(73,78,83,255);
   color: #fff;
   text-align: center;
-  border-radius: 6px;
-  padding: 0px 5px 0px 5px;
+  border-radius: 1vh;
+  padding: 0 1vh 0 1vh;
   position: absolute;
   z-index: 1;
 }
@@ -193,4 +194,7 @@
 .fade-exit-active {
   opacity: 0;
   transition: opacity 1000ms ease-in-out;
+}
+.Cur-Players{
+  font-size: 3.5vh;
 }

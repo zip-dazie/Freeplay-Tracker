@@ -88,7 +88,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
       </div>
       <div
         style={{
-          transform: 'rotate(90deg) translateX(.47vh)',
+          transform: 'rotate(90deg) translateX(.19rem)',
           height: 'fit-content',
           width: 'fit-content',
           marginLeft: '-1vh',
@@ -96,7 +96,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         }}
         onClick={toggleMute}
       >
-        {muted ? <BsX style={{ fontSize: '3vh' }} /> : <BsWifi1 style={{ fontSize: '4.5vh' }} />}
+        {muted ? <BsX style={{ fontSize: '3vh' }} /> : <BsWifi1 style={{ fontSize: '4vm' }} />}
       </div>
     </div>
   );

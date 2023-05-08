@@ -178,8 +178,6 @@ function CourtQueue(props) {
       let playerInfo = players[i];
       let slotSize = playerInfo.status[0];
       let emptySlots = slotSize - playerInfo.status[1];
-      console.log(emptySlots);
-      console.log(toBeFilled);
       if (
         slotSize === input.length &&
         emptySlots != 0 &&

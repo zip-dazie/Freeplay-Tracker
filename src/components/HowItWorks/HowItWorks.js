@@ -50,7 +50,7 @@ function HowItWorks() {
             e.preventDefault();
             setTimeout(() => {
               handleClick();
-            }, 500); // Delay of 500 milliseconds (0.5 seconds)
+            }, 500);
           }}
           style={{
             fontSize: '30px',

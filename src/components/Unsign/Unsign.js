@@ -123,5 +123,5 @@ export default Unsign;
 Unsign.propTypes = {
   close_remove: PropTypes.func,
   show_remove: PropTypes.bool,
-  save_removal: PropTypes.array
+  save_removal: PropTypes.func
 };

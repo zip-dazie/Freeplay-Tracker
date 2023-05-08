@@ -12,7 +12,7 @@ function Header() {
         <h3 style={{ color: '#424242' }}>Badminton Club at UCI</h3>
       </div>
       <div className="header-right">
-        <NavLink to="/Freeplay-Tracker" className="link free-play" activeClassName="active">
+        <NavLink to="/Freeplay-Tracker" className="link free-play">
           FREE PLAY
         </NavLink>
         <NavLink to="/how-it-works" className="link how-it-works">

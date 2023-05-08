@@ -65,8 +65,9 @@ function CourtQueue(props) {
             const updatedName = player.name.map((name) =>
               name === result.name ? MISSING_STRING : name
             );
-            const updatedStatus = [player.status[0], player.status[1] - 1];
-            if (updatedStatus[1] <= 0) {
+            const updatedStatus = [player.status[0], player.status[1] + 1];
+            console.log(updatedStatus);
+            if (updatedStatus[1] >= player.status[0]) {
               removePlayers(player.id);
               return null;
             } else {
@@ -441,7 +442,7 @@ function CourtQueue(props) {
         {/* display rest of queue */}
         {players.slice(1, players.length).map((player) => (
           <div className="Queue-Item" key={player.id}>
-            <p className="Queue-Text">{queueText(player.name)}</p>
+            <span className="Queue-Text">{queueText(player.name)}</span>
             <button className="remove-btn" onClick={() => removePlayers(player.id)}>
               ×
             </button>

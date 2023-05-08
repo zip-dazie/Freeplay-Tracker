@@ -37,7 +37,7 @@
 }
 
 .link {
-  font-size: clamp(2vh, 1.5vw, 3vh);
+  font-size: clamp(2.5vh, 1.5vw, 3vh);
   margin-left: 1vh;
   color: #616161;
   font-weight: bold;

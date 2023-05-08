@@ -1,7 +1,8 @@
 # Freeplay Tracker
 
 Website made for Badminton Club at UCI to keep track of the Thursday free-play schedule.
-
+https://zip-dazie.github.io/Freeplay-Tracker/
+image.png
 ## To Run Program
 
 Open terminal:

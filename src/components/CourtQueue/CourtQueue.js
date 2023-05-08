@@ -44,7 +44,9 @@ function CourtQueue(props) {
   };
   // unsign/withdraw players
   const showRemove = () => {
-    if (players.length > 0) setShowUnsign(true);
+    if (players.length > 0) {
+      setShowUnsign(true);
+    }
   };
   const closeRemove = () => setShowUnsign(false);
   const withdrawPlayers = async (p) => {
@@ -426,9 +428,9 @@ function CourtQueue(props) {
           −
         </button>
         <Unsign
-          show_remove={showUnsign.toString()}
-          close_remove={closeRemove.toString()}
-          save_removal={withdrawPlayers.toString()}
+          show_remove={showUnsign}
+          close_remove={closeRemove}
+          save_removal={withdrawPlayers}
         ></Unsign>
       </div>
       <div className="Queue-Box">

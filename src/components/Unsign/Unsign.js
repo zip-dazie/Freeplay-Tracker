@@ -1,9 +1,10 @@
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Unsign.css';
+
 import { Modal, Button, Form, Row, CloseButton } from 'react-bootstrap';
 function Unsign(props) {
-  const { show_modal, close_remove, save_removal } = props;
+  const { show_remove, close_remove, save_removal } = props;
   const [players, setPlayers] = useState(Array(1).fill(''));
   const handleInput = (event, i) => {
     const newPlayers = [...players];
@@ -12,7 +13,9 @@ function Unsign(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    save_removal(players);
+    if (Array.isArray(players) && players.length > 0 && players.some((player) => player !== '')) {
+      save_removal(players);
+    }
     resetModal();
     close_remove();
   };
@@ -57,7 +60,7 @@ function Unsign(props) {
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        show={show_modal}
+        show={show_remove}
         onHide={close_remove}
       >
         <Modal.Header>
@@ -91,7 +94,7 @@ function Unsign(props) {
 export default Unsign;
 
 Unsign.propTypes = {
-  close_remove: PropTypes.string,
-  show_modal: PropTypes.bool,
-  save_removal: PropTypes.string
+  close_remove: PropTypes.func,
+  show_remove: PropTypes.bool,
+  save_removal: PropTypes.func
 };

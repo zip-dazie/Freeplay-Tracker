@@ -2,16 +2,17 @@ import { firestore } from '../../firebase';
 import { collection, doc, getDocs, getDoc, setDoc, query, where } from '@firebase/firestore';
 
 async function checkUser(user) {
-  const docRef = doc(collection(firestore, 'users'), user);
-  const docSnapshot = await getDoc(docRef);
-
-  if (docSnapshot.exists()) {
-    const userData = docSnapshot.data();
-    const name = userData.name;
-    return { allow: false, name: name };
-  } else {
-    return { allow: true, name: undefined };
-  }
+  if (user) {
+    const docRef = doc(collection(firestore, 'users'), user);
+    const docSnapshot = await getDoc(docRef);
+    if (docSnapshot.exists()) {
+      const userData = docSnapshot.data();
+      const name = userData.name;
+      return { allow: false, name: name };
+    } else {
+      return { allow: true, name: undefined };
+    }
+  } else return { allow: false, name: undefined };
 }
 async function addUser(id, name) {
   // eslint-disable-next-line no-unused-vars

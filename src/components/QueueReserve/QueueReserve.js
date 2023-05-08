@@ -14,11 +14,9 @@ import {
   CloseButton,
   Toast
 } from 'react-bootstrap';
-function QueueReserve(props) {
-  const { show_modal, handle_close, handle_save, ...rest } = props;
+function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
   const [numPlayers, setNumPlayers] = useState(4);
   const [radioValue, setRadioValue] = useState('4');
-  // eslint-disable-next-line no-unused-vars
   const [toastText, setToastText] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [merge, setMerge] = useState(false);
@@ -38,7 +36,6 @@ function QueueReserve(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(players);
     const promises = players.map((name) => {
       if (name === '') {
         return Promise.resolve('');
@@ -115,7 +112,6 @@ function QueueReserve(props) {
       }}
     >
       <Modal
-        {...props}
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered

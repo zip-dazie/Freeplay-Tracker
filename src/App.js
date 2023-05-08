@@ -1,6 +1,5 @@
 import './App.css';
 import FreePlay from './components/FreePlay/FreePlay';
-import Reserve from './components/Reserve/Reserve';
 import Register from './components/Register/Register';
 import HowItWorks from './components/HowItWorks/HowItWorks';
 import Header from './components/Header/Header';
@@ -15,7 +14,6 @@ function App() {
         <Header />
         <Routes>
           <Route path="/Freeplay-Tracker" element={<FreePlay />} />
-          <Route path="/reserve/:courtId" element={<Reserve />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/register" element={<Register />} />
         </Routes>

@@ -43,7 +43,6 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
     }, 1000);
   };
   const toggleMute = () => {
-    console.log('muting');
     finishSound.muted = !muted;
     notifSound.muted = !muted;
     courtArrive.muted = !muted;

@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import './Register.css';
-// eslint-disable-next-line no-unused-vars
-import { addUser, fetchUsers } from '../Users/Users';
+import { addUser } from '../Users/Users';
 function Register() {
   const [ID, setID] = useState('');
   const [name, setName] = useState('');
   const [IdError, setIdError] = useState(false);
   const [IdEmptyError, setIdEmptyError] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [data, setData] = useState([]);
   const UCINETID = /^[a-zA-Z0-9._%+-]+@uci\.edu$/;
 
   useEffect(() => {
@@ -32,9 +29,6 @@ function Register() {
     if (name === '') {
       setNameEmptyError(true);
       return;
-    }
-    if (data) {
-      console.log('loaded');
     }
     addUser(ID, name);
     setID('');

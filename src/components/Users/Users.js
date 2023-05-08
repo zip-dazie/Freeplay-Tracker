@@ -1,20 +1,6 @@
 import { firestore } from '../../firebase';
-// eslint-disable-next-line no-unused-vars
 import { collection, doc, getDocs, getDoc, setDoc, query, where } from '@firebase/firestore';
-// eslint-disable-next-line no-unused-vars
-const userDocRef = doc(collection(firestore, 'users'), 'users');
 
-async function getUsers() {
-  await getDocs(collection(firestore, 'users')).then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(`Document ${doc.id}:`);
-      const fields = doc.data();
-      Object.keys(fields).forEach((key) => {
-        console.log(`${key}: ${fields[key]}`);
-      });
-    });
-  });
-}
 async function checkUser(user) {
   const docRef = doc(collection(firestore, 'users'), user);
   const docSnapshot = await getDoc(docRef);
@@ -35,7 +21,6 @@ async function addUser(id, name) {
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-  console.log({ id, name });
   const docId = inputId.replace('@uci.edu', '');
 
   if ((await checkUser(docId)).allow) {
@@ -55,7 +40,6 @@ async function addUser(id, name) {
 }
 const getUser = async (documentName) => {
   if (!documentName || documentName.trim() === '') {
-    console.log('we failed');
     return null;
   }
   const q = query(collection(firestore, 'users'), where('name', '==', documentName));
@@ -69,4 +53,4 @@ const getUser = async (documentName) => {
   }
 };
 
-export { addUser, getUsers, checkUser, getUser };
+export { addUser, checkUser, getUser };

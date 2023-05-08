@@ -1,22 +1,10 @@
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Unsign.css';
-// eslint-disable-next-line no-unused-vars
-import { Modal, Button, Form, Row, Col, CloseButton, Toast } from 'react-bootstrap';
+import { Modal, Button, Form, Row, CloseButton } from 'react-bootstrap';
 function Unsign(props) {
-  /*
-      <Unsign
-            show_remove={showUnsign}
-            close_remove={closeRemove}
-            save_removal={withdrawPlayers}
-          ></Unsign>
-  */
-  const { show_remove, close_remove, save_removal } = props;
-  // eslint-disable-next-line no-unused-vars
-  const [toastText, setToastText] = useState('');
-  const [showToast, setShowToast] = useState(false);
+  const { show_modal, close_remove, save_removal } = props;
   const [players, setPlayers] = useState(Array(1).fill(''));
-  // eslint-disable-next-line no-unused-vars
   const handleInput = (event, i) => {
     const newPlayers = [...players];
     newPlayers[i] = event.target.value;
@@ -24,11 +12,9 @@ function Unsign(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('saving');
     save_removal(players);
     resetModal();
     close_remove();
-    console.log('actually');
   };
   const resetModal = () => {
     setPlayers(Array(1).fill(''));
@@ -71,7 +57,7 @@ function Unsign(props) {
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        show={show_remove}
+        show={show_modal}
         onHide={close_remove}
       >
         <Modal.Header>
@@ -98,22 +84,6 @@ function Unsign(props) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Toast
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        delay={2000}
-        autohide
-        style={{
-          width: '300%',
-          height: '80%',
-          color: 'black',
-          backgroundColor: 'white'
-        }}
-      >
-        <Toast.Body style={{ fontSize: '0.8rem', padding: '8px 12px', color: 'gray' }}>
-          {toastText}
-        </Toast.Body>
-      </Toast>
     </div>
   );
 }
@@ -121,7 +91,7 @@ function Unsign(props) {
 export default Unsign;
 
 Unsign.propTypes = {
-  close_remove: PropTypes.func,
-  show_remove: PropTypes.bool,
-  save_removal: PropTypes.func
+  close_remove: PropTypes.string,
+  show_modal: PropTypes.bool,
+  save_removal: PropTypes.string
 };

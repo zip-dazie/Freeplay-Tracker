@@ -7,14 +7,10 @@ import Unsign from '../Unsign/Unsign.js';
 import Timer from '../Timer/Timer.js';
 import CourtCall from '../CourtCall/CourtCall.js';
 import { GrCheckmark, GrClose } from 'react-icons/gr';
-// eslint-disable-next-line no-unused-vars
 import { checkUser } from '../Users/Users.js';
-// eslint-disable-next-line no-unused-vars
-import { GiPlayerNext } from 'react-icons/gi';
-// eslint-disable-next-line no-unused-vars
 import { CSSTransition } from 'react-transition-group';
 // eslint-disable-next-line no-unused-vars
-import Draggable from 'react-draggable';
+import Draggable from 'react-draggable'; // future implementation
 function CourtQueue(props) {
   const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
   const { id } = props;
@@ -65,9 +61,8 @@ function CourtQueue(props) {
             const updatedName = player.name.map((name) =>
               name === result.name ? MISSING_STRING : name
             );
-            const updatedStatus = [player.status[0], player.status[1] + 1];
-            console.log(updatedStatus);
-            if (updatedStatus[1] >= player.status[0]) {
+            const updatedStatus = [player.status[0], player.status[1] - 1];
+            if (updatedStatus[1] <= 0) {
               removePlayers(player.id);
               return null;
             } else {
@@ -165,11 +160,10 @@ function CourtQueue(props) {
       //console.log(merged);
       const updatedPlayers = [...players];
       updatedPlayers[index].name = merged;
-      updatedPlayers[index].status[1] = merged.filter((e) => e === MISSING_STRING).length;
+      updatedPlayers[index].status[1] = merged.filter((e) => e !== MISSING_STRING).length;
       setPlayers(updatedPlayers);
       return true;
     }
-
     setNextId((prevNextId) => prevNextId + 1);
     setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
     return true;
@@ -307,7 +301,6 @@ function CourtQueue(props) {
   const childRef = useRef(null);
   const handleNext = () => {
     setPlayers(players.length > 1 ? players.slice(1, players.length) : []);
-    console.log(players.length);
     if (players.length > 1) {
       courtCallRef.current.finishPlay();
     } else if (players.length <= 1) {
@@ -433,9 +426,9 @@ function CourtQueue(props) {
           −
         </button>
         <Unsign
-          show_remove={showUnsign}
-          close_remove={closeRemove}
-          save_removal={withdrawPlayers}
+          show_remove={showUnsign.toString()}
+          close_remove={closeRemove.toString()}
+          save_removal={withdrawPlayers.toString()}
         ></Unsign>
       </div>
       <div className="Queue-Box">

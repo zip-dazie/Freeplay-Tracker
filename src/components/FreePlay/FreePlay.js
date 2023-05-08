@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import CourtQueue from '../CourtQueue/CourtQueue.js';
-// eslint-disable-next-line no-unused-vars
-import AliceCarousel from 'react-alice-carousel';
-// eslint-disable-next-line no-unused-vars
 import './FreePlay.css';
-// eslint-disable-next-line no-unused-vars
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 

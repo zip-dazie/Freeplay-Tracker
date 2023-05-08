@@ -116,9 +116,9 @@ function CourtQueue(props) {
     return merged;
   };
   const inputPlayers = (inputs, merge) => {
-    inputs.forEach((i) => {
-      console.log(i);
-    });
+    //inputs.forEach((i) => {
+      //console.log(i);
+    //});
     // check for sign-up on another court
     let courtNums = CHECKCOURTS[id.match(/\d+/)[0]];
     let A = courtNums[0];
@@ -155,7 +155,7 @@ function CourtQueue(props) {
     const index = findEmpty(formatted, count);
     //console.log(index, count, formatted);
     // merging
-    console.log(index);
+    //console.log(index);
     if (merge && nextId != 0 && index != -1) {
       let mergeWith = players[index].name;
       //console.log(mergeWith);
@@ -374,7 +374,7 @@ function CourtQueue(props) {
         >
           <Alert.Heading
             style={{
-              fontSize: 'clamp(10px, 1.5vw, 20px)',
+              fontSize: 'clamp(2vh, 1.5vw, 3vh)',
               display: 'flex',
               alignItems: 'center',
               whiteSpace: 'nowrap'

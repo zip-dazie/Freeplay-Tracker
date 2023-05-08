@@ -31,7 +31,7 @@
 
 .Register .form:hover {
   background-color: #2a3744;
-  transform: scaleY(1.26) scaleX(1.2);
+  transform: scaleY(1.28) scaleX(1.2);
   transition: transform 1.3s ease;
 }
 
@@ -113,5 +113,31 @@
   justify-content: center !important;
   align-items: center !important;
   width: 100%;
+  margin-top: 5vh;
   overflow: hidden;
+}
+@media (max-width: 600px) {
+  .Register{
+  width: 40vh;
+  height: 65vh;
+  padding: 3vh;
+  }
+  .Register h4{
+    font-size: 4vh;
+  }
+  .Register .form {
+    height: 80%;
+  }
+  .Register .input{
+    height: 4vh;
+  }
+  .id-input {
+    margin-top: 2vh;
+  }
+  .Register button{
+    font-size: 2vh;
+    min-width: 2vw;
+    margin-top: 1vh;
+    margin-bottom: 5vh;
+  }
 }

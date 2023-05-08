@@ -27,3 +27,24 @@
 .text-content:hover{
   transform: translate(-50%, -50%) scale(1.15);
 }
+@media (max-width: 600px) {
+  .react-parallax-bgimage {
+    margin-top: 5vh;
+    width: 150vh !important;
+    height: 70vh !important;
+  }
+  .text-content{
+    width: 20vh;
+    position:absolute;
+    top: 64%;
+    left: 70%;
+    padding: 5px 5px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 6, 0.50);
+    color:white;
+    font-size: 3vh;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background-color 0.7s ease, transform 0.7s ease;
+  }
+}

@@ -54,7 +54,7 @@ function Register() {
         <strong>Register</strong>
       </h4>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="id-input" style={{ marginTop: '10vh', alignContent: 'center' }}>
+        <div className="id-input">
           <input
             type="text"
             value={ID}

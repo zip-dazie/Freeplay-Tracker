@@ -34,3 +34,10 @@ img:hover{
   scale: 110%;
 }
 
+@media (max-width: 600px) {
+  .footer-text {
+    margin: 0px;
+    color: #a0a193;
+    font-size: 1.5vh;
+  }
+}

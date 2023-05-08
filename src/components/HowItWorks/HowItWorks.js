@@ -53,9 +53,10 @@ function HowItWorks() {
             }, 500);
           }}
           style={{
-            fontSize: '30px',
-            height: '25vh',
-            width: '50vh',
+            fontSize: '5vh',
+            height: '10vh',
+            width: '40vh',
+            borderRadius: '3vh',
             backgroundColor: '#343a40',
             borderColor: '#343a40',
             fontWeight: '500'

@@ -1,10 +1,15 @@
+// eslint-disable-next-line
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Unsign.css';
 
-import { Modal, Button, Form, Row, CloseButton } from 'react-bootstrap';
+import { Modal, Button, Form, Row, CloseButton, Toast } from 'react-bootstrap';
 function Unsign(props) {
   const { show_remove, close_remove, save_removal } = props;
+  // eslint-disable-next-line
+  const [toastText, setToastText] = useState('');
+  // eslint-disable-next-line
+  const [showToast, setShowToast] = useState(false);
   const [players, setPlayers] = useState(Array(1).fill(''));
   const handleInput = (event, i) => {
     const newPlayers = [...players];
@@ -12,11 +17,17 @@ function Unsign(props) {
     setPlayers(newPlayers);
   };
   const handleSubmit = (e) => {
+    const empty = players.every((name) => name === '');
+    if (empty) {
+      setToastText('No input');
+      setShowToast(true);
+    }
     e.preventDefault();
     if (Array.isArray(players) && players.length > 0 && players.some((player) => player !== '')) {
       save_removal(players);
     }
     resetModal();
+
     close_remove();
   };
   const resetModal = () => {
@@ -87,6 +98,20 @@ function Unsign(props) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        delay={2000}
+        autohide
+        style={{
+          width: '300%',
+          height: '80%',
+          color: 'black',
+          backgroundColor: 'white'
+        }}
+      >
+        <Toast.Body style={{ fontSize: '0.7rem', color: 'gray' }}>{toastText}</Toast.Body>
+      </Toast>
     </div>
   );
 }

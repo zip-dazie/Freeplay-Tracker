@@ -94,6 +94,7 @@ function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
           onChange={(e) => handleInput(e, i)}
           value={inputs[i]}
           onKeyUp={handleKeyPressed}
+          className="input"
           style={{ width: '35%', margin: '10px', fontSize: '12px', outlineColor: 'black' }}
         />
       );
@@ -159,8 +160,6 @@ function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
               onChange={(event) => setMerge(event.target.checked)}
               style={{
                 float: 'right',
-                position: 'relative',
-                display: 'inline-block',
                 marginTop: '1.25vh'
               }}
             />
@@ -190,9 +189,7 @@ function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
           backgroundColor: 'white'
         }}
       >
-        <Toast.Body style={{ fontSize: '0.8rem', padding: '8px 12px', color: 'gray' }}>
-          {toastText}
-        </Toast.Body>
+        <Toast.Body>{toastText}</Toast.Body>
       </Toast>
     </div>
   );

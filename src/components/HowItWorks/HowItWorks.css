@@ -34,15 +34,15 @@
     height: 70vh !important;
   }
   .text-content{
-    width: 20vh;
+    width: 30vh;
     position:absolute;
     top: 64%;
     left: 70%;
-    padding: 5px 5px;
+    padding: .5vh .5vh;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 6, 0.50);
     color:white;
-    font-size: 3vh;
+    font-size: 2.5vh;
     border-radius: 20px;
     font-weight: 500;
     transition: background-color 0.7s ease, transform 0.7s ease;

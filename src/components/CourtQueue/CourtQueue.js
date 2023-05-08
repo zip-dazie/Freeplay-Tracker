@@ -117,7 +117,7 @@ function CourtQueue(props) {
   };
   const inputPlayers = (inputs, merge) => {
     //inputs.forEach((i) => {
-      //console.log(i);
+    //console.log(i);
     //});
     // check for sign-up on another court
     let courtNums = CHECKCOURTS[id.match(/\d+/)[0]];

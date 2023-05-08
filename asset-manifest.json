@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Freeplay-Tracker/static/css/main.a049a25e.css",
-    "main.js": "/Freeplay-Tracker/static/js/main.80ccff36.js",
+    "main.css": "/Freeplay-Tracker/static/css/main.33c92edb.css",
+    "main.js": "/Freeplay-Tracker/static/js/main.00b4ad30.js",
     "static/js/651.ae995f48.chunk.js": "/Freeplay-Tracker/static/js/651.ae995f48.chunk.js",
     "static/media/logo.png": "/Freeplay-Tracker/static/media/logo.46534ec0d4649d84657a.png",
     "static/media/court_2.mp3": "/Freeplay-Tracker/static/media/court_2.d123a3d392c05d16d3c0.mp3",
@@ -13,12 +13,12 @@
     "static/media/registerFull.png": "/Freeplay-Tracker/static/media/registerFull.9a56ff439f83281f8904.png",
     "static/media/game_finished.mp3": "/Freeplay-Tracker/static/media/game_finished.57aecb4f01f1ba723bed.mp3",
     "index.html": "/Freeplay-Tracker/index.html",
-    "main.a049a25e.css.map": "/Freeplay-Tracker/static/css/main.a049a25e.css.map",
-    "main.80ccff36.js.map": "/Freeplay-Tracker/static/js/main.80ccff36.js.map",
+    "main.33c92edb.css.map": "/Freeplay-Tracker/static/css/main.33c92edb.css.map",
+    "main.00b4ad30.js.map": "/Freeplay-Tracker/static/js/main.00b4ad30.js.map",
     "651.ae995f48.chunk.js.map": "/Freeplay-Tracker/static/js/651.ae995f48.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a049a25e.css",
-    "static/js/main.80ccff36.js"
+    "static/css/main.33c92edb.css",
+    "static/js/main.00b4ad30.js"
   ]
 }

@@ -1,9 +1,8 @@
-.right-icon{
-    transform: rotate(90deg) translateX(.18rem);
+.right-icon {
+  transform: rotate(90deg) translateX(0.18rem);
 }
 @media (max-width: 600px) {
-     .right-icon{
-        transform: rotate(90deg) translateX(.25rem);
-     }
+  .right-icon {
+    transform: rotate(90deg) translateX(0.25rem);
+  }
 }
-

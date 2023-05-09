@@ -31,16 +31,9 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
 
   const handlePlay = () => {
     notifSound.play();
-    courtArrive.play();
-  };
-
-  const handleFinishPlay = () => {
-    finishSound.onended = () => {
-      setTimeout(() => {
-        handlePlay();
-      }, 500);
+    notifSound.onended = function () {
+      courtArrive.play();
     };
-    finishSound.play();
   };
   const toggleMute = () => {
     finishSound.muted = !muted;
@@ -51,9 +44,6 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
   useImperativeHandle(ref, () => ({
     play() {
       handlePlay();
-    },
-    finishPlay() {
-      handleFinishPlay();
     },
     finish() {
       finishSound.play();

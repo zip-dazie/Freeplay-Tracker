@@ -307,9 +307,10 @@ function CourtQueue(props) {
     if (players.length <= 1) {
       //console.log(players.length);
       courtCallRef.current.finish();
-    } else {
+    } else if (players.length > 1) {
       //console.log(players.length);
-      courtCallRef.current.finishPlay();
+      courtCallRef.current.finish();
+      courtCallRef.current.play();
       childRef.current.reset();
     }
   };

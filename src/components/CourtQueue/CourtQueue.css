@@ -1,19 +1,18 @@
-.Current-Box{
-    box-shadow: 0vh 0.2vh 1vh lightskyblue;
-    border-bottom-left-radius: 2.5vh;
-    border-bottom-right-radius: 2.5vh;
-    height: 15vh;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    overflow: hidden;
-    display: flex;
+.Current-Box {
+  box-shadow: 0vh 0.2vh 1vh lightskyblue;
+  border-bottom-left-radius: 2.5vh;
+  border-bottom-right-radius: 2.5vh;
+  height: 15vh;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+  display: flex;
 }
-.Current-Box:hover{
-  text-shadow : 0vh 0.5vh 2vh lightskyblue;
-
+.Current-Box:hover {
+  text-shadow: 0vh 0.5vh 2vh lightskyblue;
 }
 .Queue-Box {
   max-height: calc(28vh - 10px);
@@ -24,25 +23,25 @@
   justify-content: center;
   text-align: center;
   margin-top: 1vh;
-  box-shadow: 0vh .25vh 1vh lightskyblue;
+  box-shadow: 0vh 0.25vh 1vh lightskyblue;
   transition-duration: 0.3s;
-  }
-  
-  .Queue-Box::-webkit-scrollbar {
+}
+
+.Queue-Box::-webkit-scrollbar {
   width: 8px;
   animation-duration: 0.3s;
-  }
-  
-  .Queue-Box::-webkit-scrollbar-thumb {
+}
+
+.Queue-Box::-webkit-scrollbar-thumb {
   background-color: skyblue;
   border-radius: 8px;
-  }
-  
-  .Queue-Box::-webkit-scrollbar-thumb:hover {
+}
+
+.Queue-Box::-webkit-scrollbar-thumb:hover {
   background-color: gray;
-  }
-  
-  .Queue-Item {
+}
+
+.Queue-Item {
   border-color: skyblue;
   font-size: 2.25vh;
   height: fit-content;
@@ -54,12 +53,12 @@
   margin: auto;
   padding-top: 1vh;
   padding-bottom: 1vh;
-  }
-  
-  .Queue-Text {
+}
+
+.Queue-Text {
   margin: 0;
-  }
-.Queue-Item:hover{
+}
+.Queue-Item:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
 }
@@ -76,74 +75,71 @@
   padding-bottom: 3px;
   font-size: 3.5vh;
 }
-.circle-control:hover{
-  box-shadow: 0vh .5vh 1vh lightskyblue;
-
+.circle-control:hover {
+  box-shadow: 0vh 0.5vh 1vh lightskyblue;
 }
-.controls{
+.controls {
   display: flex;
   margin-top: 5px;
-  justify-content: space-between; 
+  justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 12.5px;
   align-items: center;
   color: white;
   z-index: 9998;
   text-align: center;
-  
 }
-.remove-btn{
+.remove-btn {
   border-radius: 50%;
   border: transparent;
   background-color: transparent;
   color: skyblue;
   margin-left: auto;
 }
-.remove-btn:hover{
+.remove-btn:hover {
   color: lightcoral;
   scale: 150%;
 }
-.config-btn{
+.config-btn {
   border-radius: 50%;
   border: transparent;
   background-color: transparent;
   color: skyblue;
 }
-.config-btn:hover{
+.config-btn:hover {
   color: white;
   scale: 120%;
 }
-.top-items{
-  display:flex;
+.top-items {
+  display: flex;
 }
-.close-control{
+.close-control {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-Color: transparent;
+  background-color: transparent;
   border-color: transparent;
   box-sizing: content-box;
   border-radius: 2vh;
   border: 1vh solid transparent;
-
 }
-.close-control:hover{
+.close-control:hover {
   border-style: outset;
-  border: 1vh solid rgba(204,80, 80, 0.8);
+  border: 1vh solid rgba(204, 80, 80, 0.8);
 }
 
-.check-control{
+.check-control {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-Color: transparent;
+  background-color: transparent;
   border-color: transparent;
   box-sizing: content-box;
   border-radius: 2vh;
   border: 1vh solid transparent;
   margin-left: 1vw;
 }
-.check-control:hover{
+.check-control:hover {
   border-style: outset;
   border: 1vh solid rgba(35, 234, 124, 0.8);
 }
@@ -164,7 +160,7 @@
   font-size: 2.5vh;
   visibility: hidden;
   width: fit-content;
-  background-color: rgba(73,78,83,255);
+  background-color: rgba(73, 78, 83, 255);
   color: #fff;
   text-align: center;
   border-radius: 1vh;
@@ -175,7 +171,7 @@
 
 .circle-control:hover .tip-text {
   visibility: visible;
-  transform: translateY(-150%)
+  transform: translateY(-150%);
 }
 
 .fade-enter {
@@ -195,12 +191,12 @@
   opacity: 0;
   transition: opacity 1000ms ease-in-out;
 }
-.Cur-Players{
+.Cur-Players {
   font-size: 3.5vh;
 }
 
 @media (max-width: 600px) {
-  .Queue-Box{
+  .Queue-Box {
     max-height: calc(35vh - 10px);
   }
 }

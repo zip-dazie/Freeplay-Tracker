@@ -30,18 +30,17 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
   }, [toCall]);
 
   const handlePlay = () => {
-    notifSound.play();
-    courtArrive.play();
+    setTimeout(() => {
+      notifSound.play();
+      courtArrive.play();
+    }, 500);
   };
 
   const handleFinishPlay = () => {
-    finishSound.onended = () => {
-      notifSound.onended = () => {
-        courtArrive.play();
-      };
-      notifSound.play();
-    };
     finishSound.play();
+    setTimeout(() => {
+      handlePlay();
+    }, 500);
   };
   const toggleMute = () => {
     finishSound.muted = !muted;

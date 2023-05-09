@@ -304,12 +304,14 @@ function CourtQueue(props) {
   const childRef = useRef(null);
   const handleNext = () => {
     setPlayers(players.length > 1 ? players.slice(1, players.length) : []);
-    if (players.length > 1) {
-      courtCallRef.current.finishPlay();
-    } else if (players.length <= 1) {
+    if (players.length <= 1) {
+      //console.log(players.length);
       courtCallRef.current.finish();
+    } else {
+      //console.log(players.length);
+      courtCallRef.current.finishPlay();
+      childRef.current.reset();
     }
-    childRef.current.reset();
   };
   useEffect(() => {
     localStorage.setItem('nextId', nextId);

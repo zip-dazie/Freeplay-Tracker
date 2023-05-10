@@ -31,7 +31,7 @@
 
 .Register .form:hover {
   background-color: #2a3744;
-  transform: scaleY(1.28) scaleX(1.2);
+  transform: scaleY(1.30) scaleX(1.25);
   transition: transform 1.3s ease;
 }
 
@@ -123,7 +123,7 @@
   padding: 3vh;
   }
   .Register h4{
-    font-size: 4vh;
+    font-size: 6vh;
   }
   .Register .form {
     height: 80%;

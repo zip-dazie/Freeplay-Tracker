@@ -248,10 +248,10 @@
     max-height: calc(35vh - 10px);
   }
   .Queue-Item {
-    font-size: 2vh;
-    padding-left: 0.25vh;
+    font-size: 1.5vh;
+    padding-left: 0vh;
   }
   .remove-btn {
-    padding-right: 2.25vh;
+    padding-right: 3vh;
   }
 }

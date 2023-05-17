@@ -50,9 +50,9 @@ function Register() {
 
   return (
     <div className="Register" style={{ textAlign: 'left' }}>
-      <h4>
+      <h3>
         <strong>Register</strong>
-      </h4>
+      </h3>
       <form className="form" onSubmit={handleSubmit}>
         <div className="id-input">
           <input

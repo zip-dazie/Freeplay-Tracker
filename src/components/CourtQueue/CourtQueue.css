@@ -111,6 +111,7 @@
   font-size: 1vh;
   white-space: nowrap;
 }
+.remove-btn:hover::after,
 .remove-btn:focus::after,
 .remove-btn:active::after {
   display: inline-block;
@@ -245,5 +246,12 @@
 @media (max-width: 600px) {
   .Queue-Box {
     max-height: calc(35vh - 10px);
+  }
+  .Queue-Item {
+    font-size: 2vh;
+    padding-left: 0.25vh;
+  }
+  .remove-btn {
+    padding-right: 2.25vh;
   }
 }

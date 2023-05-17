@@ -101,7 +101,7 @@
   position: absolute;
   height: fit-content;
   width: fit-content;
-  top: -10%;
+  top: -15%;
   left: 30%;
   transform: translateX(-50%);
   display: none;
@@ -252,5 +252,11 @@
   }
   .remove-btn {
     padding-right: 2.75vh;
+  }
+  .remove-btn::after {
+    font-size: 2vh;
+  }
+  .add-btn::after {
+    font-size: 2vh;
   }
 }

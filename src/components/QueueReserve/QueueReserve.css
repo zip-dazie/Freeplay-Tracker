@@ -37,6 +37,7 @@
 @media (max-width: 2048px) {
     .modal-sm {
         max-width: 50% !important;
+        transform: scale(1.2) !important;
     }
 }
 @media (max-width: 600px) and (orientation: portrait) {

@@ -91,7 +91,6 @@
   padding-right: 1.9vh;
   margin-left: auto;
   position: relative;
-
 }
 .remove-btn:hover {
   color: lightcoral;
@@ -243,12 +242,12 @@
   font-size: 3.5vh;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 2048px) {
   .Queue-Box {
     max-height: calc(35vh - 10px);
   }
   .Queue-Item {
-    font-size: 1.5vh;
+    font-size: 2vh;
     padding-left: 0vh;
   }
   .remove-btn {

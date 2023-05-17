@@ -104,9 +104,14 @@ function Unsign(props) {
         autohide
         style={{
           width: '300%',
-          height: '80%',
-          color: 'black',
-          backgroundColor: 'white'
+          height: '6vh',
+          backgroundColor: 'white',
+          fontSize: '2.5vh',
+          color: 'gray',
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
         <Toast.Body style={{ fontSize: '0.7rem', color: 'gray' }}>{toastText}</Toast.Body>

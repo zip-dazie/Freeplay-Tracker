@@ -69,8 +69,12 @@ function CourtQueue(props) {
     //console.log(toAdd);
     //console.log(p);
     const added = p.filter((e) => !toAdd.includes(e));
-
     if (alreadyOnCourt(added)) return false;
+    else if (added.every((player) => player.trim() === '')) {
+      alert('No double sign-ups!');
+      return false;
+    }
+    console.log(added);
     let { formatted, count } = replaceEmpty(p);
     //console.log(formatted, count);
     let updatedStatus = [formatted.length, count];

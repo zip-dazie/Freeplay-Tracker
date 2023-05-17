@@ -34,6 +34,11 @@
   height: 100%;
   font-size: 2.5vh !important;
 }
+@media (max-width: 2048px) {
+    .modal-sm {
+        max-width: 50% !important;
+    }
+}
 @media (max-width: 600px) and (orientation: portrait) {
   .inputs .input {
     justify-content: center;
@@ -52,10 +57,4 @@
     height: 6vh !important;
     font-size: 2vh !important;
   }
-}
-@media (max-width: 2048px) {
-    .modal-sm {
-        max-width: 50% !important;
-        transform: scale(1.2) !important;
-    }
 }

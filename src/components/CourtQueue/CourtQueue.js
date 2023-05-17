@@ -406,12 +406,29 @@ function CourtQueue(props) {
         </CSSTransition>
       </div>
 
-      {warning ? <div className="dark-overlay"></div> : null}
+      {warning ? (
+        <div
+          className="dark-overlay"
+          style={{
+            position: 'absolute',
+            zIndex: '5',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: '5vh'
+          }}
+        ></div>
+      ) : null}
       <div
         className="controls"
         style={{
           position: 'relative',
-          zIndex: 1
+          zIndex: '6'
         }}
       >
         <Alert
@@ -419,7 +436,7 @@ function CourtQueue(props) {
           transition={Fade}
           show={warning && players.length > 0}
           style={{
-            zIndex: 9998,
+            zIndex: '6',
             display: 'flex',
             justifyContent: 'center',
             height: '100%',
@@ -497,7 +514,7 @@ function CourtQueue(props) {
       <div className="Queue-Box">
         {/* display rest of queue */}
         {players.slice(1, players.length).map((player, index) => (
-          <div className="Queue-Item" key={player.id}>
+          <div className="Queue-Item" key={player.id} style={{ zIndex: '2' }}>
             <button
               className="add-btn"
               onClick={() => {

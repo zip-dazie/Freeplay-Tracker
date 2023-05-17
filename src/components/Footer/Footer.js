@@ -5,7 +5,7 @@ function Footer() {
     <div className="Footer">
       <div className="footer-left">
         <p className="footer-text">Made with 💙 by zip-dazie</p>
-        <p className="footer-text">2023 © Badminton Club at UCI — Version 1.2.1</p>
+        <p className="footer-text">2023 © Badminton Club at UCI — Version 1.3.0</p>
       </div>
       <div className="footer-right">
         <a

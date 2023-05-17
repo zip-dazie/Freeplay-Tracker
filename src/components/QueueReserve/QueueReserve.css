@@ -1,57 +1,55 @@
-.modal{
-    z-index: 9999;
-    
+.modal {
+  z-index: 9999;
 }
-.modal-header, .modal-body, .modal-footer {
-    background-color: #343a40;
-    color: white;
-  }
-
-.modal-footer{
-    background-color:  #343a40 !important;
-    color: white;
-
-}
-.form-check-input{
-    background-color: white !important;
+.modal-header,
+.modal-body,
+.modal-footer {
+  background-color: #343a40;
+  color: white;
 }
 
-.form-check-input:checked{
-    background-color: skyblue !important;
-    border-color: skyblue !important;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
-
+.modal-footer {
+  background-color: #343a40 !important;
+  color: white;
 }
-.form-check-input:focus{
-    outline: 0 !important;
-    box-shadow: none !important;
-}
-.form-switch .form-check-input:focus{
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(200,200,200,1.0)'/></svg>") !important;
+.form-check-input {
+  background-color: white !important;
 }
 
+.form-check-input:checked {
+  background-color: skyblue !important;
+  border-color: skyblue !important;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
+}
+.form-check-input:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.form-switch .form-check-input:focus {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(200,200,200,1.0)'/></svg>") !important;
+}
 
 .toast .toast-body {
-    color: gray;
-    height: 100%;
-    font-size: 2.5vh!important;
+  color: gray;
+  height: 100%;
+  font-size: 2.5vh !important;
 }
 @media (max-width: 600px) and (orientation: portrait) {
-    .inputs .input {
-        justify-content: center;
-        font-size: 1vh;
-      }
-    .modal-sm {
-        max-width: 120% !important;
-    }
-    .modal-sm .modal-title {
-        font-size: 3vh
-      }
-      .toast{
-        border-radius: 1vh !important;
-      }
-      .toast .toast-body {
-        height: 6vh !important;
-        font-size: 2vh!important;
-      }
+  .inputs .input {
+    justify-content: center;
+    font-size: 1vh;
+  }
+  .modal-sm {
+    max-width: 120% !important;
+  }
+  .modal-sm .modal-title {
+    font-size: 3vh;
+  }
+  .toast {
+    border-radius: 1vh !important;
+  }
+  .toast .toast-body {
+    height: 6vh !important;
+    font-size: 2vh !important;
+  }
 }

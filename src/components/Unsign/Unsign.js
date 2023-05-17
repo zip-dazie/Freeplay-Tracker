@@ -2,7 +2,6 @@
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Unsign.css';
-
 import { Modal, Button, Form, Row, CloseButton, Toast } from 'react-bootstrap';
 function Unsign(props) {
   const { show_remove, close_remove, save_removal } = props;

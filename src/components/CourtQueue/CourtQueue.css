@@ -17,7 +17,7 @@
 .Queue-Box {
   max-height: calc(28vh - 10px);
   height: fit-content;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   align-items: center;
   justify-content: center;
@@ -28,19 +28,8 @@
 }
 
 .Queue-Box::-webkit-scrollbar {
-  width: 8px;
-  animation-duration: 0.3s;
+  display: none;
 }
-
-.Queue-Box::-webkit-scrollbar-thumb {
-  background-color: skyblue;
-  border-radius: 8px;
-}
-
-.Queue-Box::-webkit-scrollbar-thumb:hover {
-  background-color: gray;
-}
-
 .Queue-Item {
   border-color: skyblue;
   font-size: 2.25vh;
@@ -48,18 +37,23 @@
   display: flex;
   text-align: center;
   color: rgb(190, 188, 188);
-  padding-left: 3.5vh;
+  padding-left: 0.5vh;
   overflow: visible;
   margin: auto;
   padding-top: 1vh;
   padding-bottom: 1vh;
 }
-
+.Queue-Item:nth-of-type(odd) {
+  background-color: #343a40 !important;
+}
+.Queue-Item:nth-of-type(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 .Queue-Text {
   margin: 0;
 }
 .Queue-Item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1) important!;
   color: white;
 }
 .circle-control {
@@ -94,11 +88,63 @@
   border: transparent;
   background-color: transparent;
   color: skyblue;
+  padding-right: 1.9vh;
   margin-left: auto;
 }
 .remove-btn:hover {
   color: lightcoral;
   scale: 150%;
+}
+.remove-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  top: -10%;
+  left: 20%;
+  transform: translateX(-50%);
+  display: none;
+  background-color: black;
+  color: #fff;
+  font-size: 1vh;
+  white-space: nowrap;
+}
+.remove-btn:hover::after,
+.remove-btn:focus::after,
+.remove-btn:active::after {
+  display: inline-block;
+}
+.add-btn {
+  border-radius: 50%;
+  border: transparent;
+  background-color: transparent;
+  color: skyblue;
+  position: relative;
+}
+
+.add-btn:hover {
+  color: lightcoral;
+  scale: 150%;
+}
+.add-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  top: -10%;
+  left: 80%;
+  transform: translateX(-50%);
+  display: none;
+  background-color: black;
+  color: #fff;
+  font-size: 1vh;
+  white-space: nowrap;
+}
+
+.add-btn[disabled]:hover::after,
+.add-btn[disabled]:focus::after,
+.add-btn[disabled]:active::after {
+  display: inline-block;
 }
 .config-btn {
   border-radius: 50%;
@@ -160,7 +206,7 @@
   font-size: 2.5vh;
   visibility: hidden;
   width: fit-content;
-  background-color: rgba(73, 78, 83, 255);
+  background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 1vh;

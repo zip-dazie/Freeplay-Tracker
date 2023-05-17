@@ -6,6 +6,7 @@ import QueueReserve from '../QueueReserve/QueueReserve.js';
 import Unsign from '../Unsign/Unsign.js';
 import Timer from '../Timer/Timer.js';
 import CourtCall from '../CourtCall/CourtCall.js';
+import AddOn from '../AddOn/AddOn.js';
 import { GrCheckmark, GrClose } from 'react-icons/gr';
 import { checkUser } from '../Users/Users.js';
 import { CSSTransition } from 'react-transition-group';
@@ -24,6 +25,12 @@ function CourtQueue(props) {
   );
   const [pLength, setPLength] = useState(0);
   const [removed, setRemoved] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [canMerge, setCanMerge] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [showAdd, setShowAdd] = useState(false);
+  const [toAdd, setToAdd] = useState([]);
+  const [toAddId, setToAddId] = useState(null);
   const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
   const MISSING_STRING = '?';
@@ -39,8 +46,38 @@ function CourtQueue(props) {
   const handleClose = () => {
     SetShowSignup(false);
   };
-  const handleShow = () => {
+  const handleSignUp = () => {
+    setCanMerge(players.filter((player) => player.status[1] < player.status[0]));
     SetShowSignup(true);
+    //setPlayers([...players, { id: nextId, name: formatted, status: [formatted.length, count] }]);
+  };
+  // eslint-disable-next-line no-unused-vars
+  const handleAddon = (pid) => {
+    setShowAdd(true);
+    setToAddId(pid);
+    //console.log(pid);
+    setToAdd((prevToAdd) => {
+      const player = players.find((_, index) => index === pid);
+      return player ? player.name : prevToAdd;
+    });
+  };
+  const closeAddon = () => {
+    setShowAdd(false);
+  };
+  const saveAdd = (p) => {
+    //console.log(toAddId);
+    //console.log(toAdd);
+    //console.log(p);
+    const added = p.filter((e) => !toAdd.includes(e));
+
+    if (alreadyOnCourt(added)) return false;
+    let { formatted, count } = replaceEmpty(p);
+    //console.log(formatted, count);
+    let updatedStatus = [formatted.length, count];
+    //console.log(players[toAddId].name);
+    const updatedArray = [...players];
+    updatedArray[toAddId] = { id: toAddId, name: formatted, status: updatedStatus };
+    setPlayers(updatedArray);
   };
   // unsign/withdraw players
   const showRemove = () => {
@@ -115,11 +152,8 @@ function CourtQueue(props) {
     }
     return merged;
   };
-  const inputPlayers = (inputs, merge) => {
-    //inputs.forEach((i) => {
-    //console.log(i);
-    //});
-    // check for sign-up on another court
+
+  const alreadyOnCourt = (inputs) => {
     let courtNums = CHECKCOURTS[id.match(/\d+/)[0]];
     let A = courtNums[0];
     let B = courtNums[1];
@@ -146,11 +180,17 @@ function CourtQueue(props) {
     // alert based on duplicate type
     if (onCourt) {
       alert('A player is already signed up on this court!');
-      return false;
+      return true;
     } else if (onOtherCourt) {
       alert('A player is signed up on another court!');
+      return true;
+    } else {
       return false;
     }
+  };
+  const inputPlayers = (inputs, merge) => {
+    if (alreadyOnCourt(inputs)) return false;
+
     let { formatted, count } = replaceEmpty(inputs);
     const index = findEmpty(formatted, count);
     //console.log(index, count, formatted);
@@ -196,7 +236,6 @@ function CourtQueue(props) {
     }
     return -1;
   };
-  // eslint-disable-next-line no-unused-vars
   const queueText = (p) => {
     let short = shortenNames(p);
     let { a: firstHalf, b: secondHalf } = splitNames(p);
@@ -282,10 +321,23 @@ function CourtQueue(props) {
   };
   const removePlayers = (pid) => {
     setRemoved(true);
-    setPlayers((players) => players.filter((player) => player.id !== pid));
+    setPlayers((players) => {
+      const updatedPlayers = players.filter((player) => player.id !== pid);
+      return updatedPlayers;
+    });
   };
+  useEffect(() => {
+    // Load nextId from localStorage
+    const storedNextId = localStorage.getItem('nextId');
+    if (storedNextId) {
+      setNextId(parseInt(storedNextId));
+    }
+  }, []);
   // get queue (persisted)
   useEffect(() => {
+    if (players.length === 0) {
+      setNextId(0);
+    }
     if (players.length > 0) {
       childRef.current.start();
     } else if (players.length <= 0) {
@@ -406,7 +458,7 @@ function CourtQueue(props) {
         {/* add to queue */}
         <button
           className="circle-control"
-          onClick={handleShow}
+          onClick={handleSignUp}
           style={{
             pointerEvents: 'auto'
           }}
@@ -439,15 +491,30 @@ function CourtQueue(props) {
       </div>
       <div className="Queue-Box">
         {/* display rest of queue */}
-        {players.slice(1, players.length).map((player) => (
+        {players.slice(1, players.length).map((player, index) => (
           <div className="Queue-Item" key={player.id}>
+            <button
+              className="add-btn"
+              onClick={() => {
+                handleAddon(index + 1);
+              }}
+              disabled={player.status[0] === player.status[1]}
+              data-tooltip="Full sign-up"
+            >
+              ⊕
+            </button>
             <span className="Queue-Text">{queueText(player.name)}</span>
-            <button className="remove-btn" onClick={() => removePlayers(player.id)}>
-              ×
+            <button
+              className="remove-btn"
+              onDoubleClick={() => removePlayers(player.id)}
+              data-tooltip="Double-click"
+            >
+              ⊖
             </button>
           </div>
         ))}
       </div>
+      <AddOn show_add={showAdd} close_add={closeAddon} save_add={saveAdd} to_add={toAdd} />
       <div
         style={{
           height: 'fit-content',

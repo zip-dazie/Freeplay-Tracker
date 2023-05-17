@@ -40,7 +40,7 @@
     font-size: 1vh;
   }
   .modal-sm {
-    max-width: 150% !important;
+    max-width: 100% !important;
   }
   .modal-sm .modal-title {
     font-size: 3vh;
@@ -52,4 +52,9 @@
     height: 6vh !important;
     font-size: 2vh !important;
   }
+}
+@media (max-width: 2048px) {
+    .modal-sm {
+        max-width: 40% !important;
+      }
 }

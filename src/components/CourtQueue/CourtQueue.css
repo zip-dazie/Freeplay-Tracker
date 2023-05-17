@@ -102,7 +102,7 @@
   height: fit-content;
   width: fit-content;
   top: -10%;
-  left: 20%;
+  left: 30%;
   transform: translateX(-50%);
   display: none;
   background-color: black;
@@ -133,7 +133,7 @@
   height: fit-content;
   width: fit-content;
   top: -10%;
-  left: 80%;
+  left: 70%;
   transform: translateX(-50%);
   display: none;
   background-color: black;
@@ -248,7 +248,7 @@
   }
   .Queue-Item {
     font-size: 2vh;
-    padding-left: .25vh;
+    padding-left: .35vh;
   }
   .remove-btn {
     padding-right: 2.75vh;

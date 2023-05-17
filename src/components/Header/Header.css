@@ -61,7 +61,7 @@
   border-bottom: 0.4vh solid rgb(235, 205, 84);
 
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .Header {
     height: auto;
     flex-direction: column;

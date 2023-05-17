@@ -319,10 +319,11 @@ function CourtQueue(props) {
   const clearQueue = () => {
     setPlayers((players) => [players[0]]);
   };
-  const removePlayers = (pid) => {
+  const removePlayers = (index) => {
     setRemoved(true);
     setPlayers((players) => {
-      const updatedPlayers = players.filter((player) => player.id !== pid);
+      const updatedPlayers = [...players];
+      updatedPlayers.splice(index, 1);
       return updatedPlayers;
     });
   };
@@ -506,7 +507,7 @@ function CourtQueue(props) {
             <span className="Queue-Text">{queueText(player.name)}</span>
             <button
               className="remove-btn"
-              onDoubleClick={() => removePlayers(player.id)}
+              onDoubleClick={() => removePlayers(index + 1)}
               data-tooltip="Double-click"
             >
               ⊖

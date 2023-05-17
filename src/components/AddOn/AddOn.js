@@ -101,7 +101,7 @@ function AddOn(props) {
         onHide={close_add}
       >
         <Modal.Header>
-          <Modal.Title>Add On</Modal.Title>
+          <Modal.Title>Add-On</Modal.Title>
           <CloseButton variant="white" onClick={close_add} />
         </Modal.Header>
         <Modal.Body>
@@ -114,7 +114,7 @@ function AddOn(props) {
             variant="primary"
             onClick={handleSubmit}
           >
-            Add-on
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>

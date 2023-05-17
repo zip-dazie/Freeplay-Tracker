@@ -90,6 +90,8 @@
   color: skyblue;
   padding-right: 1.9vh;
   margin-left: auto;
+  position: relative;
+
 }
 .remove-btn:hover {
   color: lightcoral;
@@ -109,7 +111,6 @@
   font-size: 1vh;
   white-space: nowrap;
 }
-.remove-btn:hover::after,
 .remove-btn:focus::after,
 .remove-btn:active::after {
   display: inline-block;

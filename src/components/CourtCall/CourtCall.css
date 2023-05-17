@@ -1,7 +1,7 @@
 .right-icon {
   transform: rotate(90deg) translateX(0.18rem);
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .right-icon {
     transform: rotate(90deg) translateX(0.25rem);
   }

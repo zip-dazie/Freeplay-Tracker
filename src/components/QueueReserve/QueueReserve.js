@@ -184,12 +184,17 @@ function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
         autohide
         style={{
           width: '300%',
-          height: '80%',
-          color: 'black',
-          backgroundColor: 'white'
+          height: '6vh',
+          backgroundColor: 'white',
+          fontSize: '2.5vh',
+          color: 'gray',
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
-        <Toast.Body>{toastText}</Toast.Body>
+        {toastText}
       </Toast>
     </div>
   );

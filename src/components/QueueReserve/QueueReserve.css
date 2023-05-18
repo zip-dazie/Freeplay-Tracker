@@ -40,6 +40,12 @@
         transform: scale(1.1) !important;
     }
 }
+@media (max-width: 1025px) {
+  .modal-sm {
+    width: 60% !important;
+    transform: scale(1.2) !important;
+  }
+}
 @media (max-width: 600px) and (orientation: portrait) {
   .inputs .input {
     justify-content: center;

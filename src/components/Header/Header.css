@@ -20,6 +20,7 @@
 .header-left h3 {
   text-shadow: 0.15vh 0.3vh 0.5vh rgba(0, 0, 0, 0.5);
   font-size: clamp(4vh, 2.5vw, 5vh);
+  cursor: pointer;
 }
 .header-left h3:hover {
   text-shadow: 0.15vh 0.3vh 0.5vh rgb(255, 205, 84);
@@ -58,6 +59,23 @@
 .active {
   border-bottom: 0.4vh solid rgb(235, 205, 84);
 }
+.tool-icons {
+  font-size: clamp(4vh, 2vw, 4.5vh);
+}
+.tool-icons:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+@media (max-width: 2048px) {
+  .tool-icons {
+    margin-top: -1vh;
+  }
+}
+@media (max-width: 1025px) {
+  .tool-icons {
+    margin-top: 0vh;
+  }
+}
 @media (max-width: 500px) {
   .Header {
     height: auto;
@@ -95,4 +113,5 @@
     color: #424242;
     letter-spacing: 0.1vh;
   }
+  
 }

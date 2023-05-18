@@ -1,0 +1,12 @@
+.password-toggle {
+  cursor: pointer;
+  color: gray;
+  margin: 1vh;
+}
+.modal-sm {
+  width: 30%;
+  transform: scale(1.1) !important;
+}
+.error-message{
+    font-size: 2vh;
+}

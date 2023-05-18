@@ -230,6 +230,22 @@
 .Cur-Players {
   font-size: 3.5vh;
 }
+.clear-icon {
+  color: white;
+  height: fit-content;
+  width: fit-content;
+  position: absolute;
+  right: 0;
+  bottom: 2vh;
+  margin-right: 3vh;
+  font-size: 3vh;
+}
+.clear-icon:hover,
+.clear-icon:active,
+.clear-icon:focus {
+  color: coral;
+  cursor: pointer;
+}
 
 @media (max-width: 2048px) {
   .Queue-Box {

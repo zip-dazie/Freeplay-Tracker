@@ -11,7 +11,9 @@ import { GrCheckmark, GrClose } from 'react-icons/gr';
 import { checkUser } from '../Users/Users.js';
 import { CSSTransition } from 'react-transition-group';
 // eslint-disable-next-line no-unused-vars
-import Draggable from 'react-draggable'; // future implementation
+import Draggable from 'react-draggable';
+
+import { AiOutlineUndo } from 'react-icons/ai';
 function CourtQueue(props) {
   const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
   const { id } = props;
@@ -33,6 +35,7 @@ function CourtQueue(props) {
   const [toAddId, setToAddId] = useState(null);
   const [toastText, setToastText] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('loggedIn')) || false);
   const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
   const MISSING_STRING = '?';
@@ -377,10 +380,33 @@ function CourtQueue(props) {
       childRef.current.reset();
     }
   };
+  const handleDragEnd = (dragIndex, dropIndex) => {
+    if (dragIndex === dropIndex) return;
+
+    const draggedPlayer = players[dragIndex];
+    const newPlayers = [...players];
+
+    newPlayers.splice(dragIndex, 1);
+    newPlayers.splice(dropIndex, 0, draggedPlayer);
+
+    setPlayers(newPlayers);
+  };
+
   useEffect(() => {
     localStorage.setItem('nextId', nextId);
   }, [nextId]);
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updatedLoggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
+      setLoggedIn(updatedLoggedIn);
+    };
 
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
   return (
     <div>
       <div className="top-items">
@@ -411,7 +437,6 @@ function CourtQueue(props) {
           </div>
         </CSSTransition>
       </div>
-
       {warning ? (
         <div
           className="dark-overlay"
@@ -539,29 +564,57 @@ function CourtQueue(props) {
         ></Unsign>
       </div>
       <div className="Queue-Box">
-        {/* display rest of queue */}
-        {players.slice(1, players.length).map((player, index) => (
-          <div className="Queue-Item" key={player.id} style={{ zIndex: '2' }}>
-            <button
-              className="add-btn"
-              onClick={() => {
-                handleAddon(index + 1);
-              }}
-              disabled={player.status[0] === player.status[1]}
-              data-tooltip="Full sign-up"
-            >
-              ⊕
-            </button>
-            <span className="Queue-Text">{queueText(player.name)}</span>
-            <button
-              className="remove-btn"
-              onDoubleClick={() => removePlayers(index + 1)}
-              data-tooltip="Double-click"
-            >
-              ⊖
-            </button>
-          </div>
-        ))}
+        {/* Display the rest of the queue */}
+        {players.slice(1).map((player, index) => {
+          if (loggedIn) {
+            return (
+              <Draggable
+                key={player.id}
+                axis="y"
+                position={{ x: 0, y: index }}
+                onStop={() => handleDragEnd(index + 1, index + 2)}
+                cancel={['.add-btn', '.remove-btn']}
+              >
+                <div className="Queue-Item" style={{ zIndex: '2', cursor: 'grab' }}>
+                  <button
+                    className="add-btn"
+                    onClick={() => {
+                      handleAddon(index + 1);
+                    }}
+                    disabled={player.status[0] === player.status[1]}
+                    data-tooltip="Full sign-up"
+                  >
+                    ⊕
+                  </button>
+                  <span className="Queue-Text">{queueText(player.name)}</span>
+                  <button
+                    className="remove-btn"
+                    onClick={() => removePlayers(index + 1)}
+                    data-tooltip="Double-click"
+                  >
+                    ⊖
+                  </button>
+                </div>
+              </Draggable>
+            );
+          } else {
+            return (
+              <div key={player.id} className="Queue-Item" style={{ zIndex: '2' }}>
+                <button
+                  className="add-btn"
+                  onClick={() => {
+                    handleAddon(index + 1);
+                  }}
+                  disabled={player.status[0] === player.status[1]}
+                  data-tooltip="Full sign-up"
+                >
+                  ⊕
+                </button>
+                <span className="Queue-Text">{queueText(player.name)}</span>
+              </div>
+            );
+          }
+        })}
       </div>
       <AddOn show_add={showAdd} close_add={closeAddon} save_add={saveAdd} to_add={toAdd} />
       <div
@@ -576,6 +629,11 @@ function CourtQueue(props) {
       >
         <CourtCall toCall={id} ref={courtCallRef} />
       </div>
+      {loggedIn && (
+        <div className="clear-icon" onClick={() => setPlayers([])} data-tooltip="Clear Players">
+          <AiOutlineUndo />
+        </div>
+      )}
     </div>
   );
 }

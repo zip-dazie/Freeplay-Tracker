@@ -39,7 +39,7 @@ function AddOn(props) {
       } else {
         if (nonEmptyInputs.length > 0 && isUnique) setToastText('Not all players are registered!');
         else if (!isUnique) setToastText('No double sign-ups');
-        else if (nonEmptyInputs.length < 0) setToastText('No input');
+        else if (nonEmptyInputs.length === 0) setToastText('No input');
 
         setShowToast(true);
         setPlayers(to_add.map((p) => (p === '?' ? '' : p)));

@@ -114,7 +114,7 @@ function Unsign(props) {
           alignItems: 'center'
         }}
       >
-        <Toast.Body style={{ fontSize: '0.7rem', color: 'gray' }}>{toastText}</Toast.Body>
+        {toastText}
       </Toast>
     </div>
   );

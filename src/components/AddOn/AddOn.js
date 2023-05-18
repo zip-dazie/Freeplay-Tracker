@@ -1,5 +1,5 @@
 import './AddOn.css';
-import { Modal, CloseButton, Form, Row, Button } from 'react-bootstrap';
+import { Modal, CloseButton, Form, Row, Button, Toast } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { checkUser } from '../Users/Users';
@@ -8,6 +8,8 @@ function AddOn(props) {
   const { show_add, close_add, save_add, to_add } = props;
   const [players, setPlayers] = useState(to_add.map((p) => (p === '?' ? '' : p)));
   const [isEditable, setIsEditable] = useState(to_add.map((val) => val === '?'));
+  const [toastText, setToastText] = useState('');
+  const [showToast, setShowToast] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(players);
@@ -35,12 +37,17 @@ function AddOn(props) {
         setPlayers(to_add.map((p) => (p === '?' ? '' : p)));
         close_add();
       } else {
-        alert('Not all players are registered.');
+        if (nonEmptyInputs.length > 0 && isUnique) setToastText('Not all players are registered!');
+        else if (!isUnique) setToastText('No double sign-ups');
+        else if (nonEmptyInputs.length < 0) setToastText('No input');
+
+        setShowToast(true);
         setPlayers(to_add.map((p) => (p === '?' ? '' : p)));
         close_add();
       }
     } catch (error) {
-      alert('Error occurred while checking user.');
+      setToastText('Error occurred while checking user.');
+      setShowToast(true);
       setPlayers(to_add.map((p) => (p === '?' ? '' : p)));
       close_add();
     }
@@ -118,6 +125,30 @@ function AddOn(props) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        delay={2000}
+        autohide
+        style={{
+          zIndex: '9999',
+          width: '68.5vh',
+          height: '6vh',
+          backgroundColor: 'white',
+          fontSize: '2.5vh',
+          color: 'gray',
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          top: '41.5%',
+          left: '50%',
+          transform: 'translateX(-50%)'
+        }}
+      >
+        {toastText}
+      </Toast>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import './CourtQueue.css';
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { OverlayTrigger, Tooltip, Alert, Fade } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Alert, Fade, Toast } from 'react-bootstrap';
 import QueueReserve from '../QueueReserve/QueueReserve.js';
 import Unsign from '../Unsign/Unsign.js';
 import Timer from '../Timer/Timer.js';
@@ -31,6 +31,8 @@ function CourtQueue(props) {
   const [showAdd, setShowAdd] = useState(false);
   const [toAdd, setToAdd] = useState([]);
   const [toAddId, setToAddId] = useState(null);
+  const [toastText, setToastText] = useState('');
+  const [showToast, setShowToast] = useState(false);
   const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
   const MISSING_STRING = '?';
@@ -71,7 +73,8 @@ function CourtQueue(props) {
     const added = p.filter((e) => !toAdd.includes(e));
     if (alreadyOnCourt(added)) return false;
     else if (added.every((player) => player.trim() === '')) {
-      alert('No double sign-ups!');
+      setToastText('No double sign-ups!');
+      setShowToast(true);
       return false;
     }
     console.log(added);
@@ -122,7 +125,8 @@ function CourtQueue(props) {
         .filter(Boolean);
       setPlayers(updatedPlayers);
     } else {
-      alert('Player is not signed up');
+      setToastText('Player is not signed up');
+      setShowToast(true);
     }
   };
   const handleWarning = () => setWarning(true);
@@ -183,10 +187,12 @@ function CourtQueue(props) {
     }
     // alert based on duplicate type
     if (onCourt) {
-      alert('A player is already signed up on this court!');
+      setToastText('A player is already signed up on this court!');
+      setShowToast(true);
       return true;
     } else if (onOtherCourt) {
-      alert('A player is signed up on another court!');
+      setToastText('A player is signed up on another court!');
+      setShowToast(true);
       return true;
     } else {
       return false;
@@ -477,6 +483,27 @@ function CourtQueue(props) {
             </button>
           </Alert.Heading>
         </Alert>
+        <Toast
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          delay={2000}
+          autohide
+          style={{
+            position: 'absolute',
+            zIndex: '9999',
+            width: '69.5vh',
+            height: '6vh',
+            backgroundColor: 'white',
+            fontSize: '2.5vh',
+            color: 'gray',
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          {toastText}
+        </Toast>
         {/* add to queue */}
         <button
           className="circle-control"

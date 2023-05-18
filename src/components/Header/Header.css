@@ -16,14 +16,13 @@
   color: black;
   text-decoration: none;
   margin-right: 1vh;
-  
 }
-.header-left h3{
-  text-Shadow: 0.15vh 0.3vh 0.5vh rgba(0, 0, 0, 0.5);
+.header-left h3 {
+  text-shadow: 0.15vh 0.3vh 0.5vh rgba(0, 0, 0, 0.5);
   font-size: clamp(4vh, 2.5vw, 5vh);
 }
 .header-left h3:hover {
-  text-Shadow: 0.15vh 0.3vh 0.5vh rgb(255,205,84);
+  text-shadow: 0.15vh 0.3vh 0.5vh rgb(255, 205, 84);
 }
 
 .header-right {
@@ -47,19 +46,17 @@
   text-decoration: none;
   transition: color 20ms ease-in-out;
   transition: 0.5s;
-  text-Shadow: 0.15vh 0.3vh 0.5vh rgba(0, 0, 0, 0.5);
-
+  text-shadow: 0.15vh 0.3vh 0.5vh rgba(0, 0, 0, 0.5);
 }
 
 .free-play:hover,
 .how-it-works:hover,
 .register:hover {
   color: #424242;
-  letter-spacing: .35vh;
+  letter-spacing: 0.35vh;
 }
 .active {
   border-bottom: 0.4vh solid rgb(235, 205, 84);
-
 }
 @media (max-width: 500px) {
   .Header {
@@ -68,7 +65,7 @@
     align-items: flex-start;
     padding: 2vh;
   }
-.header-left h3 {
+  .header-left h3 {
     font-size: 3.5vh;
     margin-right: 0;
     margin-bottom: 2vh;
@@ -81,7 +78,7 @@
 
   .header-right {
     justify-content: center;
-    text-align:center;
+    text-align: center;
     margin-right: 1vh;
     margin-top: 2vh;
     gap: 1vh;
@@ -93,9 +90,9 @@
     padding: 1vh;
   }
   .free-play:hover,
-.how-it-works:hover,
-.register:hover {
-  color: #424242;
-  letter-spacing: .1vh;
-}
+  .how-it-works:hover,
+  .register:hover {
+    color: #424242;
+    letter-spacing: 0.1vh;
+  }
 }

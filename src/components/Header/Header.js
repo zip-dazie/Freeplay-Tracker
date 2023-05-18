@@ -1,15 +1,21 @@
 import './Header.css';
 import logo from '../../assets/logo.png';
-//import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
+import { Modal, Button } from 'react-bootstrap';
 function Header() {
+  const openLogin = () => {
+    console.log('opening');
+  };
   return (
     <div className="Header">
       <div className="header-left">
         <a href="https://campusrec.mhsoftware.com/" target="_blank" rel="noopener noreferrer">
           <img src={logo} className="logo" />
         </a>
-        <h3 style={{ color: '#424242' }}>Badminton Club at UCI</h3>
+        <h3 style={{ color: '#424242' }} onClick={openLogin}>
+          Badminton Club at UCI
+        </h3>
       </div>
       <div className="header-right">
         <NavLink to="/Freeplay-Tracker" className="link free-play">

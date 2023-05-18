@@ -587,11 +587,7 @@ function CourtQueue(props) {
                     ⊕
                   </button>
                   <span className="Queue-Text">{queueText(player.name)}</span>
-                  <button
-                    className="remove-btn"
-                    onClick={() => removePlayers(index + 1)}
-                    data-tooltip="Double-click"
-                  >
+                  <button className="remove-btn" onClick={() => removePlayers(index + 1)}>
                     ⊖
                   </button>
                 </div>

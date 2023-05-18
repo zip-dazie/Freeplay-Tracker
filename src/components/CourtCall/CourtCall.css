@@ -3,7 +3,7 @@
 }
 @media (max-width: 1025) {
   .right-icon {
-    transform: rotate(90deg) translateX(0.20rem);
+    transform: rotate(90deg) translateX(0.18rem);
   }
 }
 @media (max-width: 500px) {

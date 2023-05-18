@@ -113,7 +113,6 @@ function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
       }}
     >
       <Modal
-        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={show_modal}

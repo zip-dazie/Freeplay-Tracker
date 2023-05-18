@@ -33,7 +33,7 @@ const Login = ({ show_login, close_login, save_login }) => {
   const passwordInput = isPasswordValid ? 'password-input' : 'password-input invalid';
 
   return (
-    <Modal show={show_login} onHide={close_login} size="sm">
+    <Modal show={show_login} onHide={close_login} size="sm" style={{ top: '10vh' }}>
       <Modal.Header>
         <Modal.Title>Admin Login</Modal.Title>
         <CloseButton variant="white" onClick={close_login} />

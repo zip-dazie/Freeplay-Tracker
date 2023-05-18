@@ -99,7 +99,15 @@ function AddOn(props) {
   }, [to_add]);
 
   return (
-    <div>
+    <div
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '102.5%'
+      }}
+    >
       <Modal
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
@@ -131,8 +139,7 @@ function AddOn(props) {
         delay={2000}
         autohide
         style={{
-          zIndex: '9999',
-          width: '68.5vh',
+          width: '300%',
           height: '6vh',
           backgroundColor: 'white',
           fontSize: '2.5vh',
@@ -140,11 +147,7 @@ function AddOn(props) {
           textAlign: 'center',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          top: '41.5%',
-          left: '50%',
-          transform: 'translateX(-50%)'
+          alignItems: 'center'
         }}
       >
         {toastText}

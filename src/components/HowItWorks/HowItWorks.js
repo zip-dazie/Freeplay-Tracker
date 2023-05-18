@@ -23,8 +23,8 @@ function HowItWorks() {
         <div className="content">
           <div className="text-content">
             <span>
-              ⋅ Press the (+) button to sign-up for a court <br />
-              ⋅ (→) to finish game <br />⋅ (−) to withdraw a player
+              ⋅ (+) sign-up for a court <br />
+              ⋅ (→) finish game <br />⋅ (−) withdraw a player <br />⋅ (⊕) add-on to a queue slot
             </span>
           </div>
         </div>

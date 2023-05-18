@@ -3,6 +3,9 @@
   color: gray;
   margin: 1vh;
 }
+.modal-sm {
+  top: 10vh; 
+}
 .error-message{
     font-size: 2vh;
 }

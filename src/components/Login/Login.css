@@ -4,7 +4,7 @@
   margin: 1vh;
 }
 .modal-sm {
-  top: 10vh; 
+  top: 10vh !important; 
 }
 .error-message{
     font-size: 2vh;

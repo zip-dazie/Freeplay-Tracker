@@ -254,6 +254,7 @@
   .Queue-Item {
     font-size: 2vh;
     padding-left: 0.5vh;
+    padding-right: .25vh;
   }
   .remove-btn {
     padding-right: 2.75vh;

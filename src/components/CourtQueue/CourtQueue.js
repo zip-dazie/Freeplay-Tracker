@@ -608,6 +608,7 @@ function CourtQueue(props) {
                   ⊕
                 </button>
                 <span className="Queue-Text">{queueText(player.name)}</span>
+                <div style={{ width: '1vh', paddingRight: '1vh' }}></div>
               </div>
             );
           }

@@ -56,16 +56,7 @@ function Unsign(props) {
     </Form.Group>
   ));
   return (
-    <div
-      {...props}
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '102.5%'
-      }}
-    >
+    <div>
       <Modal
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"

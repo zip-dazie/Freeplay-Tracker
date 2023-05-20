@@ -380,7 +380,7 @@ function CourtQueue(props) {
       childRef.current.reset();
     }
   };
-  const handleDragEnd = (dragIndex, dropIndex) => {
+  const handleDrag = (dragIndex, dropIndex) => {
     if (dragIndex === dropIndex) return;
 
     const draggedPlayer = players[dragIndex];
@@ -391,7 +391,13 @@ function CourtQueue(props) {
 
     setPlayers(newPlayers);
   };
-
+  const handleStop = (event, data, dragIndex, dropIndex) => {
+    const thres = 5;
+    const Ydist = Math.sqrt(Math.pow(data.x, 2) + Math.pow(data.y, 2));
+    if (Ydist > thres) {
+      handleDrag(dragIndex, dropIndex);
+    }
+  };
   useEffect(() => {
     localStorage.setItem('nextId', nextId);
   }, [nextId]);
@@ -534,7 +540,8 @@ function CourtQueue(props) {
           className="circle-control"
           onClick={handleSignUp}
           style={{
-            pointerEvents: 'auto'
+            pointerEvents: 'auto',
+            marginRight: 'auto'
           }}
         >
           +
@@ -545,7 +552,7 @@ function CourtQueue(props) {
           handle_save={inputPlayers}
         />
         <AddOn show_add={showAdd} close_add={closeAddon} save_add={saveAdd} to_add={toAdd} />
-        <strong style={{ color: 'white', fontSize: '2.25vh' }}>
+        <strong style={{ color: 'white', fontSize: '2.25vh', margin: 'auto' }}>
           Waiting: {players.length - 1 > 0 ? players.length - 1 : 0}
         </strong>
         {/* clear queue */}
@@ -553,7 +560,8 @@ function CourtQueue(props) {
           className="circle-control"
           onClick={showRemove}
           style={{
-            pointerEvents: 'auto'
+            pointerEvents: 'auto',
+            marginLeft: 'auto'
           }}
         >
           −
@@ -573,7 +581,7 @@ function CourtQueue(props) {
                 key={player.id}
                 axis="y"
                 position={{ x: 0, y: index }}
-                onStop={() => handleDragEnd(index + 1, index + 2)}
+                onStop={(event, data) => handleStop(event, data, index + 1, index + 2)}
                 cancel={['.add-btn', '.remove-btn']}
               >
                 <div className="Queue-Item" style={{ zIndex: '2', cursor: 'grab' }}>
@@ -607,8 +615,9 @@ function CourtQueue(props) {
                 >
                   ⊕
                 </button>
-                <span className="Queue-Text">{queueText(player.name)}</span>
-                <div style={{ width: '1vh', paddingRight: '1vh' }}></div>
+                <span className="Queue-Text" style={{ paddingRight: '1vh' }}>
+                  {queueText(player.name)}
+                </span>
               </div>
             );
           }

@@ -14,7 +14,7 @@ import {
   CloseButton,
   Toast
 } from 'react-bootstrap';
-function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
+function QueueReserve({ show_modal, handle_close, handle_save }) {
   const [numPlayers, setNumPlayers] = useState(4);
   const [radioValue, setRadioValue] = useState('4');
   const [toastText, setToastText] = useState('');
@@ -102,16 +102,7 @@ function QueueReserve({ show_modal, handle_close, handle_save, ...rest }) {
     return inputs;
   };
   return (
-    <div
-      {...rest}
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '102.5%'
-      }}
-    >
+    <div>
       <Modal
         aria-labelledby="contained-modal-title-vcenter"
         centered

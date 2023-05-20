@@ -99,15 +99,7 @@ function AddOn(props) {
   }, [to_add]);
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '102.5%'
-      }}
-    >
+    <div style={{ position: 'absolute' }}>
       <Modal
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"

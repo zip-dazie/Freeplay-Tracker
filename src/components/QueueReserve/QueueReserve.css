@@ -1,7 +1,7 @@
 .modal {
   z-index: 9999;
   position: absolute;
-  left: 25% !important;
+  left: 28% !important;
   margin: 5vh 5vh !important;
   transform: none !important;
   width: 40% !important;
@@ -43,9 +43,9 @@
   font-size: 2.5vh !important;
 }
 @media (max-width: 2048px) {
-    .modal {
-        transform: scale(1.3) !important;
-    }
+  .modal {
+    transform: scale(1.3) !important;
+  }
 }
 @media (max-width: 1025px) {
   .modal {
@@ -65,8 +65,9 @@
     left: 0 !important;
     right: 0 !important;
     transform: none !important;
+    top: 25% !important;
   }
-  
+
   .modal .modal-title {
     font-size: 3vh;
   }

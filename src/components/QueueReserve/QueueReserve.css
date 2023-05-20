@@ -1,5 +1,13 @@
 .modal {
   z-index: 9999;
+  position: absolute;
+  left: 25% !important;
+  margin: 5vh 5vh !important;
+  transform: none !important;
+  width: 40% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  overflow: hidden;
 }
 .modal-header,
 .modal-body,
@@ -50,8 +58,15 @@
     font-size: 1vh;
   }
   .modal {
-    max-width: 100vh !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
   }
+  
   .modal .modal-title {
     font-size: 3vh;
   }

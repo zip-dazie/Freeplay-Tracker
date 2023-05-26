@@ -255,7 +255,7 @@
     margin-right: 0vh;
   }
   .add-btn:hover{
-    transform: scale(1.25) translateY(-5%);
+    transform: scale(1.25) translateY(-2.5%);
 
   }
   .Queue-Text{
@@ -298,5 +298,8 @@
   .add-btn::after {
     font-size: 1.5vh;
     top: -30%;
+  }
+  .Queue-Text{
+    font-size: 2.5vh;
   }
 }

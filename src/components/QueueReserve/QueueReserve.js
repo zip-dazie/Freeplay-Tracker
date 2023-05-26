@@ -181,7 +181,8 @@ function QueueReserve({ show_modal, handle_close, handle_save }) {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '0.5vh'
+          padding: '0.5vh',
+          width: '100%'
         }}
       >
         {toastText}

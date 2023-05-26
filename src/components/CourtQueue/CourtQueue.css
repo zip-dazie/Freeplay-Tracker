@@ -24,6 +24,7 @@
   margin-top: 1vh;
   box-shadow: 0vh 0.25vh 1vh lightskyblue;
   transition-duration: 0.3s;
+  padding-bottom: 0.5vh;
 }
 
 .Queue-Box::-webkit-scrollbar {
@@ -32,15 +33,13 @@
 .Queue-Item {
   border-color: skyblue;
   font-size: 2.25vh;
-  height: fit-content;
+  height: 5vh;
   display: flex;
   text-align: center;
   color: rgb(190, 188, 188);
   padding-left: 0.5vh;
   overflow: visible;
   margin: auto;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
 }
 .Queue-Item:nth-of-type(odd) {
   background-color: #343a40 !important;
@@ -50,6 +49,14 @@
 }
 .Queue-Text {
   margin: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+.Queue-Text::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 .Queue-Item:hover {
   background-color: rgba(255, 255, 255, 0.1) important!;
@@ -87,28 +94,15 @@
   border: transparent;
   background-color: transparent;
   color: skyblue;
-  padding-right: 1.9vh;
   margin-left: auto;
+  margin-right: -1vh;
   position: relative;
   z-index: 0 !important;
+  font-size: 2.5vh;
 }
 .remove-btn:hover {
   color: lightcoral;
-  scale: 150%;
-}
-.remove-btn::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  height: fit-content;
-  width: fit-content;
-  top: -25%;
-  left: 30%;
-  transform: translateX(-50%);
-  display: none;
-  background-color: black;
-  color: #fff;
-  font-size: 1vh;
-  white-space: nowrap;
+  transform: scale(1.5) translateY(-10%)  translateX(5%);
 }
 .remove-btn:hover::after,
 .remove-btn:focus::after,
@@ -122,25 +116,30 @@
   color: skyblue;
   position: relative;
   z-index: 0 !important;
+  transition: transform 0.2s;
+  transform-origin: center center; 
+  font-size: 2vh;
+
 }
 
 .add-btn:hover {
-  color: lightcoral;
-  scale: 150%;
+  color: lightgreen;
+  transform: scale(1.5) translateY(-10%);
 }
 .add-btn::after {
   content: attr(data-tooltip);
   position: absolute;
   height: fit-content;
   width: fit-content;
-  top: -25%;
-  left: 70%;
+  top: 1vh !important;
+  left: 50%;
   transform: translateX(-50%);
   display: none;
   background-color: black;
   color: #fff;
   font-size: 1vh;
   white-space: nowrap;
+  z-index: 9999;
 }
 
 .add-btn[disabled]:hover::after,

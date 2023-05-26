@@ -12,7 +12,7 @@ import { checkUser } from '../Users/Users.js';
 import { CSSTransition } from 'react-transition-group';
 // eslint-disable-next-line no-unused-vars
 import Draggable from 'react-draggable';
-
+import { IoMdAddCircleOutline } from 'react-icons/io';
 import { AiOutlineUndo } from 'react-icons/ai';
 function CourtQueue(props) {
   const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
@@ -29,13 +29,14 @@ function CourtQueue(props) {
   const [removed, setRemoved] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [canMerge, setCanMerge] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [showAdd, setShowAdd] = useState(false);
   const [toAdd, setToAdd] = useState([]);
   const [toAddId, setToAddId] = useState(null);
   const [toastText, setToastText] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('loggedIn')) || false);
+  const queueItemRef = useRef(null);
+  let ITEM_HEIGHT = 0;
   const MISSING_SIGN = '👤';
   const VERSUS_SIGN = '🏸';
   const MISSING_STRING = '?';
@@ -44,6 +45,11 @@ function CourtQueue(props) {
     2: [1, 3],
     3: [1, 2]
   };
+  useEffect(() => {
+    if (queueItemRef.current) {
+      ITEM_HEIGHT = queueItemRef.current.clientHeight;
+    }
+  }, []);
   const courtCallRef = useRef(null);
   const toggleWarning = () => {
     setWarning(!warning);
@@ -392,10 +398,13 @@ function CourtQueue(props) {
     setPlayers(newPlayers);
   };
   const handleStop = (event, data, dragIndex, dropIndex) => {
-    const thres = 5;
-    const Ydist = Math.sqrt(Math.pow(data.x, 2) + Math.pow(data.y, 2));
-    if (Ydist > thres) {
-      handleDrag(dragIndex, dropIndex);
+    console.log(dragIndex, dropIndex);
+    if (dragIndex < dropIndex) {
+      const thres = 5;
+      const Ydist = Math.sqrt(Math.pow(data.x, 2) + Math.pow(data.y, 2));
+      if (Ydist > thres) {
+        handleDrag(dragIndex, dropIndex);
+      }
     }
   };
   useEffect(() => {
@@ -525,7 +534,7 @@ function CourtQueue(props) {
             width: '69.5vh',
             height: '6vh',
             backgroundColor: 'white',
-            fontSize: '2.5vh',
+            fontSize: 'clamp(2vh, 2.25vh, 2.5vh)',
             color: 'gray',
             textAlign: 'center',
             display: 'flex',
@@ -581,10 +590,16 @@ function CourtQueue(props) {
                 key={player.id}
                 axis="y"
                 position={{ x: 0, y: index }}
-                onStop={(event, data) => handleStop(event, data, index + 1, index + 2)}
-                cancel={['.add-btn', '.remove-btn']}
+                onStop={(event, data) =>
+                  handleStop(event, data, index + 1, Math.round(data.y / ITEM_HEIGHT))
+                }
+                cancel={['.add-btn', '.remove-btn', '.Queue-Text']}
               >
-                <div className="Queue-Item" style={{ zIndex: '2', cursor: 'grab' }}>
+                <div
+                  className="Queue-Item"
+                  ref={queueItemRef}
+                  style={{ zIndex: '2', cursor: 'grab' }}
+                >
                   <button
                     className="add-btn"
                     onClick={() => {
@@ -593,7 +608,7 @@ function CourtQueue(props) {
                     disabled={player.status[0] === player.status[1]}
                     data-tooltip="Full sign-up"
                   >
-                    ⊕
+                    <IoMdAddCircleOutline />
                   </button>
                   <span className="Queue-Text">{queueText(player.name)}</span>
                   <button className="remove-btn" onClick={() => removePlayers(index + 1)}>

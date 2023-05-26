@@ -102,7 +102,7 @@ function QueueReserve({ show_modal, handle_close, handle_save }) {
     return inputs;
   };
   return (
-    <div>
+    <div style={{ position: 'absolute', zIndex: '9999', width: '100%' }}>
       <Modal
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -173,7 +173,6 @@ function QueueReserve({ show_modal, handle_close, handle_save }) {
         delay={2000}
         autohide
         style={{
-          width: '300%',
           height: '6vh',
           backgroundColor: 'white',
           fontSize: '2.5vh',
@@ -181,7 +180,8 @@ function QueueReserve({ show_modal, handle_close, handle_save }) {
           textAlign: 'center',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          padding: '0.5vh'
         }}
       >
         {toastText}

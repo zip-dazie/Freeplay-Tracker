@@ -99,7 +99,7 @@ function AddOn(props) {
   }, [to_add]);
 
   return (
-    <div style={{ position: 'absolute' }}>
+    <div style={{ position: 'absolute', zIndex: '9999', width: '100%' }}>
       <Modal
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
@@ -131,8 +131,8 @@ function AddOn(props) {
         delay={2000}
         autohide
         style={{
-          width: '300%',
           height: '6vh',
+          width: '100%',
           backgroundColor: 'white',
           fontSize: '2.5vh',
           color: 'gray',

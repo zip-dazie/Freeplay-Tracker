@@ -254,18 +254,17 @@
     margin-left: -0.5vh;
     margin-right: 0vh;
   }
-  .add-btn:hover{
+  .add-btn:hover {
     transform: scale(1.25) translateY(-2.5%);
-
   }
-  .Queue-Text{
+  .Queue-Text {
     font-size: 1.75vh;
   }
   .remove-btn {
     margin-right: 0.25vh;
   }
-  .remove-btn:hover{
-    transform: scale(1.25) translateY(-.25%) translateX(.25%);
+  .remove-btn:hover {
+    transform: scale(1.25) translateY(-0.25%) translateX(0.25%);
   }
   .remove-btn::after {
     font-size: 1.5vh;
@@ -299,7 +298,7 @@
     font-size: 1.5vh;
     top: -30%;
   }
-  .Queue-Text{
+  .Queue-Text {
     font-size: 2.5vh;
   }
 }

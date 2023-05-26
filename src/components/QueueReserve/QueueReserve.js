@@ -102,7 +102,7 @@ function QueueReserve({ show_modal, handle_close, handle_save }) {
     return inputs;
   };
   return (
-    <div style={{ position: 'absolute', zIndex: '9999' }}>
+    <div style={{ position: 'absolute', zIndex: '9999', width: '100%', maxWidth: '100%' }}>
       <Modal
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -181,7 +181,8 @@ function QueueReserve({ show_modal, handle_close, handle_save }) {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '0.5vh'
+          padding: '0.5vh',
+          minWidth: '100%'
         }}
       >
         {toastText}

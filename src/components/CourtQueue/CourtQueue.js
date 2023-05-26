@@ -558,7 +558,6 @@ function CourtQueue(props) {
           show_modal={showSignUp}
           handle_close={handleClose}
           handle_save={inputPlayers}
-          style={{ width: '100%' }}
         />
         <AddOn show_add={showAdd} close_add={closeAddon} save_add={saveAdd} to_add={toAdd} />
         <strong style={{ color: 'white', fontSize: '2.25vh', margin: 'auto' }}>

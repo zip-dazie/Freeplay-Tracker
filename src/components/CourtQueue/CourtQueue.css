@@ -37,7 +37,7 @@
   text-align: center;
   color: rgb(190, 188, 188);
   padding-left: 0.5vh;
-  overflow: visible;
+  overflow: hidden;
   margin: auto;
 }
 .Queue-Item:nth-of-type(odd) {
@@ -95,14 +95,12 @@
   background-color: transparent;
   color: skyblue;
   margin-left: auto;
-  margin-right: -1vh;
   position: relative;
   z-index: 0 !important;
-  font-size: 2.5vh;
 }
 .remove-btn:hover {
   color: lightcoral;
-  transform: scale(1.5) translateY(-10%)  translateX(5%);
+  transform: scale(1.5) translateY(-10%) translateX(5%);
 }
 .remove-btn:hover::after,
 .remove-btn:focus::after,
@@ -117,9 +115,7 @@
   position: relative;
   z-index: 0 !important;
   transition: transform 0.2s;
-  transform-origin: center center; 
-  font-size: 2vh;
-
+  transform-origin: center center;
 }
 
 .add-btn:hover {
@@ -137,7 +133,6 @@
   display: none;
   background-color: black;
   color: #fff;
-  font-size: 1vh;
   white-space: nowrap;
   z-index: 9999;
 }
@@ -246,16 +241,41 @@
   cursor: pointer;
 }
 
-@media (max-width: 2048px) {
+@media (max-width: 1200px) {
+  .Queue-Item {
+    padding-left: 0.75vh;
+  }
+  .add-btn{
+    font-size: 2vh;
+    font-weight: bold;
+  }
+  .remove-btn {
+    font-size: 2.5vh;
+    margin-right: 1vh;
+  }
+  .remove-btn::after {
+    font-size: 1.5vh;
+    top: -30%;
+  }
+  .add-btn::after {
+    font-size: 1.5vh;
+    top: -30%;
+  }
+}
+
+@media (min-width: 1500px) {
   .Queue-Box {
     max-height: calc(35vh - 10px);
   }
   .Queue-Item {
-    font-size: 2vh;
     padding-left: 0.5vh;
+  }
+  .add-btn{
+    font-size: 2.5vh;
   }
   .remove-btn {
     padding-right: 2.75vh;
+    font-size: 3vh;
   }
   .remove-btn::after {
     font-size: 1.5vh;

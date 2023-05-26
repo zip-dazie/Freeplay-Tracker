@@ -1,13 +1,29 @@
 .right-icon {
-  transform: rotate(90deg) translateX(0.18rem);
+  transform: rotate(90deg) translateX(0.205rem);
+}
+.audio-icon {
+  z-index: 2;
+  height: fit-content;
+  width: fit-content;
+  margin-left: 1vw;
 }
 @media (max-width: 1025) {
   .right-icon {
     transform: rotate(90deg) translateX(0.15rem);
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .right-icon {
-    transform: rotate(90deg) translateX(0.25rem);
+    transform: rotate(90deg) translateX(0.125rem);
   }
 }
+
+@media (max-width: 400px) {
+  .right-icon {
+    transform: rotate(90deg) translateX(0.3rem);
+  }
+  .audio-icon{
+    margin-left: 3vw;
+  }
+}
+

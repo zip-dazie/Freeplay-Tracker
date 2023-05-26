@@ -70,10 +70,7 @@ const CourtCall = forwardRef(({ toCall }, ref) => {
         e.target.style.filter = '';
       }}
     >
-      <div
-        style={{ zIndex: '2', height: 'fit-content', width: 'fit-content', marginLeft: '1vw' }}
-        onClick={handlePlay}
-      >
+      <div className="audio-icon" onClick={handlePlay}>
         <BsFillVolumeOffFill />
       </div>
       <div

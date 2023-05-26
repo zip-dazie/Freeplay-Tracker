@@ -32,7 +32,6 @@
 }
 .Queue-Item {
   border-color: skyblue;
-  font-size: 2.25vh;
   height: 5vh;
   display: flex;
   text-align: center;
@@ -53,6 +52,7 @@
   white-space: nowrap;
   padding-top: 1vh;
   padding-bottom: 1vh;
+  font-size: 2.25vh;
 }
 .Queue-Text::-webkit-scrollbar {
   width: 0;

@@ -12,7 +12,6 @@ import { checkUser } from '../Users/Users.js';
 import { CSSTransition } from 'react-transition-group';
 // eslint-disable-next-line no-unused-vars
 import Draggable from 'react-draggable';
-import { IoMdAddCircleOutline } from 'react-icons/io';
 import { AiOutlineUndo } from 'react-icons/ai';
 function CourtQueue(props) {
   const [nextId, setNextId] = useState(localStorage.getItem('nextId') || 0); // indexing for queuing
@@ -608,7 +607,7 @@ function CourtQueue(props) {
                     disabled={player.status[0] === player.status[1]}
                     data-tooltip="Full sign-up"
                   >
-                    <IoMdAddCircleOutline />
+                    ⊕
                   </button>
                   <span className="Queue-Text">{queueText(player.name)}</span>
                   <button className="remove-btn" onClick={() => removePlayers(index + 1)}>
